@@ -22,17 +22,17 @@ shopphukien là một dự án E-commerce full stack được xây dựng bằng
 
 1. **Clone kho lưu trữ**:
    ```
-   git clone https://github.com/your-username/organica.git
-   cd organica
+   git clone https://github.com/TranTyPhuQuy/CD_WEB-Website-ban-phu-kien.git
+   cd CD_WEB-Website-ban-phu-kien
    ```
 
 2. **Cài đặt cơ sở dữ liệu**:
    - Tạo một cơ sở dữ liệu MySQL và cấu hình chi tiết kết nối trong tệp `backend/src/main/resources/application.properties`.
 
 3. **Cài đặt phía máy chủ (Backend)**:
-   - Di chuyển vào thư mục `server`:
+   - Di chuyển vào thư mục `springboot`:
      ```
-     cd server
+     cd springboot
      ```
    - Xây dựng và chạy ứng dụng Spring Boot:
      ```
@@ -41,9 +41,9 @@ shopphukien là một dự án E-commerce full stack được xây dựng bằng
    - Máy chủ backend sẽ chạy tại [http://localhost:8080](http://localhost:8080).
 
 4. **Cài đặt phía giao diện (Frontend)**:
-   - Di chuyển vào thư mục `Client`:
+   - Di chuyển vào thư mục `reactjs`:
      ```
-     cd Client
+     cd reactjs
      ```
    - Cài đặt các phụ thuộc:
      ```
@@ -72,18 +72,8 @@ Mọi đóng góp đều được hoan nghênh! Nếu bạn muốn đóng góp c
 
 Nếu bạn có bất kỳ câu hỏi hoặc đề xuất nào, hãy liên hệ với người duy trì dự án:
 
-- **Vivek Kakadiya**: vivek.kakadiya111@gmail.com
+- ****: 
 
 ---
 
 Hy vọng tệp README này sẽ giúp bạn bắt đầu với dự án E-commerce của mình! 🛒🌟
-
-Source: Conversation with Bing, 3/31/2024
-(1) shopphukien - Full Stack E-commerce Project - GitHub. https://github.com/vivekkakadiya/Organica.
-(2) TheSYNcoder/Full-Stack-Ecommerce-Spring-Boot-React. https://github.com/TheSYNcoder/Full-Stack-Ecommerce-Spring-Boot-React.
-(3) ujjavaldesai07/spring-boot-react-ecommerce-app - GitHub. https://github.com/ujjavaldesai07/spring-boot-react-ecommerce-app.
-(4) merikbest/ecommerce-spring-reactjs - GitHub. https://github.com/merikbest/ecommerce-spring-reactjs.
-(5) undefined. https://github.com/your-username/organica.git.
-(6) undefined. http://localhost:8080.
-(7) undefined. http://localhost:3000.
-(8) undefined. http://perfume-web.tk.
