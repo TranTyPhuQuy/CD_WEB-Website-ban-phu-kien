@@ -1,7 +1,5 @@
 package com.cdweb.springboot.entities;
 
-import org.hibernate.annotations.BatchSize;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
