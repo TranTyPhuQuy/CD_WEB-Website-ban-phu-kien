@@ -1,8 +1,7 @@
 import React from 'react';
-import "../components/css/home.css";
-
 import Header from "../components/Header";
 
+import "../components/css/header.css";
 
 export default function HomePage() {
   return (
