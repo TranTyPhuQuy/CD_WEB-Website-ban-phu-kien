@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import HomePage from '../customer/pages/HomePage/HomePage'
+import HomePage from '../customer/pages/HomePage'
 import ProductList from '../customer/pages/ProductList/ProductList'
 import Header from '../customer/components/Header/Header'
 import Footer from '../customer/components/Footer/Footer'
@@ -10,19 +10,19 @@ import NotFound from '../customer/pages/NotFound/NotFound'
 const CustomerRouters = () => {
     return (
         <div>
-            <div>
+            {/* <div>
                 <Header />
-            </div>
+            </div> */}
             <Routes>
-                <Route path='/' element={<HomePage />}> </Route>
+                <Route path='/' element={<HomePage/>}> </Route>
                 <Route path='/products' element={<ProductList />}> </Route>
                 <Route path='/product/:productId' element={<ProductDetail />}> </Route>
 
                 <Route component={NotFound} />
             </Routes>
-            <div>
+            {/* <div>
                 <Footer />
-            </div>
+            </div> */}
         </div>
     )
 }

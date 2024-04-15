@@ -1,5 +1,5 @@
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link, NavLink } from 'react-router-dom';
 import CustomerRouters from './Routers/CustomerRouters';
 
 // Font and CSS
@@ -12,7 +12,7 @@ import '@fontsource/roboto/700.css';
 function App() {
   return (
     <Routes>
-      <Route path='/*' element={<CustomerRouters />} ></Route>
+      <Route path='/' element={<CustomerRouters/>}></Route>
     </Routes>
   );
 }
