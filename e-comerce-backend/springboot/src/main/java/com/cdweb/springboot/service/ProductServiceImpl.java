@@ -1,6 +1,7 @@
 package com.cdweb.springboot.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,15 +22,22 @@ public class ProductServiceImpl implements ProductService{
 	public ProductServiceImpl(ProductRepository productRepository) {
 		this.productRepository = productRepository;
 	}
+	
 	@Override
 	public Product findProductById(Long id) throws ProductException {
 		// TODO Auto-generated method stub
-		return null;
+		Optional<Product> opt =productRepository.findById(id);
+		
+		if(opt.isPresent()) {
+			return opt.get();
+		}
+		throw new ProductException("Product not found with id: "+id);
 	}
 
 	@Override
 	public List<Product> findProductByCategory(String category) throws ProductException {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
