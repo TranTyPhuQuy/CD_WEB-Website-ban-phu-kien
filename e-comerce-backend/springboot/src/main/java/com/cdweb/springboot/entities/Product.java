@@ -33,7 +33,7 @@ public class Product {
 	private int discountedPrice;
 	
 	@Column(name = "discounted_persent")
-	private int discountedPersent;
+	private int discountPersent;
 	
 	@Column(name = "quantity")
 	private int quantity;
@@ -60,7 +60,7 @@ public class Product {
 		this.description = description;
 		this.price = price;
 		this.discountedPrice = discountedPrice;
-		this.discountedPersent = discountedPersent;
+		this.discountPersent = discountedPersent;
 		this.quantity = quantity;
 		this.brand = brand;
 		this.category = category;
@@ -116,11 +116,11 @@ public class Product {
 	}
 
 	public int getDiscountedPersent() {
-		return discountedPersent;
+		return discountPersent;
 	}
 
 	public void setDiscountedPersent(int discountedPersent) {
-		this.discountedPersent = discountedPersent;
+		this.discountPersent = discountedPersent;
 	}
 
 	public int getQuantity() {
