@@ -2,6 +2,8 @@ package com.cdweb.springboot.entities;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,6 +43,7 @@ public class Product {
 	@Column(name = "brand")
 	private String brand;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;

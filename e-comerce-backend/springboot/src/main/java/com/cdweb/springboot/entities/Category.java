@@ -1,5 +1,7 @@
 package com.cdweb.springboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,12 +19,13 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 	
 	@NotNull
 	@Size(max = 50)
 	private String name;
 	
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "parent_category_id")
 	private Category pareCategory;
@@ -35,18 +38,18 @@ public class Category {
 
 	public Category(Long id, @NotNull @Size(max = 50) String name, Category pareCategory, int level) {
 		super();
-		Id = id;
+		this.id = id;
 		this.name = name;
 		this.pareCategory = pareCategory;
 		this.level = level;
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {

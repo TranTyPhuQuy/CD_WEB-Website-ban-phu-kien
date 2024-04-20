@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Page<Product> getListProduct(String category,Integer minPrice, Integer maxPrice,Integer minDiscount, String sort, Integer pageNumber, Integer pageSize) throws ProductException {
+	public Page<Product> getListProduct(String category,Integer minPrice, Integer maxPrice,Integer minDiscount, String sort, Integer pageNumber, Integer pageSize){
 		// TODO Auto-generated method stub
 		
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
@@ -58,5 +58,4 @@ public class ProductServiceImpl implements ProductService{
 		
 		return filteredProducts;
 	}
-
 }
