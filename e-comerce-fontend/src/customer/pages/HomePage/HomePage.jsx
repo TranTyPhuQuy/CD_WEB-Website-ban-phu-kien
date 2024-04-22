@@ -1,16 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-HomePage.propTypes = {
-    
-};
+import "./styles.css";
 
-function HomePage(props) {
-    return (
-        <div>
-            HomePage
-        </div>
-    );
+export default function HomePage() {
+  return (
+    <div id='container'>
+    </div>
+  )
 }
-
-export default HomePage;

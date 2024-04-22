@@ -1,0 +1,48 @@
+#header {
+    width: 100%;
+    height: auto;
+    background-color: #0f1230;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__content {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 15px 0;
+}
+
+.logo__text {
+    background-image: linear-gradient(to right, #ffc400, #feb47b);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.search__image, .cart__image, .user__image, .menu__image {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(100%);
+}
+
+/* Tìm Kiếm */
+.header__search {
+    width: 100%;
+    height: auto;
+}
+
+.header__input--search {
+    width: 100%;
+    height: 50px;   
+}
+
+.search__image {
+    position: absolute;
+    filter: brightness(0);
+}
