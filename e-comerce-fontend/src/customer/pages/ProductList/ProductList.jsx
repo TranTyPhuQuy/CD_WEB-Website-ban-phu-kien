@@ -3,12 +3,13 @@ import { Box, Container, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import productApi from '../../../api/productApi';
 import LoadingProducts from './components/LoadingProducts';
+import List from './components/List';
 
 const useStyles = makeStyles(theme => ({
     root: {},
 
     left: { width: '250px' },
-    right: { flex: '1 1 auto' }
+    right: { flex: '1 1 0' }
 
 }))
 
@@ -21,9 +22,8 @@ function ProductList(props) {
     useEffect(() => {
         (async () => {
             try {
-                const repo = await productApi.getAll({ _page: 1, _limit: 10 });
-                setProductList(repo);
-                console.log({ repo });
+                const {data} = await productApi.getAll({ _page: 1, _limit: 10 });
+                setProductList(data);
             } catch (error) {
                 console.log('Loi product list: ',error);
             }
@@ -40,7 +40,7 @@ function ProductList(props) {
                         left column
                     </Grid>
                     <Grid item className={classes.right}>
-                        <Paper elevation={0}> {loading ? <LoadingProducts/> : <Typography>Product List</Typography>}</Paper>
+                        <Paper elevation={0}> {loading ? <LoadingProducts/> : <List data = {productList} />}</Paper>
                     </Grid>
                 </Grid>
             </Container>
