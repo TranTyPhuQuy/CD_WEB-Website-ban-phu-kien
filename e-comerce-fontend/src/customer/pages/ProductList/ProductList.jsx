@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Box, Container, Grid, Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Container, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import productApi from '../../../api/productApi';
+import LoadingProducts from './components/LoadingProducts';
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -15,10 +15,19 @@ const useStyles = makeStyles(theme => ({
 
 function ProductList(props) {
     const classes = useStyles();
+    const [productList, setProductList] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         (async () => {
-            const respo = await productApi.getAll({ _page: 1, _limit: 10 });
-            console.log({ respo });
+            try {
+                const repo = await productApi.getAll({ _page: 1, _limit: 10 });
+                setProductList(repo);
+                console.log({ repo });
+            } catch (error) {
+                console.log('Loi product list: ',error);
+            }
+            setLoading(false);
         })();
     }, []);
 
@@ -31,8 +40,7 @@ function ProductList(props) {
                         left column
                     </Grid>
                     <Grid item className={classes.right}>
-                        <Paper elevation={0} />
-                        right column
+                        <Paper elevation={0}> {loading ? <LoadingProducts/> : <Typography>Product List</Typography>}</Paper>
                     </Grid>
                 </Grid>
             </Container>
