@@ -1,0 +1,1 @@
+export const BASEURLHOST = 'https://api.ezfrontend.com';
