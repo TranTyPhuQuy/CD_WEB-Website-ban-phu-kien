@@ -13,7 +13,7 @@ function Product({ product }) {
     : "https://www.svgrepo.com/show/508699/landscape-placeholder.svg";
   return (
     <Box padding={1}>
-      <img src={thumbnailUrl} alt={product.name} width="100%" />
+      <img src={thumbnailUrl} alt={product.name} width="100%" height='213'/>
       <Skeleton />
       <Typography variant="body2">{product.name}</Typography>
       <Typography variant="body2">
