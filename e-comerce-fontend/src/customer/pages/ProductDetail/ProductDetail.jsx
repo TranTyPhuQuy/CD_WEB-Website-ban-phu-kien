@@ -1,31 +1,40 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box, Container, Grid, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import ProductThumbnail from "./components/ProductThumbnail";
+import useProductDetail from "../../../hooks/useProductDetail";
+import { useMatch } from "react-router-dom";
+import ProductInfo from "./components/ProductInfo";
 
-ProductDetail.propTypes = {};
 const useStyles = makeStyles((theme) => ({
-  root: {},
-
+  root: {margin: '30px 0px'},
   left: {
     width: "400px",
     padding: "12px",
-    borderRight: '1px solid grey'
+    borderRight: "1px solid grey",
   },
   right: { flex: "1 1 0", padding: "12px" },
 }));
-function ProductDetail(props) {
+
+function ProductDetail() {
   const classes = useStyles();
+  const match = useMatch("/products/:productId");
+  const {
+    params: { productId },
+  } = match;
+  const {product, loading} = useProductDetail(productId);
+if(loading) {return <Box>Loading</Box>}
+
   return (
-    <Box>
+    <Box className={classes.root}>
       <Container>
         <Paper elevation={0}>
           <Grid container>
             <Grid item className={classes.left}>
-              Thumbnail
+              <ProductThumbnail product={product} />
             </Grid>
             <Grid item className={classes.right}>
-              Product infor
+              <ProductInfo product={product}/>
             </Grid>
           </Grid>
         </Paper>
