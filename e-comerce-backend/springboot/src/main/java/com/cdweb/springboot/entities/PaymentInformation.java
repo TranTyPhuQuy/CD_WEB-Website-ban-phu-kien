@@ -3,6 +3,7 @@ package com.cdweb.springboot.entities;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
 public class PaymentInformation {
 
@@ -14,4 +15,6 @@ public class PaymentInformation {
 	private LocalDate expirationDate;
 	@Column(name = "cvv")
 	private String cvv;
+	
+	
 }
