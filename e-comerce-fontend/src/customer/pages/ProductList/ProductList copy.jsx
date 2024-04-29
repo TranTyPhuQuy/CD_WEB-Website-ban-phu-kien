@@ -39,10 +39,9 @@ function ProductList(props) {
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
-    // _page: 1,
-    // _limit: 12,
-    // _sort: "salePrice:ASC",
-    _pageNumber: 0,
+    _page: 1,
+    _limit: 12,
+    _sort: "salePrice:ASC",
   });
   // const [filters, setFilters] = useState(() => ({
   //   ...queryParams,
@@ -69,47 +68,44 @@ function ProductList(props) {
     (async () => {
       try {
         const { data, pagination } = await productApi.getAll(filters);
-        // setProductList(data);
-        // setPagination(pagination);
-        console.log(data);
-        console.log('=====================');
-        console.log(pagination);
+        setProductList(data);
+        setPagination(pagination);
       } catch (error) {
         console.log("Loi product list: ", error);
       }
       setLoading(false);
     })();
-  }, []);
-  // const handlePanigation = (e, page) => {
-  //   setFilters((prevFilters) => ({
-  //     ...prevFilters,
-  //     _page: page,
-  //   }));
-  // };
-  // const handleSort = (newValueSort) => {
-  //   setFilters((prevFilters) => ({
-  //     ...prevFilters,
-  //     _sort: newValueSort,
-  //   }));
-  // };
-  // const handleFilters = (newFilters) => {
-  //   setFilters((prevFilters) => ({
-  //     ...prevFilters,
-  //     ...newFilters,
-  //   }));
-  // };
+  }, [filters]);
+  const handlePanigation = (e, page) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      _page: page,
+    }));
+  };
+  const handleSort = (newValueSort) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      _sort: newValueSort,
+    }));
+  };
+  const handleFilters = (newFilters) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      ...newFilters,
+    }));
+  };
   return (
     <Box pt={4}>
       <Container>
         <Grid container spacing={1}>
           <Grid item className={classes.left}>
             <Paper elevation={0}>
-              {/* <Filters filters={filters} onChange={handleFilters} /> */}
+              <Filters filters={filters} onChange={handleFilters} />
             </Paper>
           </Grid>
           <Grid item className={classes.right}>
             <Paper elevation={0}>
-              {/* <Sort currentSort={filters._sort} onChange={handleSort}></Sort>
+              <Sort currentSort={filters._sort} onChange={handleSort}></Sort>
               {loading ? <LoadingProducts /> : <List data={productList} />}
               <Box className={classes.pagination}>
                 <Pagination
@@ -120,8 +116,7 @@ function ProductList(props) {
                   onChange={handlePanigation}
                   color="primary"
                 />
-              </Box> */}
-              productlist
+              </Box>
             </Paper>
           </Grid>
         </Grid>

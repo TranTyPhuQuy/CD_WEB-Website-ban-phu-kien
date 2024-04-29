@@ -58,4 +58,10 @@ public class ProductServiceImpl implements ProductService{
 		
 		return filteredProducts;
 	}
+
+	@Override
+	public Page<Product> getAllProduct(Integer pageNumber, Integer pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

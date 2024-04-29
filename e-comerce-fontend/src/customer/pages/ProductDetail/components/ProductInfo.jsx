@@ -15,9 +15,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   priceBox: {
-    padding: "12px",
-    backgroundColor: "#f6f6f6",
-    marginTop: "20px",
+    padding: "20px",
+    backgroundColor: "#efefef",
   },
 
   salePrice: {
@@ -46,7 +45,7 @@ function ProductInfo({ product = {} }) {
         {name}
       </Typography>
 
-      <Typography variant="body2" className={classes.description}>
+      <Typography variant="body2" className={classes.description} style={{margin:'20px 0px'}}>
         {shortDescription}
       </Typography>
 

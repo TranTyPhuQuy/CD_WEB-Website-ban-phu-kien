@@ -5,6 +5,8 @@ import ProductThumbnail from "./components/ProductThumbnail";
 import useProductDetail from "../../../hooks/useProductDetail";
 import { useMatch } from "react-router-dom";
 import ProductInfo from "./components/ProductInfo";
+import AddToCartForm from "./components/AddToCartForm";
+import IncrementDecrementBtn from "./components/IncrementDecrementBtn";
 
 const useStyles = makeStyles((theme) => ({
   root: {margin: '30px 0px'},
@@ -24,7 +26,9 @@ function ProductDetail() {
   } = match;
   const {product, loading} = useProductDetail(productId);
 if(loading) {return <Box>Loading</Box>}
-
+  const handleAddToCartSubmit = (formValues) => {
+    console.log('Form submit', formValues);
+  }
   return (
     <Box className={classes.root}>
       <Container>
@@ -35,6 +39,8 @@ if(loading) {return <Box>Loading</Box>}
             </Grid>
             <Grid item className={classes.right}>
               <ProductInfo product={product}/>
+              {/* <AddToCartForm onSubmit={handleAddToCartSubmit}/> */}
+              <IncrementDecrementBtn/>
             </Grid>
           </Grid>
         </Paper>
