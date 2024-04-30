@@ -22,7 +22,7 @@ import com.cdweb.springboot.request.LoginRequest;
 import com.cdweb.springboot.service.CustomerServiceImpl;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
 	private UserRepository userRepository;
@@ -45,6 +45,7 @@ public class AuthController {
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
 		User isEmailExist = userRepository.findByEmail(email);
+		
 		if (isEmailExist != null) {
 			throw new UserException("Email Is Already Used With Another Account");
 		}
@@ -64,6 +65,12 @@ public class AuthController {
 		AuthResponse authResponse = new AuthResponse(token, "Signup Success");
 		return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
 	}
+
+//	@PostMapping("/signup")
+//	public String createUserHandler() {
+//		System.out.println("dang nhap");
+//return "dang nhap";
+//	}
 	@PostMapping("/signin")
 	public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest) throws UserException {
 		String userName = loginRequest.getEmail();
@@ -73,7 +80,10 @@ public class AuthController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String token = jwtProvider.generateToken(authentication);
 
-		AuthResponse authResponse = new AuthResponse(token, "Signin Success");
+		AuthResponse authResponse = new AuthResponse();
+		authResponse.setJwt(token);
+		authResponse.setMessage("signin success");
+		
 		return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
 	
 	}

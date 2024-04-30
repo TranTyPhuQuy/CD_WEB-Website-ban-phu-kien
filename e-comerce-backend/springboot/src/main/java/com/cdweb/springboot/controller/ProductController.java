@@ -13,7 +13,7 @@ import com.cdweb.springboot.entities.Product;
 import com.cdweb.springboot.service.ProductService;
 
 @RestController
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
 	@Autowired
