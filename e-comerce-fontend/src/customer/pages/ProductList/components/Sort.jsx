@@ -18,8 +18,8 @@ function Sort({ currentSort, onChange }) {
       indicatorColor="primary"
       aria-label="disabled tabs example"
     >
-      <Tab label="Giá thấp đến cao" value="salePrice:ASC"></Tab>
-      <Tab label="Giá cao xuống thấp" value="salePrice:DESC"></Tab>
+      <Tab label="Giá thấp đến cao" value="price_low"></Tab>
+      <Tab label="Giá cao xuống thấp" value="price_high"></Tab>
     </Tabs>
   );
 }

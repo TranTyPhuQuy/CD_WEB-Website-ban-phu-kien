@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const jwt = 'eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTQ0NTY5NjksImV4cCI6MTcxNTMwMjk2OSwiZW1haWwiOiJiYW5nQGdtYWlsLmNvbSJ9.p-2w4xyUJG0-tUZO5BLIacyfHx3CKqlqAD7Cfa77_SJQbXh9DfC0I1wwbgMx2gu7IS6b5QRXyopH-WhZ9mXzng';
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:8080/api/v1/',
+  baseURL: 'http://localhost:5454/api/',
   headers: {
+    "Authorization": `Bearer ${jwt}`,
     'Content-Type': 'application/json',
   },
 });

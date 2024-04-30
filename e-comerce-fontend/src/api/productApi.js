@@ -10,14 +10,14 @@ const productApi = {
     // const count = await axiosClient.get('/products/count', { params: newParams });
 
     const newParams = { ...params };
-    newParams._category = params._category? params._category : '';
-    newParams._minPrice = params._minPrice? params._minPrice : 0;
-    newParams._maxPrice = params.maxPrice? params._maxPrice : 10000;
-    newParams._minDiscount = params._minDiscount? params._minDiscount : 0;
-    newParams._sort = params._sort? params._category : 'price_low';
-    newParams._stock = params._stock? params._stock : null;
-    newParams._pageNumber = params._pageNumber? params._pageNumber : 0;
-    newParams._pageSize = 2;
+    newParams.category = params.category? params.category : '';
+    newParams.minPrice = params.minPrice? params.minPrice : 0;
+    newParams.maxPrice = params.maxPrice? params.maxPrice : 10000;
+    newParams.minDiscount = params.minDiscount? params.minDiscount : 0;
+    newParams.sort = params.sort? params.sort.toString() : 'price_low';
+    newParams.stock = params.stock? params.stock : 'null';
+    newParams.pageNumber = params.pageNumber? params.pageNumber : 0;
+    newParams.pageSize = 10;
 
     // delete newParams._page;
 
@@ -27,7 +27,7 @@ const productApi = {
       data: res.content,
       pagination: {
         count: res.totalPages,
-        page: params._pageNumber
+        page: params.pageNumber
       },
     };
   },

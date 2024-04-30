@@ -10,8 +10,8 @@ Product.propTypes = {
 
 function Product({ product }) {
   const navigate = useNavigate();
-  const thumbnailUrl = product.thumbnail
-    ? `${BASEURLHOST}${product.thumbnail?.url}`
+  const thumbnailUrl = product.imageUrl
+    ? `${BASEURLHOST}${product.imageUrl?.url}`
     : THUMBNAIL_PLACEHOLDER;
 
   const handleProductClick = () => {
@@ -20,15 +20,15 @@ function Product({ product }) {
 
   return (
     <Box padding={1} onClick={handleProductClick}>
-      <img src={thumbnailUrl} alt={product.name} width="100%" height="213" />
+      <img src={thumbnailUrl} alt={product.productName} width="100%" height="213" />
       <Skeleton />
-      <Typography variant="body2">{product.name}</Typography>
+      <Typography variant="body2">{product.productName}</Typography>
       <Typography variant="body2">
         <Box component="span" fontSize="16px" fontWeight="bold" mr={1}>
           {new Intl.NumberFormat("vi-VN", {
             style: "currency",
             currency: "VND",
-          }).format(product.salePrice)}
+          }).format(product.price)}
         </Box>
         <Box
           component="span"

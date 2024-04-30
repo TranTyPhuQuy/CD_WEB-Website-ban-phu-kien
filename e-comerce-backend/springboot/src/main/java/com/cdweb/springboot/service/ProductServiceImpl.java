@@ -44,6 +44,9 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Page<Product> getListProduct(String category,Integer minPrice, Integer maxPrice,Integer minDiscount, String sort, Integer pageNumber, Integer pageSize){
 		// TODO Auto-generated method stub
+		System.out.println("pagenumber truoc:"+pageNumber);
+		pageNumber = pageNumber>0 ? pageNumber-1:pageNumber;
+		System.out.println("pagenumber sau:"+pageNumber);
 		
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
 		
