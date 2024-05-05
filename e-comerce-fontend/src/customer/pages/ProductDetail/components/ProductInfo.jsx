@@ -32,38 +32,44 @@ const useStyles = makeStyles((theme) => ({
   promotionPercent: {
     color: "red",
   },
+  description: {
+    height: "80px",
+  },
 }));
 
 function ProductInfo({ product = {} }) {
   const classes = useStyles();
-  const { name, shortDescription, salePrice, originalPrice, promotionPercent } =
-    product;
+  const { productName, description, price, discountedPrice } = product;
 
   return (
     <Box className={classes.root}>
       <Typography component="h1" variant="h4">
-        {name}
+        {productName}
       </Typography>
 
-      <Typography variant="body2" className={classes.description} style={{margin:'20px 0px'}}>
-        {shortDescription}
+      <Typography
+        variant="body2"
+        className={classes.description}
+        style={{ margin: "5px 0px" }}
+      >
+        {description}
       </Typography>
 
       <Box className={classes.priceBox}>
         <Box component="span" className={classes.salePrice}>
-          {formatPrice(salePrice)}
+          {formatPrice(discountedPrice)}
         </Box>
 
-        {promotionPercent > 0 && (
+        {discountedPrice > 0 && (
           <>
             <Box component="span" className={classes.originalPrice}>
-              {formatPrice(originalPrice)}
+              {formatPrice(price)}
             </Box>
 
             <Box
               component="span"
               className={classes.promotionPercent}
-            >{`-${promotionPercent}%`}</Box>
+            >{`-${discountedPrice}%`}</Box>
           </>
         )}
       </Box>

@@ -6,6 +6,7 @@ import Header from "../customer/components/Header/Header";
 import Footer from "../customer/components/Footer/Footer";
 import ProductDetail from "../customer/pages/ProductDetail/ProductDetail";
 import NotFound from "../customer/pages/NotFound/NotFound";
+import Cart from "../customer/pages/Cart/Cart";
 
 const CustomerRouters = () => {
   return (
@@ -23,11 +24,13 @@ const CustomerRouters = () => {
         <Route path="/products/:productId" element={<ProductDetail />}>
           {" "}
         </Route>
-
+        <Route path="/cart" element={<Cart />}>
+          {" "}
+        </Route>
         <Route component={NotFound} />
       </Routes>
       <div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );

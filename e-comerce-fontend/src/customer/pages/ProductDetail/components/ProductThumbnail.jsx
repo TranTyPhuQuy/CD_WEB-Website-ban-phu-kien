@@ -8,10 +8,12 @@ ProductThumbnail.propTypes = {
 };
 
 function ProductThumbnail({ product }) {
-  const thumbnailUrl = product.thumbnail ? `${BASEURLHOST}${product.thumbnail?.url}` : THUMBNAIL_PLACEHOLDER;
-  return (
+  const thumbnailUrl = product.imageUrl
+  ? `${BASEURLHOST}${product.imageUrl?.url}`
+  : THUMBNAIL_PLACEHOLDER;
+return (
     <Box>
-      <img src={thumbnailUrl} alt={product.name} width="100%" />
+      <img src={thumbnailUrl} alt={product.productName} width="100%" />
     </Box>
   );
 }

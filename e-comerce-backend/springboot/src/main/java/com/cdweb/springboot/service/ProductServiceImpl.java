@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public Product findProductById(Long id) throws ProductException {
+	public Product getProductById(Long id) throws ProductException {
 		// TODO Auto-generated method stub
 		Optional<Product> opt =productRepository.findById(id);
 		

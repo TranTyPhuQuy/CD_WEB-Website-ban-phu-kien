@@ -120,7 +120,6 @@ function ProductList(props) {
                   color="primary"
                 />
               </Box>
-              productlist
             </Paper>
           </Grid>
         </Grid>
