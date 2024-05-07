@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cdweb.springboot.entities.Product;
-import com.cdweb.springboot.exception.ProductException;
 import com.cdweb.springboot.service.ProductService;
 
 @RestController
@@ -24,8 +23,8 @@ public class ProductController {
 	@GetMapping("/getProductsByCategory")
 	public ResponseEntity<Page<Product>> findProductByCategory(@RequestParam String category,
 			@RequestParam Integer minPrice, @RequestParam Integer maxPrice, @RequestParam Integer minDiscount, @RequestParam String sort,
-			@RequestParam String stock, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
-		Page<Product> respo = productService.getListProduct(category, minPrice, maxPrice, minDiscount, sort, pageNumber, pageSize);
+			@RequestParam String stock, @RequestParam Integer page, @RequestParam Integer limit) {
+		Page<Product> respo = productService.getListProduct(category, minPrice, maxPrice, minDiscount, sort, page, limit);
 		System.out.println(" Find product By Category Successfully");
 		
 		return new ResponseEntity<>(respo, HttpStatus.ACCEPTED);
@@ -36,7 +35,7 @@ public class ProductController {
 //		return productService.getProductById(productId);
 //	}
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable("id") Long id) throws ProductException {
+    public Product getProduct(@PathVariable("id") Long id) {
         return productService.getProductById(id);
     }
 }

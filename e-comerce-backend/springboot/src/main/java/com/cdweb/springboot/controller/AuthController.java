@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cdweb.springboot.config.JwtProvider;
 import com.cdweb.springboot.entities.User;
-import com.cdweb.springboot.exception.UserException;
 import com.cdweb.springboot.repository.AuthResponse;
 import com.cdweb.springboot.repository.UserRepository;
 import com.cdweb.springboot.request.LoginRequest;
@@ -39,7 +38,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException {
+	public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user){
 		String email = user.getEmail();
 		String password = user.getPassword();
 		String firstName = user.getFirstName();
@@ -47,7 +46,8 @@ public class AuthController {
 		User isEmailExist = userRepository.findByEmail(email);
 		
 		if (isEmailExist != null) {
-			throw new UserException("Email Is Already Used With Another Account");
+			System.out.print("Email Is Already Used With Another Account");
+			return null;
 		}
 
 		User createdUser = new User();
@@ -65,14 +65,8 @@ public class AuthController {
 		AuthResponse authResponse = new AuthResponse(token, "Signup Success");
 		return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
 	}
-
-//	@PostMapping("/signup")
-//	public String createUserHandler() {
-//		System.out.println("dang nhap");
-//return "dang nhap";
-//	}
 	@PostMapping("/signin")
-	public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest) throws UserException {
+	public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest)  {
 		String userName = loginRequest.getEmail();
 		String password = loginRequest.getPassword();
 

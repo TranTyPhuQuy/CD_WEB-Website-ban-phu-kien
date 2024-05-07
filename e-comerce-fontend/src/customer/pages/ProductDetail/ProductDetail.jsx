@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   left: {
     width: "400px",
     padding: "12px",
-    borderRight: "1px solid grey",
+    borderRight: "1px solid grey"
   },
   right: { flex: "1 1 0", padding: "12px" },
 }));

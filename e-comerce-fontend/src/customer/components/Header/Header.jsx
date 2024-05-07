@@ -19,7 +19,6 @@ import { ShoppingCart } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import { cartItemsCountSelector } from "../../pages/Cart/Selectors";
 import { useNavigate } from "react-router-dom";
-import { yellow } from "@mui/material/colors";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -166,7 +165,7 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor:"#0f1230"}}>
         <Toolbar>
           <IconButton
             size="large"

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cdweb.springboot.entities.Product;
-import com.cdweb.springboot.exception.ProductException;
 import com.cdweb.springboot.repository.ProductRepository;
 
 
@@ -24,31 +23,25 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public Product getProductById(Long id) throws ProductException {
+	public Product getProductById(Long id) {
 		// TODO Auto-generated method stub
 		Optional<Product> opt =productRepository.findById(id);
 		
 		if(opt.isPresent()) {
 			return opt.get();
 		}
-		throw new ProductException("Product not found with id: "+id);
-	}
-
-	@Override
-	public List<Product> findProductByCategory(String category) throws ProductException {
-		// TODO Auto-generated method stub
-		
 		return null;
+//		System.out.print("Product not found with id: "+id);
 	}
 
 	@Override
-	public Page<Product> getListProduct(String category,Integer minPrice, Integer maxPrice,Integer minDiscount, String sort, Integer pageNumber, Integer pageSize){
+	public Page<Product> getListProduct(String category,Integer minPrice, Integer maxPrice,Integer minDiscount, String sort, Integer page, Integer limit){
 		// TODO Auto-generated method stub
-		System.out.println("pagenumber truoc:"+pageNumber);
-		pageNumber = pageNumber>0 ? pageNumber-1:pageNumber;
-		System.out.println("pagenumber sau:"+pageNumber);
+//		System.out.println("pagenumber truoc:"+pageNumber);
+		page = page>0 ? page-1:page;
+//		System.out.println("pagenumber sau:"+pageNumber);
 		
-		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		Pageable pageable = PageRequest.of(page, limit);
 		
 		List<Product> products = productRepository.filterProducts(category, minPrice, maxPrice, minDiscount, sort);
 		
@@ -60,11 +53,5 @@ public class ProductServiceImpl implements ProductService{
 		Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable,products.size());
 		
 		return filteredProducts;
-	}
-
-	@Override
-	public Page<Product> getAllProduct(Integer pageNumber, Integer pageSize) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

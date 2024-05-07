@@ -26,23 +26,25 @@ const QuantityBtn = ({ minValue = 1, maxValue = 100, product }) => {
     const action = addToCart({
       id: product.id,
       product,
-      quantity,
+      quantity
     });
     
-    console.log('action:',action)
+    // console.log('action:',action)
     dispatch(action);
   };
   return (
     <>
+    
       <div className="btn-group_quantity">
-        <button className="increment-btn" onClick={handleIncrementCounter}>
-          <span class="material-symbols-outlined">+</span>
-        </button>
-        <p>{quantity}</p>
         <button className="decrement-btn" onClick={handleDecrementCounter}>
           <span class="material-symbols-outlined">-</span>
         </button>
+        <p>{quantity}</p>
+        <button className="increment-btn" onClick={handleIncrementCounter}>
+          <span class="material-symbols-outlined">+</span>
+        </button>
       </div>
+
       <Button
         type="submit"
         variant="contained"

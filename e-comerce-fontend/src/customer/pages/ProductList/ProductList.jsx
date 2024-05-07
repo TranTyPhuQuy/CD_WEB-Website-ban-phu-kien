@@ -42,7 +42,7 @@ function ProductList(props) {
     // _page: 1,
     // _limit: 12,
     sort: "price_low",
-    pageNumber: 1,
+    page: 1,
   });
   // const [filters, setFilters] = useState(() => ({
   //   ...queryParams,
@@ -82,7 +82,7 @@ function ProductList(props) {
   const handlePanigation = (e, page) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      pageNumber: page,
+      page: page,
     }));
   };
   const handleSort = (newValueSort) => {

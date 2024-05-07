@@ -16,8 +16,8 @@ const productApi = {
     newParams.minDiscount = params.minDiscount? params.minDiscount : 0;
     newParams.sort = params.sort? params.sort.toString() : 'price_low';
     newParams.stock = params.stock? params.stock : 'null';
-    newParams.pageNumber = params.pageNumber? params.pageNumber : 0;
-    newParams.pageSize = 10;
+    newParams.page = params.pageNumber? params.pageNumber : 0;
+    newParams.limit = 10;
 
     // delete newParams._page;
 
