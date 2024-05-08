@@ -79,6 +79,7 @@ function ProductList(props) {
       setLoading(false);
     })();
   }, [filters]);
+  
   const handlePanigation = (e, page) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -91,19 +92,19 @@ function ProductList(props) {
       sort: newValueSort,
     }));
   };
-  // const handleFilters = (newFilters) => {
-  //   setFilters((prevFilters) => ({
-  //     ...prevFilters,
-  //     ...newFilters,
-  //   }));
-  // };
+  const handleFilters = (newFilters) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      ...newFilters,
+    }));
+  };
   return (
     <Box pt={4}>
       <Container>
         <Grid container spacing={1}>
           <Grid item className={classes.left}>
             <Paper elevation={0}>
-              {/* <Filters filters={filters} onChange={handleFilters} /> */}
+              <Filters filters={filters} onChange={handleFilters} />
             </Paper>
           </Grid>
           <Grid item className={classes.right}>

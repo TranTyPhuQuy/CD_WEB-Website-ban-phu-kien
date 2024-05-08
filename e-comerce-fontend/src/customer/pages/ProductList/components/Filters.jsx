@@ -11,11 +11,11 @@ Filters.propTypes = {
 
 function Filters({filters, onChange}) {
 
-    const handleFilterByCategory = (newCategoryId) => {
+    const handleFilterByCategory = (newCategoryName) => {
         if(!onChange) return;
 
         const newFilters = {
-            'category.id': newCategoryId,
+            'category': newCategoryName,
         }
         onChange(newFilters);
     }
