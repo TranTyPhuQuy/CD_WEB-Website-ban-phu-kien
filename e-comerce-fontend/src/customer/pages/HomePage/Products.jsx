@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./stylesProducts.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import categoryApi from "../../../api/categoryApi";
+import { formatPrice } from "../../../utils";
 // import {
 //   Box,
 //   CardActionArea,
@@ -110,7 +111,7 @@ export default function Products() {
       }
     })();
   }, []);
-
+  
   return (
     <>
       <div className="div__title">
@@ -121,33 +122,29 @@ export default function Products() {
           <div className="lists-iphone">
             {cate1.map((product) => (
               <Card
-                key={product.id}
-                style={{
-                  width: "13.5rem",
-                  height: "25.5rem",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="card-image">
-                  <Card.Link className="card-product">
-                    <Card.Img variant="top" src={product.image} />
-                  </Card.Link>
-                </div>
-                <Card.Body>
-                  <Card.Text className="card-trademark">
-                    {product.name}
+              key={product.id}
+              style={{ width: "13.5rem", height: "25.5rem", marginBottom: '10px', cursor:'pointer' }}
+            >
+              <div className="card-image">
+                <Card.Link className="card-product">
+                  <Card.Img variant="top" src={product.imageUrl} />
+                </Card.Link>
+              </div>
+              <Card.Body>
+                <Card.Text className="card-trademark">
+                  SHOPPHUKIEN
+                </Card.Text>
+                <Card.Title>{product.productName}</Card.Title>
+                <div className="card-price">
+                  <Card.Text className="card__text-price">
+                    {formatPrice(product.discountedPrice)}
                   </Card.Text>
-                  <Card.Title>{product.description}</Card.Title>
-                  <div className="card-price">
-                    <Card.Text className="card__text-price">
-                      {product.price}
-                    </Card.Text>
-                    <Card.Text className="card__text-cost">
-                      {product.cost}
-                    </Card.Text>
-                  </div>
-                </Card.Body>
-              </Card>
+                  <Card.Text className="card__text-cost">
+                    {formatPrice(product.price)}
+                  </Card.Text>
+                </div>
+              </Card.Body>
+            </Card>
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
@@ -162,30 +159,30 @@ export default function Products() {
         <div className="div__lists-iphone">
           <div className="lists-iphone">
             {cate2.map((product) => (
-              <Card
-                key={product.id}
-                style={{ width: "13.5rem", height: "25.5rem" }}
-              >
-                <div className="card-image">
-                  <Card.Link className="card-product">
-                    <Card.Img variant="top" src={product.image} />
-                  </Card.Link>
-                </div>
-                <Card.Body>
-                  <Card.Text className="card-trademark">
-                    {product.name}
-                  </Card.Text>
-                  <Card.Title>{product.description}</Card.Title>
-                  <div className="card-price">
-                    <Card.Text className="card__text-price">
-                      {product.price}
-                    </Card.Text>
-                    <Card.Text className="card__text-cost">
-                      {product.cost}
-                    </Card.Text>
-                  </div>
-                </Card.Body>
-              </Card>
+             <Card
+             key={product.id}
+             style={{ width: "13.5rem", height: "25.5rem", marginBottom: '10px', cursor:'pointer' }}
+           >
+             <div className="card-image">
+               <Card.Link className="card-product">
+                 <Card.Img variant="top" src={product.imageUrl} />
+               </Card.Link>
+             </div>
+             <Card.Body>
+               <Card.Text className="card-trademark">
+                 SHOPPHUKIEN
+               </Card.Text>
+               <Card.Title>{product.productName}</Card.Title>
+               <div className="card-price">
+                 <Card.Text className="card__text-price">
+                   {formatPrice(product.discountedPrice)}
+                 </Card.Text>
+                 <Card.Text className="card__text-cost">
+                   {formatPrice(product.price)}
+                 </Card.Text>
+               </div>
+             </Card.Body>
+           </Card>
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
@@ -205,30 +202,30 @@ export default function Products() {
         <div className="div__lists-iphone">
           <div className="lists-iphone">
             {cate3.map((product) => (
-              <Card
-                key={product.id}
-                style={{ width: "13.5rem", height: "25.5rem" }}
-              >
-                <div className="card-image">
-                  <Card.Link className="card-product">
-                    <Card.Img variant="top" src={product.image} />
-                  </Card.Link>
-                </div>
-                <Card.Body>
-                  <Card.Text className="card-trademark">
-                    {product.name}
-                  </Card.Text>
-                  <Card.Title>{product.description}</Card.Title>
-                  <div className="card-price">
-                    <Card.Text className="card__text-price">
-                      {product.price}
-                    </Card.Text>
-                    <Card.Text className="card__text-cost">
-                      {product.cost}
-                    </Card.Text>
-                  </div>
-                </Card.Body>
-              </Card>
+             <Card
+             key={product.id}
+             style={{ width: "13.5rem", height: "25.5rem", marginBottom: '10px', cursor:'pointer' }}
+           >
+             <div className="card-image">
+               <Card.Link className="card-product">
+                 <Card.Img variant="top" src={product.imageUrl} />
+               </Card.Link>
+             </div>
+             <Card.Body>
+               <Card.Text className="card-trademark">
+                 SHOPPHUKIEN
+               </Card.Text>
+               <Card.Title>{product.productName}</Card.Title>
+               <div className="card-price">
+                 <Card.Text className="card__text-price">
+                   {formatPrice(product.discountedPrice)}
+                 </Card.Text>
+                 <Card.Text className="card__text-cost">
+                   {formatPrice(product.price)}
+                 </Card.Text>
+               </div>
+             </Card.Body>
+           </Card>
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
@@ -248,30 +245,31 @@ export default function Products() {
         <div className="div__lists-iphone">
           <div className="lists-iphone">
             {cate4.map((product) => (
-              <Card
-                key={product.id}
-                style={{ width: "13.5rem", height: "25.5rem" }}
-              >
-                <div className="card-image">
-                  <Card.Link className="card-product">
-                    <Card.Img variant="top" src={product.image} />
-                  </Card.Link>
-                </div>
-                <Card.Body>
-                  <Card.Text className="card-trademark">
-                    {product.name}
-                  </Card.Text>
-                  <Card.Title>{product.description}</Card.Title>
-                  <div className="card-price">
-                    <Card.Text className="card__text-price">
-                      {product.price}
-                    </Card.Text>
-                    <Card.Text className="card__text-cost">
-                      {product.cost}
-                    </Card.Text>
-                  </div>
-                </Card.Body>
-              </Card>
+            <Card
+            key={product.id}
+            style={{ width: "13.5rem", height: "25.5rem", marginBottom: '10px', cursor:'pointer' }}
+            onClick={handleClickCard}
+          >
+            <div className="card-image">
+              <Card.Link className="card-product">
+                <Card.Img variant="top" src={product.imageUrl} />
+              </Card.Link>
+            </div>
+            <Card.Body>
+              <Card.Text className="card-trademark">
+                SHOPPHUKIEN
+              </Card.Text>
+              <Card.Title>{product.productName}</Card.Title>
+              <div className="card-price">
+                <Card.Text className="card__text-price">
+                  {formatPrice(product.discountedPrice)}
+                </Card.Text>
+                <Card.Text className="card__text-cost">
+                  {formatPrice(product.price)}
+                </Card.Text>
+              </div>
+            </Card.Body>
+          </Card>
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
