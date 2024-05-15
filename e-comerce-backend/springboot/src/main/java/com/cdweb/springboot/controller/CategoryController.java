@@ -1,6 +1,7 @@
 package com.cdweb.springboot.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cdweb.springboot.entities.Category;
-import com.cdweb.springboot.service.Category.CategoryService;
+import com.cdweb.springboot.entities.Product;
+import com.cdweb.springboot.service.CategoryService;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -21,8 +23,13 @@ public class CategoryController {
 		this.categoryService = categoryService;
 	}
 	
-	@GetMapping("/getListCategories")
+	@GetMapping()
 	public List<Category> getListCategory() {
 		return categoryService.getListCategory();
 	}
+	@GetMapping("/products")
+	public Map<String, List<Product>> getProducts() {
+		return categoryService.findTop10ByCategoryId();
+	}
 }
+

@@ -18,7 +18,7 @@ import com.cdweb.springboot.entities.User;
 import com.cdweb.springboot.repository.AuthResponse;
 import com.cdweb.springboot.repository.UserRepository;
 import com.cdweb.springboot.request.LoginRequest;
-import com.cdweb.springboot.service.CustomerServiceImpl;
+import com.cdweb.springboot.service.Impl.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("/auth")

@@ -2,7 +2,7 @@ import axiosClient from './axiosClient';
 
 const categoryApi = {
   getAll(params) {
-    const url = 'categories/getListCategories';
+    const url = 'categories';
     return axiosClient.get(url, { params });
   },
 
@@ -10,20 +10,9 @@ const categoryApi = {
     const url = `/categories/${id}`;
     return axiosClient.get(url);
   },
-
-  add(data) {
-    const url = '/categories';
-    return axiosClient.post(url, data);
-  },
-
-  update(data) {
-    const url = `/categories/${data.id}`;
-    return axiosClient.patch(url, data);
-  },
-
-  remove(id) {
-    const url = `/categories/${id}`;
-    return axiosClient.delete(url);
+  async getProuctsForHome() {
+    const url = '/categories/products';
+    return axiosClient.get(url);
   },
 };
 

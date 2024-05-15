@@ -18,7 +18,7 @@ const CustomerRouters = () => {
         <Route path="/" element={<HomePage />}>
           {" "}
         </Route>
-        <Route path="/products" element={<ProductList />}>
+        <Route path="/products/:categoryName" element={<ProductList />}>
           {" "}
         </Route>
         <Route path="/products/:productId" element={<ProductDetail />}>
@@ -30,7 +30,7 @@ const CustomerRouters = () => {
         <Route component={NotFound} />
       </Routes>
       <div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

@@ -1,54 +1,120 @@
-// import {Link} from 'react-router-dom';
-// // import Logo from '../images/logo.png';
-// import {FaLinkedin} from 'react-icons/fa';
-// import {FaFacebookF} from 'react-icons/fa';
-// import {AiOutlineTwitter} from 'react-icons/ai';
-// import {AiFillInstagram} from 'react-icons/ai';
-// const Footer = () => {
-//   return(
-//     <footer>
-//       <div className="container footer__container">
-//         <article>
-//           <Link to='/' className="logo">
-//             {/* <img src={Logo} alt="Footer Logo"/> */}
-//           </Link>
-//           <p>
-//             n this practical beginner react js project tutorial, I'm going to teach you, step-by-step, how to build and deploy a complete, modern, responsive react website using react version 18
-//           </p>
-//           <div className="footer__socials">
-//             <a href="#" target="_blank" rel="noreferrer noopoener"><FaLinkedin/></a>
-//             <a href="#" target="_blank" rel="noreferrer noopoener"><FaFacebookF/></a>
-//             <a href="#" target="_blank" rel="noreferrer noopoener"><AiOutlineTwitter/></a>
-//             <a href="#" target="_blank" rel="noreferrer noopoener"><AiFillInstagram/></a>
-//           </div>
-//         </article>
-//         <article>
-//           <h4>Permalinks</h4>
-//           <Link to="/about">About</Link>
-//           <Link to="/plans">Plans</Link>
-//           <Link to="/trainers">Trainers</Link>
-//           <Link to="/gallery">Gallery</Link>
-//           <Link to="/contact">Contact</Link>
-//         </article>
-//         <article>
-//           <h4>Insights</h4>
-//           <Link to="/s">Blogs</Link>
-//           <Link to="/s">Case Studies</Link>
-//           <Link to="/s">Events</Link>
-//           <Link to="/s">Communities</Link>
-//           <Link to="/s">FAQs</Link>
-//         </article>
-//         <article>
-//           <h4>Get In Touch</h4>
-//           <Link to="/contact">Contact Us</Link>
-//           <Link to="/s">Support</Link>
-//         </article>
-//         <div className="footer__copyright">
-//           <small>2022 RGATOR TUTORIALS &copy; All Rights Reserved</small>
-//         </div>
-//       </div>
-//     </footer>
-//   )
-// }
+import React from "react";
+import PropTypes from "prop-types";
+import ContactIcon from "../../../utils/images/phone-contact.png";
+import "./Footer.css";
+import { Box, Container } from "@mui/material";
 
-// export default Footer;
+Footer.propTypes = {};
+
+function Footer(props) {
+  return (
+    <footer>
+      <Box>
+        <Container>
+          <div className="footer__block">
+            <div className="footer__block-maininfo1">
+              <h3 className="footer__title-info">
+                <a href="/about-shop">Về Shop Phụ Kiện</a>
+              </h3>
+              <div className="block-maininfo">
+                <div className="block-introduce">
+                  <p className="text-introduce texts">
+                    Shop chuyên kinh doanh phụ kiện Apple chính hãng uy tín tại
+                    TP.HCM
+                  </p>
+                </div>
+                <div className="block-contacts">
+                  <p className="text-address texts">
+                    <b>Địa chỉ: </b>
+                    <span>
+                      Số 6, phường Linh Trung, Tp.Thủ Đức, Tp. Hồ Chí Minh
+                    </span>
+                  </p>
+                  <p className="text-phone texts">
+                    <b>Điện thoại: </b>
+                    <span>0934632458</span>
+                  </p>
+                  <p className="text-email texts">
+                    <b>Email: </b>
+                    <span>admin@shopphukien.com</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="footer__block-maininfo2">
+              <h3 className="footer__title-info">Hỗ trợ khách hàng</h3>
+              <div className="block-maininfo">
+                <ul className="list-helps">
+                  <li className="text-helps">
+                    <a>Giới thiệu</a>
+                  </li>
+                  <li className="text-helps">
+                    <a>Chính sách đổi trả</a>
+                  </li>
+                  <li className="text-helps">
+                    <a>Chính sách bảo mật</a>
+                  </li>
+                  <li className="text-helps">
+                    <a>Chính sách mua hàng online</a>
+                  </li>
+                  <li className="text-helps">
+                    <a>Phương thức thanh toán</a>
+                  </li>
+                  <li className="text-helps">
+                    <a>Liên hệ</a>
+                  </li>
+                  <li className="text-helps">
+                    <a>Tuyển dụng</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="footer__block-maininfo3">
+              <h3 className="footer__title-info">Chăm sóc khách hàng</h3>
+              <div className="block-maininfo">
+                <div className="contact-info">
+                  <div className="icon-contact">
+                    <img src={ContactIcon} className="img-contact" />
+                  </div>
+                  <div className="contacts">
+                    <p className="text-contact phone-contact">093.463.2458</p>
+                    <p className="text-contact email-contact">
+                      admin@shopphukien.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <h3 className="footer__title-info footer__title-follows">
+                Follow Us
+              </h3>
+              <div className="block-maininfo">
+                <div className="list-follow">
+                  <a className="block-follows" href="https://www.facebook.com/">
+                    <i class="fa-brands fa-facebook-f"></i>
+                  </a>
+                  <a className="block-follows">
+                    <i class="fa-brands fa-twitter"></i>
+                  </a>
+                  <a className="block-follows">
+                    <i class="fa-brands fa-instagram"></i>
+                  </a>
+                  <a className="block-follows" href="https://www.youtube.com/">
+                    <i class="fa-brands fa-youtube"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="footer__copyright">
+            <p className="text-copyright">
+              Copyright © 2024 <a href="/">ShopPhuKien</a>
+              <span> by FITNLU</span>
+            </p>
+          </div>
+        </Container>
+      </Box>
+    </footer>
+  );
+}
+
+export default Footer;

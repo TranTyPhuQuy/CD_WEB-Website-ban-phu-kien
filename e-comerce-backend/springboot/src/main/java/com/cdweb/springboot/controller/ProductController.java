@@ -20,11 +20,11 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/getProductsByCategory")
+	@GetMapping()
 	public ResponseEntity<Page<Product>> findProductByCategory(@RequestParam String category,
-			@RequestParam Integer minPrice, @RequestParam Integer maxPrice, @RequestParam Integer minDiscount, @RequestParam String sort,
-			@RequestParam String stock, @RequestParam Integer page, @RequestParam Integer limit) {
-		Page<Product> respo = productService.getListProduct(category, minPrice, maxPrice, minDiscount, sort, page, limit);
+			@RequestParam Integer minPrice, @RequestParam Integer maxPrice, @RequestParam String sort,
+			@RequestParam Integer page, @RequestParam Integer limit) {
+		Page<Product> respo = productService.getListProduct(category, minPrice, maxPrice, sort, page, limit);
 		System.out.println(" Find product By Category Successfully");
 		
 		return new ResponseEntity<>(respo, HttpStatus.ACCEPTED);

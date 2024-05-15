@@ -21,7 +21,7 @@ const productApi = {
 
     // delete newParams._page;
 
-    const res = await axiosClient.get('products/getProductsByCategory', { params: newParams });
+    const res = await axiosClient.get('products', { params: newParams });
 
     return {
       data: res.content,
@@ -30,26 +30,6 @@ const productApi = {
         page: params.pageNumber
       },
     };
-  },
-
-  get(productId) {
-    const url = `/products/${productId}`;
-    return axiosClient.get(url);
-  },
-
-  add(data) {
-    const url = '/products';
-    return axiosClient.post(url, data);
-  },
-
-  update(data) {
-    const url = `/products/${data.id}`;
-    return axiosClient.patch(url, data);
-  },
-
-  remove(id) {
-    const url = `/products/${id}`;
-    return axiosClient.delete(url);
   },
 };
 

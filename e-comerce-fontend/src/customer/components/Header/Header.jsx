@@ -72,6 +72,9 @@ export default function Header() {
   const handleClickIconShoppingCart = () => {
     navigate(`/cart`);
   };
+  const handleClickLogo = () => {
+    navigate('/')
+  }
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -181,7 +184,8 @@ export default function Header() {
             noWrap
             component="div"
             color="#FFFF00	"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "block" }, cursor: 'pointer' }}
+            onClick={handleClickLogo}
           >
             SHOP PHU KIEN
           </Typography>

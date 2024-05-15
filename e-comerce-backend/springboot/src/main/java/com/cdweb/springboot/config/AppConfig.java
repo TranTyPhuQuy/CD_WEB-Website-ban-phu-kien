@@ -5,13 +5,11 @@ import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -36,8 +34,7 @@ public class AppConfig {
 						System.out.println("dang nhap");
 						CorsConfiguration corsConfiguration = new CorsConfiguration();
 
-						corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000",
-								"http://localhost:4200", "http://localhost:5454"));
+						corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
 						corsConfiguration.setAllowedMethods(Collections.singletonList("*"));
 						corsConfiguration.setAllowCredentials(true);
 						corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));

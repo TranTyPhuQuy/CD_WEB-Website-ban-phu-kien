@@ -12,6 +12,7 @@ import LoadingProducts from "./components/Loading";
 import List from "./components/List";
 import Sort from "./components/Sort";
 import Filters from "./components/Filters";
+import { useMatch } from "react-router-dom";
 // import { useNavigate, useLocation } from "react-router-dom";
 // import queryString from "query-string";
 
@@ -35,12 +36,17 @@ function ProductList(props) {
   // const navigate = useNavigate();
   // const location = useLocation();
   // const queryParams = queryString.parse(location.search);
+  const match = useMatch("/products/:categoryName");
+  const {
+    params: { categoryName },
+  } = match;
 
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     // _page: 1,
     // _limit: 12,
+    category: decodeURIComponent(categoryName),
     sort: "price_low",
     page: 1,
   });

@@ -21,6 +21,7 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name = "product_name")
 	private String productName;
 	
 	@Column(name = "image_url")
@@ -33,9 +34,6 @@ public class Product {
 	
 	@Column(name = "discounted_price")
 	private int discountedPrice;
-	
-	@Column(name = "discounted_persent")
-	private int discountPersent;
 	
 	@Column(name = "quantity")
 	private int quantity;
@@ -55,7 +53,7 @@ public class Product {
 	}
 
 	public Product(Long id, String productName, String imageUrl, String description, int price, int discountedPrice,
-			int discountedPersent, int quantity, String brand, Category category, LocalDateTime createAt) {
+			 int quantity, String brand, Category category, LocalDateTime createAt) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -63,7 +61,6 @@ public class Product {
 		this.description = description;
 		this.price = price;
 		this.discountedPrice = discountedPrice;
-		this.discountPersent = discountedPersent;
 		this.quantity = quantity;
 		this.brand = brand;
 		this.category = category;
@@ -116,14 +113,6 @@ public class Product {
 
 	public void setDiscountedPrice(int discountedPrice) {
 		this.discountedPrice = discountedPrice;
-	}
-
-	public int getDiscountedPersent() {
-		return discountPersent;
-	}
-
-	public void setDiscountedPersent(int discountedPersent) {
-		this.discountPersent = discountedPersent;
 	}
 
 	public int getQuantity() {
