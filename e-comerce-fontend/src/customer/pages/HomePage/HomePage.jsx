@@ -24,32 +24,32 @@ export default function HomePage() {
           <div className="menu-list-items">
             <ul className="list-items">
               <li className="items">
-                <a className="block-pages" href="/products/Phụ kiện Apple Watch">Ốp lưng Iphone</a>
+                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Ốp lưng Iphone</a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/products/Phụ kiện Apple Watch">Phụ kiện Apple Watch</a>
+                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Phụ kiện Apple Watch</a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/products/Phụ kiện Apple Watch">
+                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">
                   Dán <span>cường lực</span>
                 </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/products/Phụ kiện Apple Watch">Dán PPF</a>
+                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Dán PPF</a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/products/Phụ kiện Apple Watch">Phụ kiện Ipad</a>
+                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Phụ kiện Ipad</a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/products/Phụ kiện Apple Watch">Phụ kiện AirPods</a>
+                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Phụ kiện AirPods</a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/products/Phụ kiện Apple Watch">
+                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">
                   Cáp sạc <span>và pin sạc dự phòng</span>
                 </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/products/Phụ kiện Apple Watch">Phụ kiện khác</a>
+                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Phụ kiện khác</a>
               </li>
               <li className="items">
                 <a href="/blogs" className="block-pages">
