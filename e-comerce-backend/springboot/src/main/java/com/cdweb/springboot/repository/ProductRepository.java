@@ -17,7 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 			"ORDER BY "+
 			"CASE WHEN :sort = 'ASC' THEN p.discountedPrice END ASC, "+
 			"CASE WHEN :sort = 'DESC' THEN p.discountedPrice END DESC" )
-			public List<Product> filterProducts(@Param("category")String category,
+			public List<Product> filterProductsByCategory(@Param("category")String category,
 			        @Param("minPrice") Integer minPrice,
 			        @Param("maxPrice") Integer maxPrice,
 			        @Param("sort") String sort);
@@ -27,4 +27,15 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Query("SELECT p.productName FROM Product p " +
 			"WHERE p.productName LIKE %:suggest% ")
 	List<String> getProductNameSuggest(@Param("suggest") String suggest);
+	
+	@Query("SELECT p FROM Product p " +
+			"WHERE (p.productName LIKE %:productName%) " +
+			"AND ((:minPrice IS NULL AND :maxPrice IS NULL) OR (p.discountedPrice BETWEEN :minPrice AND :maxPrice)) " +
+			"ORDER BY "+
+			"CASE WHEN :sort = 'ASC' THEN p.discountedPrice END ASC, "+
+			"CASE WHEN :sort = 'DESC' THEN p.discountedPrice END DESC" )
+	public List<Product> filterProductsByProductName(@Param("productName")String productName,
+			        @Param("minPrice") Integer minPrice,
+			        @Param("maxPrice") Integer maxPrice,
+			        @Param("sort") String sort);
 }

@@ -26,7 +26,7 @@ public class ProductController {
 	public ResponseEntity<Page<Product>> findProductByCategory(@RequestParam String category,
 			@RequestParam Integer minPrice, @RequestParam Integer maxPrice, @RequestParam String sort,
 			@RequestParam Integer page, @RequestParam Integer limit) {
-		Page<Product> respo = productService.getListProduct(category, minPrice, maxPrice, sort, page, limit);
+		Page<Product> respo = productService.getListProductByCategory(category, minPrice, maxPrice, sort, page, limit);
 		System.out.println(" Find product By Category Successfully");
 		
 		return new ResponseEntity<>(respo, HttpStatus.ACCEPTED);
@@ -40,10 +40,13 @@ public class ProductController {
     public Product getProduct(@PathVariable("id") Long id) {
         return productService.getProductById(id);
     }
-//    @GetMapping("/{productName}")
-//    public Product getProductByName(@PathVariable("name") String productName) {
-//        return productService.getProductById(id);
-//    }
+    @GetMapping("/name")
+    public ResponseEntity<Page<Product>> getProductByName(@RequestParam("productName") String productName,
+    		@RequestParam Integer minPrice, @RequestParam Integer maxPrice, @RequestParam String sort,
+			@RequestParam Integer page, @RequestParam Integer limit) {
+		Page<Product> respo = productService.getListProductByProductName(productName, minPrice, maxPrice, sort, page, limit);
+        return new ResponseEntity<>(respo, HttpStatus.ACCEPTED);
+    }
     @GetMapping("/suggest/{suggest}")
     public List<String> getProductNameSuggest(@PathVariable("suggest") String suggest) {
         return productService.getProductNameSuggest(suggest);

@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Page<Product> getListProduct(String category,Integer minPrice, Integer maxPrice,String sort, Integer page, Integer limit){
+	public Page<Product> getListProductByCategory(String category,Integer minPrice, Integer maxPrice,String sort, Integer page, Integer limit){
 		// TODO Auto-generated method stub
 //		System.out.println("pagenumber truoc:"+pageNumber);
 		page = page>0 ? page-1:page;
@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService{
 		
 		Pageable pageable = PageRequest.of(page, limit);
 		
-		List<Product> products = productRepository.filterProducts(category, minPrice, maxPrice, sort);
+		List<Product> products = productRepository.filterProductsByCategory(category, minPrice, maxPrice, sort);
 		
 		int startIndex = (int)pageable.getOffset();
 		int endIndex = Math.min(startIndex+ pageable.getPageSize(), products.size());
@@ -60,5 +60,26 @@ public class ProductServiceImpl implements ProductService{
 	public List<String> getProductNameSuggest(String suggest) {
 		// TODO Auto-generated method stub
 		return productRepository.getProductNameSuggest(suggest);
+	}
+
+	@Override
+	public Page<Product> getListProductByProductName(String productName,Integer minPrice, Integer maxPrice,String sort, Integer page, Integer limit) {
+		// TODO Auto-generated method stub
+//		System.out.println("pagenumber truoc:"+pageNumber);
+		page = page>0 ? page-1:page;
+//		System.out.println("pagenumber sau:"+pageNumber);
+		
+		Pageable pageable = PageRequest.of(page, limit);
+		
+		List<Product> products = productRepository.filterProductsByProductName(productName, minPrice, maxPrice, sort);
+		
+		int startIndex = (int)pageable.getOffset();
+		int endIndex = Math.min(startIndex+ pageable.getPageSize(), products.size());
+		
+		List<Product> pageContent = products.subList(startIndex, endIndex);
+		
+		Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable,products.size());
+		
+		return filteredProducts;
 	}
 }
