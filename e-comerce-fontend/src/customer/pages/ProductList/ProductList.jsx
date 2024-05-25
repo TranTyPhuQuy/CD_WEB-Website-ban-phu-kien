@@ -17,7 +17,7 @@ import { useMatch } from "react-router-dom";
 // import queryString from "query-string";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: { padding:'20px 0px', backgroundColor: '#f4f4f4'},
 
   left: { width: "250px" },
   right: { flex: "1 1 0" },
@@ -36,7 +36,7 @@ function ProductList(props) {
   // const navigate = useNavigate();
   // const location = useLocation();
   // const queryParams = queryString.parse(location.search);
-  const match = useMatch("/products/:categoryName");
+  const match = useMatch("/categories/:categoryName");
   const {
     params: { categoryName },
   } = match;
@@ -47,7 +47,7 @@ function ProductList(props) {
     // _page: 1,
     // _limit: 12,
     category: decodeURIComponent(categoryName),
-    sort: "price_low",
+    sort: "ASC",
     page: 1,
   });
   // const [filters, setFilters] = useState(() => ({
@@ -105,7 +105,7 @@ function ProductList(props) {
     }));
   };
   return (
-    <Box pt={4}>
+    <Box className={classes.root}>
       <Container>
         <Grid container spacing={1}>
           <Grid item className={classes.left}>

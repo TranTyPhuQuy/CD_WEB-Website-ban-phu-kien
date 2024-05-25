@@ -10,7 +10,7 @@ import ProductTabs from "./components/ProductTabs";
 import "./ProductDetail.css";
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: "30px 0px" },
+  root: { padding: "30px 0px", backgroundColor: '#f4f4f4'},
   left: {
     width: "400px",
     padding: "12px",

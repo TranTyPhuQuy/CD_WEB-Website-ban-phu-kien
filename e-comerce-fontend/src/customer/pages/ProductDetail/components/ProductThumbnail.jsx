@@ -9,7 +9,7 @@ ProductThumbnail.propTypes = {
 
 function ProductThumbnail({ product }) {
   const thumbnailUrl = product.imageUrl
-  ? `${BASEURLHOST}${product.imageUrl?.url}`
+  ? product.imageUrl
   : THUMBNAIL_PLACEHOLDER;
 return (
     <Box>

@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import categoryApi from "../../../api/categoryApi";
-import { Button, Card } from "react-bootstrap";
-import { formatPrice } from "../../../utils";
-import "./stylesProducts.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { IMGBANNERS, BLOGCONTENTS } from "../../../constants";
-import Item from "../ProductList/components/Item"
+import categoryApi from "../../../../api/categoryApi.js";
+import { Button } from "react-bootstrap";
+import "./Collection.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { IMGBANNERS, BLOGCONTENTS } from "../../../../constants/index.js";
+import ProductCard from "../../../components/ProductCard/ProductCard.jsx";
 
-function Products(props) {
-  const navigate = useNavigate();
-
+function Collection() {
   const [cate1, setCate1] = useState([]);
   const [cate2, setCate2] = useState([]);
   const [cate3, setCate3] = useState([]);
@@ -34,9 +30,6 @@ function Products(props) {
       }
     })();
   }, []);
-  const handleClickCard = (productId) => {
-    navigate(`products/${productId}`);
-  };
   return (
     <>
       <div className="div__title">
@@ -46,33 +39,7 @@ function Products(props) {
         <div className="div__lists-iphone">
           <div className="lists-iphone">
             {cate1.map((product) => (
-              <Card
-                key={product.id}
-                style={{
-                  width: "13.5rem",
-                  height: "25.5rem",
-                  marginBottom: "10px",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="card-image">
-                  <Card.Link className="card-product">
-                    <Card.Img variant="top" src={product.imageUrl} />
-                  </Card.Link>
-                </div>
-                <Card.Body>
-                  <Card.Text className="card-trademark">SHOPPHUKIEN</Card.Text>
-                  <Card.Title>{product.productName}</Card.Title>
-                  <div className="card-price">
-                    <Card.Text className="card__text-price">
-                      {formatPrice(product.discountedPrice)}
-                    </Card.Text>
-                    <Card.Text className="card__text-cost">
-                      {formatPrice(product.price)}
-                    </Card.Text>
-                  </div>
-                </Card.Body>
-              </Card>
+              <ProductCard product={product} />
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
@@ -87,33 +54,7 @@ function Products(props) {
         <div className="div__lists-iphone">
           <div className="lists-iphone">
             {cate2.map((product) => (
-              <Card
-                key={product.id}
-                style={{
-                  width: "13.5rem",
-                  height: "25.5rem",
-                  marginBottom: "10px",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="card-image">
-                  <Card.Link className="card-product">
-                    <Card.Img variant="top" src={product.imageUrl} />
-                  </Card.Link>
-                </div>
-                <Card.Body>
-                  <Card.Text className="card-trademark">SHOPPHUKIEN</Card.Text>
-                  <Card.Title>{product.productName}</Card.Title>
-                  <div className="card-price">
-                    <Card.Text className="card__text-price">
-                      {formatPrice(product.discountedPrice)}
-                    </Card.Text>
-                    <Card.Text className="card__text-cost">
-                      {formatPrice(product.price)}
-                    </Card.Text>
-                  </div>
-                </Card.Body>
-              </Card>
+              <ProductCard product={product} />
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
@@ -133,33 +74,7 @@ function Products(props) {
         <div className="div__lists-iphone">
           <div className="lists-iphone">
             {cate3.map((product) => (
-              <Card
-                key={product.id}
-                style={{
-                  width: "13.5rem",
-                  height: "25.5rem",
-                  marginBottom: "10px",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="card-image">
-                  <Card.Link className="card-product">
-                    <Card.Img variant="top" src={product.imageUrl} />
-                  </Card.Link>
-                </div>
-                <Card.Body>
-                  <Card.Text className="card-trademark">SHOPPHUKIEN</Card.Text>
-                  <Card.Title>{product.productName}</Card.Title>
-                  <div className="card-price">
-                    <Card.Text className="card__text-price">
-                      {formatPrice(product.discountedPrice)}
-                    </Card.Text>
-                    <Card.Text className="card__text-cost">
-                      {formatPrice(product.price)}
-                    </Card.Text>
-                  </div>
-                </Card.Body>
-              </Card>
+              <ProductCard product={product} />
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
@@ -179,34 +94,7 @@ function Products(props) {
         <div className="div__lists-iphone">
           <div className="lists-iphone">
             {cate4.map((product) => (
-              <Item product={product}/>
-              // <Card
-              //   style={{
-              //     width: "13.5rem",
-              //     height: "25.5rem",
-              //     marginBottom: "10px",
-              //     cursor: "pointer",
-              //   }}
-              //   onClick={handleClickCard(product.id)}
-              // >
-              //   <div className="card-image">
-              //     <Card.Link className="card-product">
-              //       <Card.Img variant="top" src={product.imageUrl} />
-              //     </Card.Link>
-              //   </div>
-              //   <Card.Body>
-              //     <Card.Text className="card-trademark">SHOPPHUKIEN</Card.Text>
-              //     <Card.Title>{product.productName}</Card.Title>
-              //     <div className="card-price">
-              //       <Card.Text className="card__text-price">
-              //         {formatPrice(product.discountedPrice)}
-              //       </Card.Text>
-              //       <Card.Text className="card__text-cost">
-              //         {formatPrice(product.price)}
-              //       </Card.Text>
-              //     </div>
-              //   </Card.Body>
-              // </Card>
+              <ProductCard product={product} />
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
@@ -331,4 +219,4 @@ function Products(props) {
   );
 }
 
-export default Products;
+export default Collection;

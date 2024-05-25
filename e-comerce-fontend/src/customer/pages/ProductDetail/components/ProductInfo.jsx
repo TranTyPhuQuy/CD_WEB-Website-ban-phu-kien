@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
-import { formatPrice } from "../../../../utils";
+import { formatPrice, promotionPercent } from "../../../../utils";
 import { makeStyles } from "@mui/styles";
 
 ProductInfo.propTypes = {
@@ -69,7 +69,7 @@ function ProductInfo({ product = {} }) {
             <Box
               component="span"
               className={classes.promotionPercent}
-            >{`-${discountedPrice}%`}</Box>
+            >{`- ${promotionPercent(price, discountedPrice)}%`}</Box>
           </>
         )}
       </Box>

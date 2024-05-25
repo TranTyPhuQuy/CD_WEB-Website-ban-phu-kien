@@ -12,10 +12,8 @@ const productApi = {
     const newParams = { ...params };
     newParams.category = params.category? params.category : '';
     newParams.minPrice = params.minPrice? params.minPrice : 0;
-    newParams.maxPrice = params.maxPrice? params.maxPrice : 10000;
-    newParams.minDiscount = params.minDiscount? params.minDiscount : 0;
-    newParams.sort = params.sort? params.sort.toString() : 'price_low';
-    newParams.stock = params.stock? params.stock : 'null';
+    newParams.maxPrice = params.maxPrice? params.maxPrice : 10000000;
+    newParams.sort = params.sort? params.sort.toString() : 'ASC';
     newParams.page = params.pageNumber? params.pageNumber : 0;
     newParams.limit = 10;
 

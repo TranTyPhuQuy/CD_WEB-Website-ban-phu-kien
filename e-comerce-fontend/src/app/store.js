@@ -1,17 +1,26 @@
-// import counterReducer from '../features/Counter/counterSlice';
-// import userReducer from '../features/Auth/userSlice';
-import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "../customer/pages/Cart/CartSlice";
-// const { configureStore } = require("@reduxjs/toolkit");
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import cartReducer from '../customer/pages/Cart/CartSlice';
 
-const rootReducer = {
-  // count: counterReducer,
-  // user: userReducer,
-  cart: cartReducer,
+const persistConfig = {
+  key: 'root',
+  storage,
 };
 
+const persistedReducer = persistReducer(persistConfig, cartReducer);
+
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    cart: persistedReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-export default store;
+const persistor = persistStore(store);
+
+export { store, persistor };
+

@@ -1,7 +1,6 @@
-// import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
-import "./stylesCarouselHome.css";
+import "./CarouselHome.css";
 
 
 function CarouselHome() {
@@ -11,7 +10,7 @@ function CarouselHome() {
             <Carousel.Item interval={6000}>
                 <img
                     className="d-block w-100"
-                    src={require("../../../utils/images/bgr1.png")}
+                    src={require("../../../../utils/images/bgr1.png")}
                     alt="First slide"
                 /> 
                 {/* <Carousel.Caption>
@@ -22,7 +21,7 @@ function CarouselHome() {
             <Carousel.Item interval={6000}>
                 <img
                     className="d-block w-100"
-                    src={require("../../../utils/images/bgr2.jpeg")}
+                    src={require("../../../../utils/images/bgr2.jpeg")}
                     alt="Second slide"
                 />
                 {/* <Carousel.Caption>
@@ -33,7 +32,7 @@ function CarouselHome() {
             <Carousel.Item interval={6000}>
                 <img
                     className="d-block w-100"
-                    src={require("../../../utils/images/bgr3.png")}
+                    src={require("../../../../utils/images/bgr3.png")}
                     alt="Third slide"
                 />
                 {/* <Carousel.Caption>
@@ -46,7 +45,7 @@ function CarouselHome() {
             <Carousel.Item interval={6000}>
                 <img
                     className="d-block w-100"
-                    // src={require("../../../utils/images/bgr1.png")}
+                    // src={require("../../../../utils/images/bgr1.png")}
                     src="https://images.alphacoders.com/133/thumb-1920-1338574.jpeg"
                     alt="Third slide"
                 />

@@ -2,20 +2,21 @@ import React from "react";
 // Font Awesome
 import "@fortawesome/fontawesome-free/css/all.min.css";
 // CSS
-import "./styles.css";
+import "./HomePage.css";
 // Icon
 import ChatIcon from "../../../utils/images/chats.svg";
 // Page
-import Carousel from "./CarouselHome";
-import Accessory from "./Products";
+import Carousel from "./components/CarouselHome";
+import Accessory from "./components/Collection";
 import { Box, Container } from "@mui/material";
 
 export default function HomePage() {
-  
   return (
-    <Box sx={{
-      bgcolor: '#f4f4f4',
-    }}>
+    <Box
+      sx={{
+        bgcolor: "#f4f4f4",
+      }}
+    >
       <Container>
         <div className="div__chat">
           <img src={ChatIcon} className="chat-icon" alt="chat" />
@@ -24,32 +25,68 @@ export default function HomePage() {
           <div className="menu-list-items">
             <ul className="list-items">
               <li className="items">
-                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Ốp lưng Iphone</a>
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Apple Watch"
+                >
+                  Ốp lưng Iphone
+                </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Phụ kiện Apple Watch</a>
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Apple Watch"
+                >
+                  Phụ kiện Apple Watch
+                </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Apple Watch"
+                >
                   Dán <span>cường lực</span>
                 </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Dán PPF</a>
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Apple Watch"
+                >
+                  Dán PPF
+                </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Phụ kiện Ipad</a>
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Apple Watch"
+                >
+                  Phụ kiện Ipad
+                </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Phụ kiện AirPods</a>
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Apple Watch"
+                >
+                  Phụ kiện AirPods
+                </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Apple Watch"
+                >
                   Cáp sạc <span>và pin sạc dự phòng</span>
                 </a>
               </li>
               <li className="items">
-                <a className="block-pages" href="/categories/Phụ kiện Apple Watch">Phụ kiện khác</a>
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Apple Watch"
+                >
+                  Phụ kiện khác
+                </a>
               </li>
               <li className="items">
                 <a href="/blogs" className="block-pages">

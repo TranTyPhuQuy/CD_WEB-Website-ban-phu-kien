@@ -1,23 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
-// import { cartItemsCountSelector, cartTotalSelector,cartSelector } from "./Selectors";
-// import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CartItem from "./Components/CartItem";
-import { cartSelector } from "./Selectors";
+import { cartSelector,cartTotalSelector } from "./Selectors";
+import { formatPrice } from "../../../utils";
 
 Cart.propTypes = {};
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: "30px 0px" },
+  root: { padding: "30px 0px", backgroundColor: '#f4f4f4'},
   left: { width: "65%" },
   right: { width: "33%" },
 }));
 function Cart(props) {
   const classes = useStyles();
   const cart = useSelector(cartSelector);
+  const cartTotal = useSelector(cartTotalSelector);
+
   return (
     <Box className={classes.root}>
       <Container>
@@ -48,7 +48,7 @@ function Cart(props) {
                 >
                   <Typography>Tạm tính</Typography>
                   <Typography sx={{ fontWeight: "bold" }}>
-                    20.000.000 đ
+                    {formatPrice(cartTotal)}
                   </Typography>
                 </Box>
                 <Box
@@ -64,7 +64,7 @@ function Cart(props) {
                     variant="h5"
                     color="#FF0000"
                   >
-                    20.000.000 đ
+                    {formatPrice(cartTotal)}
                   </Typography>
                 </Box>
               </Box>
@@ -88,6 +88,3 @@ function Cart(props) {
 }
 
 export default Cart;
-
-// lỗi: Cannot access 'cartSelector' before initialization
-// ReferenceError: Cannot access 'cartSelector' before initialization
