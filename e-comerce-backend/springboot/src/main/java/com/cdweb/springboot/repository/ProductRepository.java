@@ -23,4 +23,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 			        @Param("sort") String sort);
 
 	List<Product> findTop10ByCategoryId(Long categoryId);
+	
+	@Query("SELECT p.productName FROM Product p " +
+			"WHERE p.productName LIKE %:suggest% ")
+	List<String> getProductNameSuggest(@Param("suggest") String suggest);
 }

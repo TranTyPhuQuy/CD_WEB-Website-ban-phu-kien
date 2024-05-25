@@ -11,5 +11,5 @@ public interface ProductService {
 
 	public Product getProductById(Long id);
 	public Page<Product> getListProduct(String category,Integer minPrice, Integer maxPrice, String sort, Integer page, Integer limit);
-
+	public List<String> getProductNameSuggest(String suggest);
 }

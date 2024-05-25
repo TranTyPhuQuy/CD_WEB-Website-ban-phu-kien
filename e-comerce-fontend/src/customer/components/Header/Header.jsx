@@ -168,7 +168,7 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{backgroundColor:"#0f1230"}}>
+      <AppBar position="sticky" style={{backgroundColor:"#0f1230", zIndex: 1000}}>
         <Toolbar>
           <IconButton
             size="large"

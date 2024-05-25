@@ -1,5 +1,7 @@
 package com.cdweb.springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -37,6 +39,14 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product getProduct(@PathVariable("id") Long id) {
         return productService.getProductById(id);
+    }
+//    @GetMapping("/{productName}")
+//    public Product getProductByName(@PathVariable("name") String productName) {
+//        return productService.getProductById(id);
+//    }
+    @GetMapping("/suggest/{suggest}")
+    public List<String> getProductNameSuggest(@PathVariable("suggest") String suggest) {
+        return productService.getProductNameSuggest(suggest);
     }
 }
 

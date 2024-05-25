@@ -1,17 +1,27 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Button,
+  Container,
+  Grid,
+  Link,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CartItem from "./Components/CartItem";
-import { cartSelector,cartTotalSelector } from "./Selectors";
+import { cartSelector, cartTotalSelector } from "./Selectors";
 import { formatPrice } from "../../../utils";
 
 Cart.propTypes = {};
 
 const useStyles = makeStyles((theme) => ({
-  root: { padding: "30px 0px", backgroundColor: '#f4f4f4'},
+  root: { padding: "30px 0px", backgroundColor: "#f4f4f4" },
   left: { width: "65%" },
   right: { width: "33%" },
+  breadcrumb: {marginBottom: '20px'}
 }));
 function Cart(props) {
   const classes = useStyles();
@@ -21,6 +31,16 @@ function Cart(props) {
   return (
     <Box className={classes.root}>
       <Container>
+        <Box className={classes.breadcrumb}>
+        <Breadcrumbs maxItems={2} aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="#">
+            Trang chủ
+          </Link>
+          <Link underline="hover" color="inherit" href="#">
+            Giỏ hàng
+          </Link>
+        </Breadcrumbs>
+        </Box>
         <Typography sx={{ fontWeight: 500, fontSize: "23px" }}>
           GIỎ HÀNG
         </Typography>
@@ -30,9 +50,12 @@ function Cart(props) {
               {cart.length === 0 ? (
                 <Typography>Rong</Typography>
               ) : (
-                  cart.map((cartItems) => (
-                    <CartItem product={cartItems.product} quan={cartItems.quantity}/>
-                  ))
+                cart.map((cartItems) => (
+                  <CartItem
+                    product={cartItems.product}
+                    quan={cartItems.quantity}
+                  />
+                ))
               )}
             </Paper>
           </Grid>

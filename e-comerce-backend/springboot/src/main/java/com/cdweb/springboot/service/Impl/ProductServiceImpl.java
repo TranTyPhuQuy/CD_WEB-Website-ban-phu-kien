@@ -55,4 +55,10 @@ public class ProductServiceImpl implements ProductService{
 		
 		return filteredProducts;
 	}
+
+	@Override
+	public List<String> getProductNameSuggest(String suggest) {
+		// TODO Auto-generated method stub
+		return productRepository.getProductNameSuggest(suggest);
+	}
 }
