@@ -1,7 +1,7 @@
 import axiosClient from './axiosClient';
 
 const productApi = {
-  async getAll(params) {
+  async getProductsByCategory(params) {
     // const newParams = { ...params };
     // newParams._start = !params._page || params._page <= 1 ? 0 : (params._page - 1) * (params._limit || 50);
     // delete newParams._page;
@@ -15,11 +15,39 @@ const productApi = {
     newParams.maxPrice = params.maxPrice? params.maxPrice : 10000000;
     newParams.sort = params.sort? params.sort.toString() : 'ASC';
     newParams.page = params.pageNumber? params.pageNumber : 0;
-    newParams.limit = 10;
+    newParams.limit = 12;
 
     // delete newParams._page;
 
     const res = await axiosClient.get('products', { params: newParams });
+
+    return {
+      data: res.content,
+      pagination: {
+        count: res.totalPages,
+        page: params.pageNumber
+      },
+    };
+  },
+  async getProductsByName(params) {
+    // const newParams = { ...params };
+    // newParams._start = !params._page || params._page <= 1 ? 0 : (params._page - 1) * (params._limit || 50);
+    // delete newParams._page;
+
+    // const productList = await axiosClient.get('/findByCategory', { params: newParams });
+    // const count = await axiosClient.get('/products/count', { params: newParams });
+
+    const newParams = { ...params };
+    newParams.productName = params.productName? params.productName : '';
+    newParams.minPrice = params.minPrice? params.minPrice : 0;
+    newParams.maxPrice = params.maxPrice? params.maxPrice : 10000000;
+    newParams.sort = params.sort? params.sort.toString() : 'ASC';
+    newParams.page = params.pageNumber? params.pageNumber : 0;
+    newParams.limit = 12;
+
+    // delete newParams._page;
+
+    const res = await axiosClient.get('products/name', { params: newParams });
 
     return {
       data: res.content,

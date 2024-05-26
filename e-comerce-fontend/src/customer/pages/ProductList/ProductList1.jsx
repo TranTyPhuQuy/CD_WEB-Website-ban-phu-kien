@@ -22,31 +22,36 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
     paddingBottom: "10px",
   },
+  breadcrumb: { marginBottom: "20px" },
 }));
 
-function ProductList(props) {
+function ProductList1(props) {
   const classes = useStyles();
-  let categoryName;
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const queryParams = queryString.parse(location.search);
-  const match = useMatch("/categories/:categoryName");
-  if (match) {
-    const {
-      params: { categoryName: matchedCategoryName },
-    } = match;
-    categoryName = matchedCategoryName;
-  }
 
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const queryParams = queryString.parse(location.search);
+  let productName;
+
+  const match = useMatch("/products/name/:productName");
+  if (match) {
+    const {
+      params: { productName: matchedProductName },
+    } = match;
+    productName = matchedProductName;
+  }
+
   const [filters, setFilters] = useState({
     // _page: 1,
     // _limit: 12,
-    category: decodeURIComponent(categoryName),
+    productName: productName ? decodeURIComponent(productName) : undefined,
     sort: "ASC",
     page: 1,
   });
+
   // const [filters, setFilters] = useState(() => ({
   //   ...queryParams,
   //   _page: queryParams._page || 1,
@@ -70,7 +75,7 @@ function ProductList(props) {
   useEffect(() => {
     (async () => {
       try {
-        const { data, pagination } = await productApi.getProductsByCategory(
+        const { data, pagination } = await productApi.getProductsByName(
           filters
         );
         setProductList(data);
@@ -111,7 +116,10 @@ function ProductList(props) {
               Trang chủ
             </Link>
             <Link underline="hover" color="inherit" href="#">
-              Giỏ hàng
+              Danh sách sản phẩm
+            </Link>
+            <Link underline="hover" color="inherit" href="#">
+              Kết quả tìm kiếm cho từ khóa: {filters.productName}
             </Link>
           </Breadcrumbs>
         </Box>
@@ -129,10 +137,8 @@ function ProductList(props) {
                 <Pagination
                   count={pagination.count}
                   page={pagination.page}
-                  variant="outlined"
                   shape="rounded"
                   onChange={handlePanigation}
-                  color="primary"
                 />
               </Box>
             </Paper>
@@ -143,4 +149,4 @@ function ProductList(props) {
   );
 }
 
-export default ProductList;
+export default ProductList1;

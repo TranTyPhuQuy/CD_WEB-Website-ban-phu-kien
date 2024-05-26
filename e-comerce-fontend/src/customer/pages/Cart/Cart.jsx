@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   root: { padding: "30px 0px", backgroundColor: "#f4f4f4" },
   left: { width: "65%" },
   right: { width: "33%" },
-  breadcrumb: {marginBottom: '20px'}
+  breadcrumb: { marginBottom: "20px" },
 }));
 function Cart(props) {
   const classes = useStyles();
@@ -32,14 +32,14 @@ function Cart(props) {
     <Box className={classes.root}>
       <Container>
         <Box className={classes.breadcrumb}>
-        <Breadcrumbs maxItems={2} aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="#">
-            Trang chủ
-          </Link>
-          <Link underline="hover" color="inherit" href="#">
-            Giỏ hàng
-          </Link>
-        </Breadcrumbs>
+          <Breadcrumbs maxItems={2} aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="#">
+              Trang chủ
+            </Link>
+            <Link underline="hover" color="inherit" href="#">
+              Giỏ hàng
+            </Link>
+          </Breadcrumbs>
         </Box>
         <Typography sx={{ fontWeight: 500, fontSize: "23px" }}>
           GIỎ HÀNG

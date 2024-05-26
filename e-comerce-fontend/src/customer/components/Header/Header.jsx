@@ -130,7 +130,6 @@ export default function Header() {
   );
   const [list, setList] = useState([]);
   const [suggest, setSuggest] = useState();
-  const [keyword, setKeyword] = useState();
 
   useEffect(() => {
     (async () => {
@@ -149,7 +148,7 @@ export default function Header() {
   };
   const handleEnterKeyword = (keyword) => {
     console.log("handleEnterKeyword: ", keyword);
-    setKeyword(keyword);
+    navigate(`/products/name/${keyword}`);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>

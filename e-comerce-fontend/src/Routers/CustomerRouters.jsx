@@ -7,6 +7,7 @@ import Footer from "../customer/components/Footer/Footer";
 import ProductDetail from "../customer/pages/ProductDetail/ProductDetail";
 import NotFound from "../customer/pages/NotFound/NotFound";
 import Cart from "../customer/pages/Cart/Cart";
+import ProductList1 from "../customer/pages/ProductList/ProductList1";
 
 const CustomerRouters = () => {
   return (
@@ -21,7 +22,7 @@ const CustomerRouters = () => {
         <Route path="/categories/:categoryName" element={<ProductList />}>
           {" "}
         </Route>
-        <Route path="/products/name/:productName" element={<ProductList />}>
+        <Route path="/products/name/:productName" element={<ProductList1 />}>
           {" "}
         </Route>
         <Route path="/products/:productId" element={<ProductDetail />}>
