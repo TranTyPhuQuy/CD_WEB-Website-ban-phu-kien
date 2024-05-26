@@ -21,6 +21,9 @@ const CustomerRouters = () => {
         <Route path="/categories/:categoryName" element={<ProductList />}>
           {" "}
         </Route>
+        <Route path="/products/name/:productName" element={<ProductList />}>
+          {" "}
+        </Route>
         <Route path="/products/:productId" element={<ProductDetail />}>
           {" "}
         </Route>

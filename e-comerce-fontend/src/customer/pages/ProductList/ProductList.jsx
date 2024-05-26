@@ -40,7 +40,12 @@ function ProductList(props) {
   const {
     params: { categoryName },
   } = match;
-
+  
+  const match1 = useMatch("/products/name/:productName");
+  const {
+    params: { productName },
+  } = match1;
+  
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({

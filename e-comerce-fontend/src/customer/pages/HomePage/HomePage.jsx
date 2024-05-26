@@ -45,7 +45,7 @@ export default function HomePage() {
                   className="block-pages"
                   href="/categories/Phụ kiện Apple Watch"
                 >
-                  Dán <span>cường lực</span>
+                  Dán cường lực
                 </a>
               </li>
               <li className="items">
@@ -77,7 +77,7 @@ export default function HomePage() {
                   className="block-pages"
                   href="/categories/Phụ kiện Apple Watch"
                 >
-                  Cáp sạc <span>và pin sạc dự phòng</span>
+                  Cáp sạc
                 </a>
               </li>
               <li className="items">

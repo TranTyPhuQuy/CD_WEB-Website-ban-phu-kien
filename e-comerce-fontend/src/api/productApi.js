@@ -33,6 +33,10 @@ const productApi = {
     const url = `/products/${productId}`;
     return axiosClient.get(url);
   },
+  getProductNameSuggest(suggest) {
+    const url = `/products/suggest/${suggest}`;
+    return axiosClient.get(url);
+  }
 };
 
 export default productApi;
