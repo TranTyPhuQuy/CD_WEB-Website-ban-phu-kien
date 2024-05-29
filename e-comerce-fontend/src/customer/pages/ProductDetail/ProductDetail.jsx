@@ -35,7 +35,7 @@ function ProductDetail() {
     <Box className={classes.root}>
       <Container>
         <Box className={classes.breadcrumb}>
-          <Breadcrumbs maxItems={2} aria-label="breadcrumb">
+          <Breadcrumbs maxItems={3} aria-label="breadcrumb">
             <Link underline="hover" color="inherit" href="#">
               Trang chủ
             </Link>

@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Breadcrumbs, Container, Grid, Pagination, Paper } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Container,
+  Grid,
+  Pagination,
+  Paper,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import productApi from "../../../api/productApi";
 import LoadingProducts from "./components/Loading";
@@ -101,12 +108,6 @@ function ProductList1(props) {
       sort: newValueSort,
     }));
   };
-  const handleFilters = (newFilters) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      ...newFilters,
-    }));
-  };
   return (
     <Box className={classes.root}>
       <Container>
@@ -123,12 +124,7 @@ function ProductList1(props) {
             </Link>
           </Breadcrumbs>
         </Box>
-        <Grid container spacing={1}>
-          <Grid item className={classes.left}>
-            <Paper elevation={0}>
-              <Filters filters={filters} onChange={handleFilters} />
-            </Paper>
-          </Grid>
+        <Grid container>
           <Grid item className={classes.right}>
             <Paper elevation={0}>
               <Sort currentSort={filters.sort} onChange={handleSort}></Sort>

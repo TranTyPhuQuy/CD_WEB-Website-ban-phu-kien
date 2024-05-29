@@ -27,31 +27,7 @@ export default function HomePage() {
               <li className="items">
                 <a
                   className="block-pages"
-                  href="/categories/Phụ kiện Apple Watch"
-                >
-                  Ốp lưng Iphone
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Phụ kiện Apple Watch"
-                >
-                  Phụ kiện Apple Watch
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Phụ kiện Apple Watch"
-                >
-                  Dán cường lực
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Phụ kiện Apple Watch"
+                  href="/categories/Dán PPF"
                 >
                   Dán PPF
                 </a>
@@ -59,15 +35,47 @@ export default function HomePage() {
               <li className="items">
                 <a
                   className="block-pages"
-                  href="/categories/Phụ kiện Apple Watch"
+                  href="/categories/Dán Cường Lực"
                 >
-                  Phụ kiện Ipad
+                  Dán Cường Lực
                 </a>
               </li>
               <li className="items">
                 <a
                   className="block-pages"
-                  href="/categories/Phụ kiện Apple Watch"
+                  href="/categories/Phụ Kiện Apple Watch"
+                >
+                  Phụ Kiện Apple Watch
+                </a>
+              </li>
+              <li className="items">
+                <a
+                  className="block-pages"
+                  href="/categories/Ốp Lưng iPhone"
+                >
+                  Ốp Lưng iPhone
+                </a>
+              </li>
+              <li className="items">
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện IPad"
+                >
+                  Phụ kiện IPad
+                </a>
+              </li>
+              <li className="items">
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện Macbook"
+                >
+                  Phụ kiện Macbook
+                </a>
+              </li>
+              <li className="items">
+                <a
+                  className="block-pages"
+                  href="/categories/Phụ kiện AirPods"
                 >
                   Phụ kiện AirPods
                 </a>
@@ -75,17 +83,9 @@ export default function HomePage() {
               <li className="items">
                 <a
                   className="block-pages"
-                  href="/categories/Phụ kiện Apple Watch"
+                  href="/categories/Cáp sạc & pin dự phòng"
                 >
-                  Cáp sạc
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Phụ kiện Apple Watch"
-                >
-                  Phụ kiện khác
+                  Cáp sạc & pin dự phòng
                 </a>
               </li>
               <li className="items">

@@ -5,7 +5,7 @@ import { BASEURLHOST, THUMBNAIL_PLACEHOLDER } from "../../../../constants";
 import QuantityBtn from "../../../components/QuantityBtn/QuantityBtn";
 import { Height } from "@mui/icons-material";
 import { formatPrice } from "../../../../utils";
-import { addToCart, setQuantity } from "../CartSlice";
+import { addToCart, setQuantity, removeFromCart } from "../CartSlice";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
 
@@ -33,6 +33,7 @@ function CartItem({ minValue = 1, maxValue = 100, product, quan }) {
     : THUMBNAIL_PLACEHOLDER;
   const [quantity, setCount] = useState(quan);
   const dispatch = useDispatch();
+
   const handleIncrementCounter = () => {
     if (quantity < maxValue) {
       setCount((prevState) => prevState + 1);
@@ -56,6 +57,12 @@ function CartItem({ minValue = 1, maxValue = 100, product, quan }) {
       dispatch(action);
     }
   };
+  const handleRemoveCartItem = (productId) => {
+    const action = removeFromCart({
+      id: productId,
+    });
+    dispatch(action);
+  };
   return (
     // alt={product.productName}
     <Box
@@ -66,7 +73,12 @@ function CartItem({ minValue = 1, maxValue = 100, product, quan }) {
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box width="400px">
           <Typography>{product.productName}</Typography>
-          <Button sx={{ p: 0, minWidth: 0, marginBottom: -14 }}>Xóa</Button>
+          <Button
+            sx={{ p: 0, minWidth: 0, marginBottom: -14 }}
+            onClick={() => handleRemoveCartItem(product.id)}
+          >
+            Xóa
+          </Button>
         </Box>
         <Box sx={{ fontWeight: "800" }}>
           <p> {formatPrice(product.discountedPrice)}</p>

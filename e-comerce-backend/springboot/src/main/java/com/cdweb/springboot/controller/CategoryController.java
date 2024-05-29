@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cdweb.springboot.entities.Category;
 import com.cdweb.springboot.entities.Product;
+import com.cdweb.springboot.response.CategoryResponse;
 import com.cdweb.springboot.service.CategoryService;
 
 @RestController
@@ -27,8 +28,9 @@ public class CategoryController {
 	public List<Category> getListCategory() {
 		return categoryService.getListCategory();
 	}
+	
 	@GetMapping("/products")
-	public Map<String, List<Product>> getProducts() {
+	public List<CategoryResponse> getProducts() {
 		return categoryService.findTop10ByCategoryId();
 	}
 }

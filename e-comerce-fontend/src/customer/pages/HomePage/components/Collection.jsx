@@ -24,7 +24,7 @@ function Collection() {
         setCate3(categoriesArray[2]);
         setCate4(categoriesArray[3]);
 
-        console.log(res);
+        console.log('categoriesArray',categoriesArray);
       } catch (error) {
         console.log("Loi product list: ", error);
       }
@@ -48,7 +48,7 @@ function Collection() {
         </div>
       </div>
       <div className="div__title">
-        <h2 className="title-accessory">Phụ kiện Apple Watch</h2>
+        <h2 className="title-accessory">Phụ kiện IPad</h2>
       </div>
       <div className="div__lists">
         <div className="div__lists-iphone">
@@ -58,7 +58,7 @@ function Collection() {
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
-            Xem thêm sản phẩm <b className="bold-text">Apple Watch</b>
+            Xem thêm sản phẩm <b className="bold-text">IPad</b>
           </Button>
         </div>
       </div>
@@ -68,7 +68,7 @@ function Collection() {
         </div>
       </div>
       <div className="div__title">
-        <h2 className="title-accessory">Phụ kiện Apple Watch</h2>
+        <h2 className="title-accessory">Phụ kiện Macbook</h2>
       </div>
       <div className="div__lists">
         <div className="div__lists-iphone">
@@ -78,7 +78,7 @@ function Collection() {
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
-            Xem thêm sản phẩm <b className="bold-text">Apple Watch</b>
+            Xem thêm sản phẩm <b className="bold-text">Macbook</b>
           </Button>
         </div>
       </div>
@@ -88,7 +88,7 @@ function Collection() {
         </div>
       </div>
       <div className="div__title">
-        <h2 className="title-accessory">Phụ kiện Apple Watch</h2>
+        <h2 className="title-accessory">Phụ kiện AirPods</h2>
       </div>
       <div className="div__lists">
         <div className="div__lists-iphone">
@@ -98,7 +98,7 @@ function Collection() {
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
-            Xem thêm sản phẩm <b className="bold-text">Apple Watch</b>
+            Xem thêm sản phẩm <b className="bold-text">AirPods</b>
           </Button>
         </div>
       </div>

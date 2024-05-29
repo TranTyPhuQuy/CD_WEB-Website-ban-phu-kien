@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
     paddingBottom: "10px",
   },
+  breadcrumb: { marginBottom: "20px" },
 }));
 
 function ProductList(props) {
@@ -111,7 +112,7 @@ function ProductList(props) {
               Trang chủ
             </Link>
             <Link underline="hover" color="inherit" href="#">
-              Giỏ hàng
+              Danh sách sản phẩm
             </Link>
           </Breadcrumbs>
         </Box>
@@ -129,10 +130,8 @@ function ProductList(props) {
                 <Pagination
                   count={pagination.count}
                   page={pagination.page}
-                  variant="outlined"
                   shape="rounded"
                   onChange={handlePanigation}
-                  color="primary"
                 />
               </Box>
             </Paper>
