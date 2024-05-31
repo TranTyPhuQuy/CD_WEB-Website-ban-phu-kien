@@ -10,7 +10,7 @@ const categoryApi = {
     const url = `/categories/${id}`;
     return axiosClient.get(url);
   },
-  async getProuctsForHome() {
+  async getProucts() {
     const url = '/categories/products';
     return axiosClient.get(url);
   },

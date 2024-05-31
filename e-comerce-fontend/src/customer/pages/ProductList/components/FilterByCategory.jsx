@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box,Typography } from '@mui/material';
 import categoryApi from "../../../../api/categoryApi";
 import { makeStyles } from "@mui/styles";
+import { CategoryContext } from '../../../../constants';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,29 +32,13 @@ FilterByCategory.propTypes = {
 };
 
 function FilterByCategory({ onChange }) {
-  const [categoryList, setCategoryList] = useState([]);
   const classes = useStyles();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const list = await categoryApi.getAll();
-        // setCategoryList(
-        //   list.map((x) => ({
-        //     id: x.id,
-        //     name: x.name,
-        //   }))
-        // );
-        setCategoryList(list);
-      } catch (error) {
-        console.log('Failed to fetch category list', error);
-      }
-    })();
-  }, []);
+  const categories = useContext(CategoryContext);
 
-  const handleCategoryClick = (category) => {
+  const handleCategoryClick = (categoryName) => {
     if (onChange) {
-      onChange(category.name);
+      onChange(categoryName);
     }
   };
 
@@ -61,9 +46,9 @@ function FilterByCategory({ onChange }) {
     <Box className={classes.root}>
       <Typography variant="subtitle2" fontWeight={800}>DANH MỤC SẢN PHẨM</Typography>
       <ul className={classes.menu}>
-        {categoryList.map((category) => (
-          <li key={category.id} onClick={() => handleCategoryClick(category)}>
-            <Typography variant="body2">{category.name}</Typography>
+        {categories.map((c) => (
+          <li key={c.categoryId} onClick={() => handleCategoryClick(c.categoryName)}>
+            <Typography variant="body2">{c.categoryName}</Typography>
           </li>
         ))}
       </ul>

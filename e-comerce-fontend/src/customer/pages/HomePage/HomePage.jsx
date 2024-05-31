@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 // Font Awesome
 import "@fortawesome/fontawesome-free/css/all.min.css";
 // CSS
@@ -7,10 +7,13 @@ import "./HomePage.css";
 import ChatIcon from "../../../utils/images/chats.svg";
 // Page
 import Carousel from "./components/CarouselHome";
-import Accessory from "./components/Collection";
 import { Box, Container } from "@mui/material";
+import { CategoryContext } from "../../../constants";
+import Collection from "./components/Collection";
 
 export default function HomePage() {
+  const categories = useContext(CategoryContext);
+
   return (
     <Box
       sx={{
@@ -24,75 +27,17 @@ export default function HomePage() {
         <div className="div__menu">
           <div className="menu-list-items">
             <ul className="list-items">
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Dán PPF"
-                >
-                  Dán PPF
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Dán Cường Lực"
-                >
-                  Dán Cường Lực
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Phụ Kiện Apple Watch"
-                >
-                  Phụ Kiện Apple Watch
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Ốp Lưng iPhone"
-                >
-                  Ốp Lưng iPhone
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Phụ kiện IPad"
-                >
-                  Phụ kiện IPad
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Phụ kiện Macbook"
-                >
-                  Phụ kiện Macbook
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Phụ kiện AirPods"
-                >
-                  Phụ kiện AirPods
-                </a>
-              </li>
-              <li className="items">
-                <a
-                  className="block-pages"
-                  href="/categories/Cáp sạc & pin dự phòng"
-                >
-                  Cáp sạc & pin dự phòng
-                </a>
-              </li>
-              <li className="items">
-                <a href="/blogs" className="block-pages">
-                  Blog
-                </a>
-              </li>
+              {categories &&
+                categories.map((c) => (
+                  <li className="items">
+                    <a
+                      className="block-pages"
+                      href={`/categories/${c.categoryName}`}
+                    >
+                      {c.categoryName}
+                    </a>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
@@ -137,7 +82,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="accessoryMain">
-            <Accessory />
+            <Collection categories={categories} />
           </div>
         </div>
       </Container>

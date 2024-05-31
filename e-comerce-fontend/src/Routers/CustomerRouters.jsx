@@ -12,9 +12,7 @@ import ProductList1 from "../customer/pages/ProductList/ProductList1";
 const CustomerRouters = () => {
   return (
     <div>
-      <div>
         <Header />
-      </div>
       <Routes>
         <Route path="/" element={<HomePage />}>
           {" "}

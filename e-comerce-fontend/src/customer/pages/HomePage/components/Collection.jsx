@@ -1,84 +1,54 @@
 import React, { useEffect, useState } from "react";
-import categoryApi from "../../../../api/categoryApi.js";
 import { Button } from "react-bootstrap";
 import "./Collection.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IMGBANNERS, BLOGCONTENTS } from "../../../../constants/index.js";
 import ProductCard from "../../../components/ProductCard/ProductCard.jsx";
 
-function Collection() {
+function Collection({categories}) {
   const [cate1, setCate1] = useState([]);
   const [cate2, setCate2] = useState([]);
   const [cate3, setCate3] = useState([]);
   const [cate4, setCate4] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await categoryApi.getProuctsForHome();
-        // Chuyển đổi đối tượng thành mảng
-        const categoriesArray = Object.values(res);
+    if (categories) {
+      setCate1(categories[0]);
+      setCate2(categories[1]);
+      setCate3(categories[2]);
+      setCate4(categories[3]);
+    }
+  }, [categories]);
 
-        setCate1(categoriesArray[0]);
-        setCate2(categoriesArray[1]);
-        setCate3(categoriesArray[2]);
-        setCate4(categoriesArray[3]);
-
-        console.log('categoriesArray',categoriesArray);
-      } catch (error) {
-        console.log("Loi product list: ", error);
-      }
-    })();
-  }, []);
   return (
     <>
       <div className="div__title">
-        <h2 className="title-accessory">Phụ kiện Apple Watch</h2>
+        <h2 className="title-accessory">{cate1 && cate1.categoryName}</h2>
       </div>
       <div className="div__lists">
         <div className="div__lists-iphone">
           <div className="lists-iphone">
-            {cate1.map((product) => (
+            {cate1 && cate1.products && cate1.products.map((product) => (
               <ProductCard product={product} />
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
-            Xem thêm sản phẩm <b className="bold-text">Apple Watch</b>
+            Xem thêm sản phẩm <b className="bold-text">{cate1 && cate1.categoryName}</b>
           </Button>
         </div>
       </div>
       <div className="div__title">
-        <h2 className="title-accessory">Phụ kiện IPad</h2>
+        <h2 className="title-accessory">{cate2 && cate2.categoryName}</h2>
       </div>
       <div className="div__lists">
         <div className="div__lists-iphone">
           <div className="lists-iphone">
-            {cate2.map((product) => (
+            {cate2 && cate2.products && cate2.products.map((product) => (
               <ProductCard product={product} />
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
-            Xem thêm sản phẩm <b className="bold-text">IPad</b>
-          </Button>
-        </div>
-      </div>
-      <div className="div__banners">
-        <div className="banners">
-          <img src={IMGBANNERS.imgID1} className="img-banners" alt="banners" />
-        </div>
-      </div>
-      <div className="div__title">
-        <h2 className="title-accessory">Phụ kiện Macbook</h2>
-      </div>
-      <div className="div__lists">
-        <div className="div__lists-iphone">
-          <div className="lists-iphone">
-            {cate3.map((product) => (
-              <ProductCard product={product} />
-            ))}
-          </div>
-          <Button variant="outline-dark" className="button__seeMore">
-            Xem thêm sản phẩm <b className="bold-text">Macbook</b>
+            Xem thêm sản phẩm <b className="bold-text">{cate2 && cate2.categoryName}</b>
           </Button>
         </div>
       </div>
@@ -88,17 +58,37 @@ function Collection() {
         </div>
       </div>
       <div className="div__title">
-        <h2 className="title-accessory">Phụ kiện AirPods</h2>
+        <h2 className="title-accessory">{cate3 && cate3.categoryName}</h2>
       </div>
       <div className="div__lists">
         <div className="div__lists-iphone">
           <div className="lists-iphone">
-            {cate4.map((product) => (
+            {cate3 && cate3.products && cate3.products.map((product) => (
               <ProductCard product={product} />
             ))}
           </div>
           <Button variant="outline-dark" className="button__seeMore">
-            Xem thêm sản phẩm <b className="bold-text">AirPods</b>
+            Xem thêm sản phẩm <b className="bold-text">{cate3 && cate3.categoryName}</b>
+          </Button>
+        </div>
+      </div>
+      <div className="div__banners">
+        <div className="banners">
+          <img src={IMGBANNERS.imgID1} className="img-banners" alt="banners" />
+        </div>
+      </div>
+      <div className="div__title">
+        <h2 className="title-accessory">{cate4 && cate4.categoryName}</h2>
+      </div>
+      <div className="div__lists">
+        <div className="div__lists-iphone">
+          <div className="lists-iphone">
+            {cate4 && cate4.products && cate4.products.map((product) => (
+              <ProductCard product={product} />
+            ))}
+          </div>
+          <Button variant="outline-dark" className="button__seeMore">
+            Xem thêm sản phẩm <b className="bold-text">{cate4 && cate4.categoryName}</b>
           </Button>
         </div>
       </div>

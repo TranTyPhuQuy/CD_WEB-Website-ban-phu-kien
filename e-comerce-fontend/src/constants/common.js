@@ -29,8 +29,8 @@ export const CategoryProvider = (props) => {
   useEffect(() => {
     (async () => {
       try {
-        const list = await categoryApi.getAll();
-        console.log('cateee',list);
+        const list = await categoryApi.getProucts();
+        console.log("cateee", list);
         setCategories(list);
       } catch (error) {
         console.log("Failed to fetch category list", error);
