@@ -14,6 +14,7 @@ import { makeStyles } from "@mui/styles";
 import CartItem from "./Components/CartItem";
 import { cartSelector, cartTotalSelector } from "./Selectors";
 import { formatPrice } from "../../../utils";
+import { useNavigate } from "react-router-dom";
 
 Cart.propTypes = {};
 
@@ -36,10 +37,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 function Cart(props) {
   const classes = useStyles();
   const cart = useSelector(cartSelector);
   const cartTotal = useSelector(cartTotalSelector);
+
+  const navigate = useNavigate();
+  
+  const handleAddToCartSubmit = () => {
+    navigate('/cart/checkout');
+  }
 
   return (
     <Box className={classes.root}>
@@ -124,7 +132,7 @@ function Cart(props) {
                 color="primary"
                 style={{ width: "100%", marginTop: "20px" }}
                 size="large"
-                // onClick={handleAddToCartSubmit}
+                onClick={handleAddToCartSubmit}
               >
                 ĐẶT HÀNG
               </Button>
