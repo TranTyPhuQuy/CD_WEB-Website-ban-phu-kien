@@ -19,12 +19,13 @@ import { useNavigate } from "react-router-dom";
 Cart.propTypes = {};
 
 const useStyles = makeStyles((theme) => ({
-  root: { padding: "30px 0px", backgroundColor: "#f4f4f4" },
+  root: { padding: "30px 0px", backgroundColor: "#f4f4f4", height: '500px' },
   left: { width: "65%" },
   right: { width: "33%" },
   breadcrumb: { marginBottom: "20px" },
   cartTitle: {
     position: "relative",
+    marginBottom: '20px',
     "&::after": {
       content: '""',
       position: "absolute",

@@ -8,12 +8,11 @@ import ProductDetail from "../customer/pages/ProductDetail/ProductDetail";
 import NotFound from "../customer/pages/NotFound/NotFound";
 import Cart from "../customer/pages/Cart/Cart";
 import ProductList1 from "../customer/pages/ProductList/ProductList1";
-import Checkout from "../customer/pages/Checkout/Checkout";
 
 const CustomerRouters = () => {
   return (
     <div>
-        <Header />
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />}>
           {" "}
@@ -28,9 +27,6 @@ const CustomerRouters = () => {
           {" "}
         </Route>
         <Route path="/cart" element={<Cart />}>
-          {" "}
-        </Route>
-        <Route path="/cart/checkout" element={<Checkout />}>
           {" "}
         </Route>
         <Route component={NotFound} />

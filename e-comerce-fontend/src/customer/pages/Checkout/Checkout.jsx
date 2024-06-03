@@ -1,139 +1,270 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Button, Grid, TextField } from '@mui/material';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import {
+  Box,
+  Breadcrumbs,
+  Container,
+  Grid,
+  Link,
+  Typography,
+} from "@mui/material";
+import CheckoutForm from "./Components/CheckoutForm";
+import { makeStyles } from "@mui/styles";
+import "./Checkout.css";
 
-Checkout.propTypes = {
-    
-};
-
+Checkout.propTypes = {};
+const useStyles = makeStyles((theme) => ({
+  root: { padding: "30px 0px", backgroundColor: "#f4f4f4" },
+  left: {
+    width: "55%",
+    padding: "12px",
+    borderRight: "1px solid grey",
+  },
+  right: { flex: "1 1 0", padding: "12px", width: "45%" },
+  breadcrumb: { marginBottom: "20px" },
+}));
 function Checkout(props) {
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        address: '',
-        city: '',
-        state: '',
-        zip: '',
-        country: ''
-      });
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-          ...formData,
-          [name]: value
-        });
-      };
-    
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form Data:', formData);
-      };
-    
-      return (
-        <Container component="main" maxWidth="sm">
-      <CssBaseline />
-      <Paper elevation={3} style={{ padding: 20, marginTop: 20 }}>
-        <Typography component="h1" variant="h4" align="center">
-          Checkout
-        </Typography>
-        <CheckoutForm />
-      </Paper>
-    </Container>
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="firstName"
-                name="firstName"
-                label="First Name"
-                fullWidth
-                variant="outlined"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="lastName"
-                name="lastName"
-                label="Last Name"
-                fullWidth
-                variant="outlined"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="address"
-                name="address"
-                label="Address"
-                fullWidth
-                variant="outlined"
-                value={formData.address}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="city"
-                name="city"
-                label="City"
-                fullWidth
-                variant="outlined"
-                value={formData.city}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="state"
-                name="state"
-                label="State"
-                fullWidth
-                variant="outlined"
-                value={formData.state}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="zip"
-                name="zip"
-                label="Zip / Postal Code"
-                fullWidth
-                variant="outlined"
-                value={formData.zip}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="country"
-                name="country"
-                label="Country"
-                fullWidth
-                variant="outlined"
-                value={formData.country}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" fullWidth variant="contained" color="primary">
-                Place Order
-              </Button>
-            </Grid>
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.root}>
+      <Container>
+        <Grid container>
+          <Grid item className={classes.left}>
+            <Box>
+              <Typography>SHOP PHU KIEN</Typography>
+              <Box className={classes.breadcrumb}>
+                <Breadcrumbs maxItems={3} aria-label="breadcrumb">
+                  <Link underline="hover" color="inherit" href="#">
+                    Trang chủ
+                  </Link>
+                  <Link underline="hover" color="inherit" href="#">
+                    Chi tiết sản phẩm
+                  </Link>
+                </Breadcrumbs>
+              </Box>
+            </Box>
+            <Box>
+              <Typography>Thông tin giao hàng</Typography>
+              <Typography marginBottom={2}>Bạn đã có tài khoản?</Typography>
+              <CheckoutForm />
+            </Box>
           </Grid>
-        </form>
-      );
+          <Grid item className={classes.right}>
+            <div className="order-summary order-summary-is-collapsed">
+              <h2 className="visually-hidden">Thông tin đơn hàng</h2>
+              <div className="order-summary-sections">
+                <div
+                  className="order-summary-section order-summary-section-product-list"
+                  data-order-summary-section="line-items"
+                >
+                  <table className="product-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">
+                          <span className="visually-hidden">Hình ảnh</span>
+                        </th>
+                        <th scope="col">
+                          <span className="visually-hidden">Mô tả</span>
+                        </th>
+                        <th scope="col">
+                          <span className="visually-hidden">Số lượng</span>
+                        </th>
+                        <th scope="col">
+                          <span className="visually-hidden">Giá</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        className="product"
+                        data-product-id={1037850824}
+                        data-variant-id={1082802643}
+                      >
+                        <td className="product-image">
+                          <div className="product-thumbnail">
+                            <div className="product-thumbnail-wrapper">
+                              <img
+                                className="product-thumbnail-image"
+                                alt="Dây da Native Union Classic cho Apple Watch 38/40/41 mm"
+                                src="//product.hstatic.net/200000454999/product/8_1fdc986efb164667bdad2f8d580ea799_small.jpg"
+                              />
+                            </div>
+                            <span
+                              className="product-thumbnail-quantity"
+                              aria-hidden="true"
+                            >
+                              1
+                            </span>
+                          </div>
+                        </td>
+                        <td className="product-description">
+                          <span className="product-description-name order-summary-emphasis">
+                            Dây da Native Union Classic cho Apple Watch 38/40/41
+                            mm
+                          </span>
+                          <span className="product-description-variant order-summary-small-text">
+                            38/40/41 mm / Black
+                          </span>
+                        </td>
+                        <td className="product-quantity visually-hidden">1</td>
+                        <td className="product-price">
+                          <span className="order-summary-emphasis">
+                            1,218,000₫
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  className="order-summary-section order-summary-section-discount"
+                  data-order-summary-section="discount"
+                >
+                  <form
+                    id="form_discount_add"
+                    acceptCharset="UTF-8"
+                    method="post"
+                  >
+                    <input name="utf8" type="hidden" defaultValue="✓" />
+                    <div className="fieldset">
+                      <div className="field  ">
+                        <div className="field-input-btn-wrapper">
+                          <div className="field-input-wrapper">
+                            <label
+                              className="field-label"
+                              htmlFor="discount.code"
+                            >
+                              Mã giảm giá
+                            </label>
+                            <input
+                              placeholder="Mã giảm giá"
+                              className="field-input"
+                              data-discount-field="true"
+                              autoComplete="false"
+                              autoCapitalize="off"
+                              spellCheck="false"
+                              size={30}
+                              type="text"
+                              id="discount.code"
+                              name="discount.code"
+                              defaultValue=""
+                            />
+                          </div>
+                          <button
+                            type="submit"
+                            className="field-input-btn btn btn-default btn-disabled"
+                          >
+                            <span className="btn-content">Sử dụng</span>
+                            <i className="btn-spinner icon icon-button-spinner" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div
+                  className="order-summary-section order-summary-section-display-discount"
+                  data-order-summary-section="discount-display"
+                >
+                  <div>
+                    <div className="hrv-discount-choose-coupons">
+                      <div>
+                        <svg
+                          width={15}
+                          height={10}
+                          viewBox="0 0 18 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M17.3337 5.3335V2.00016C17.3337 1.07516 16.5837 0.333496 15.667 0.333496H2.33366C1.41699 0.333496 0.675326 1.07516 0.675326 2.00016V5.3335C1.59199 5.3335 2.33366 6.0835 2.33366 7.00016C2.33366 7.91683 1.59199 8.66683 0.666992 8.66683V12.0002C0.666992 12.9168 1.41699 13.6668 2.33366 13.6668H15.667C16.5837 13.6668 17.3337 12.9168 17.3337 12.0002V8.66683C16.417 8.66683 15.667 7.91683 15.667 7.00016C15.667 6.0835 16.417 5.3335 17.3337 5.3335ZM15.667 4.11683C14.6753 4.69183 14.0003 5.77516 14.0003 7.00016C14.0003 8.22516 14.6753 9.3085 15.667 9.8835V12.0002H2.33366V9.8835C3.32533 9.3085 4.00033 8.22516 4.00033 7.00016C4.00033 5.76683 3.33366 4.69183 2.34199 4.11683L2.33366 2.00016H15.667V4.11683ZM9.83366 9.50016H8.16699V11.1668H9.83366V9.50016ZM8.16699 6.16683H9.83366V7.8335H8.16699V6.16683ZM9.83366 2.8335H8.16699V4.50016H9.83366V2.8335Z"
+                            fill="#318DBB"
+                          />
+                        </svg>
+                        <span>Xem thêm mã giảm giá</span>
+                      </div>
+                      <div id="list_short_coupon">
+                        <span>
+                          <span data-code="SWITCHEASY GIẢM 50%">Giảm 50%</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="order-summary-section order-summary-section-total-lines payment-lines"
+                  data-order-summary-section="payment-lines"
+                >
+                  <table className="total-line-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">
+                          <span className="visually-hidden">Mô tả</span>
+                        </th>
+                        <th scope="col">
+                          <span className="visually-hidden">Giá</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="total-line total-line-subtotal">
+                        <td className="total-line-name">Tạm tính</td>
+                        <td className="total-line-price">
+                          <span
+                            className="order-summary-emphasis"
+                            data-checkout-subtotal-price-target={121800000}
+                          >
+                            1,218,000₫
+                          </span>
+                        </td>
+                      </tr>
+                      <tr className="total-line total-line-shipping">
+                        <td className="total-line-name">Phí vận chuyển</td>
+                        <td className="total-line-price">
+                          <span
+                            className="order-summary-emphasis"
+                            data-checkout-total-shipping-target={0}
+                          >
+                            —
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot className="total-line-table-footer">
+                      <tr className="total-line">
+                        <td className="total-line-name payment-due-label">
+                          <span className="payment-due-label-total">
+                            Tổng cộng
+                          </span>
+                        </td>
+                        <td className="total-line-name payment-due">
+                          <span className="payment-due-currency">VND</span>
+                          <span
+                            className="payment-due-price"
+                            data-checkout-payment-due-target={121800000}
+                          >
+                            1,218,000₫
+                          </span>
+                          <span
+                            className="checkout_version"
+                            display="none"
+                            data_checkout_version={27}
+                          ></span>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
+  );
 }
 
 export default Checkout;
