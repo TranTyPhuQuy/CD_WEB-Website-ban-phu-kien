@@ -85,10 +85,10 @@ function Cart(props) {
                 >
                   GIỎ HÀNG CỦA BẠN
                 </Typography>
-                {cart.map((cartItems) => (
+                {cart.map((cartItem) => (
                   <CartItem
-                    product={cartItems.product}
-                    quan={cartItems.quantity}
+                    product={cartItem.product}
+                    quan={cartItem.quantity}
                   />
                 ))}
               </Paper>

@@ -11,6 +11,9 @@ import {
 import CheckoutForm from "./Components/CheckoutForm";
 import { makeStyles } from "@mui/styles";
 import "./Checkout.css";
+import { useSelector } from "react-redux";
+import { cartSelector, cartTotalSelector } from "../Cart/Selectors";
+import { formatPrice } from "../../../utils";
 
 Checkout.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Checkout(props) {
   const classes = useStyles();
+  const cart = useSelector(cartSelector);
+  const cartTotal = useSelector(cartTotalSelector);
 
   return (
     <Box className={classes.root}>
@@ -76,44 +81,47 @@ function Checkout(props) {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr
-                        className="product"
-                        data-product-id={1037850824}
-                        data-variant-id={1082802643}
-                      >
-                        <td className="product-image">
-                          <div className="product-thumbnail">
-                            <div className="product-thumbnail-wrapper">
-                              <img
-                                className="product-thumbnail-image"
-                                alt="Dây da Native Union Classic cho Apple Watch 38/40/41 mm"
-                                src="//product.hstatic.net/200000454999/product/8_1fdc986efb164667bdad2f8d580ea799_small.jpg"
-                              />
+                      {cart.map((cartItem) => (
+                        <tr
+                          className="product"
+                          data-product-id={1037850824}
+                          data-variant-id={1082802643}
+                        >
+                          <td className="product-image">
+                            <div className="product-thumbnail">
+                              <div className="product-thumbnail-wrapper">
+                                <img
+                                  className="product-thumbnail-image"
+                                  alt="Dây da Native Union Classic cho Apple Watch 38/40/41 mm"
+                                  src={cartItem.product.imageUrl}
+                                />
+                              </div>
+                              <span
+                                className="product-thumbnail-quantity"
+                                aria-hidden="true"
+                              >
+                                1
+                              </span>
                             </div>
-                            <span
-                              className="product-thumbnail-quantity"
-                              aria-hidden="true"
-                            >
-                              1
+                          </td>
+                          <td className="product-description">
+                            <span className="product-description-name order-summary-emphasis">
+                              {cartItem.product.productName}
                             </span>
-                          </div>
-                        </td>
-                        <td className="product-description">
-                          <span className="product-description-name order-summary-emphasis">
-                            Dây da Native Union Classic cho Apple Watch 38/40/41
-                            mm
-                          </span>
-                          <span className="product-description-variant order-summary-small-text">
-                            38/40/41 mm / Black
-                          </span>
-                        </td>
-                        <td className="product-quantity visually-hidden">1</td>
-                        <td className="product-price">
-                          <span className="order-summary-emphasis">
-                            1,218,000₫
-                          </span>
-                        </td>
-                      </tr>
+                            <span className="product-description-variant order-summary-small-text">
+                              38/40/41 mm / Black
+                            </span>
+                          </td>
+                          <td className="product-quantity visually-hidden">
+                          {cartItem.quantity}
+                          </td>
+                          <td className="product-price">
+                            <span className="order-summary-emphasis">
+                            {formatPrice(cartItem.quantity*cartItem.product.price)}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -217,7 +225,7 @@ function Checkout(props) {
                             className="order-summary-emphasis"
                             data-checkout-subtotal-price-target={121800000}
                           >
-                            1,218,000₫
+                            {formatPrice(cartTotal)}
                           </span>
                         </td>
                       </tr>
@@ -241,12 +249,11 @@ function Checkout(props) {
                           </span>
                         </td>
                         <td className="total-line-name payment-due">
-                          <span className="payment-due-currency">VND</span>
                           <span
                             className="payment-due-price"
                             data-checkout-payment-due-target={121800000}
                           >
-                            1,218,000₫
+                          {formatPrice(cartTotal)}
                           </span>
                           <span
                             className="checkout_version"

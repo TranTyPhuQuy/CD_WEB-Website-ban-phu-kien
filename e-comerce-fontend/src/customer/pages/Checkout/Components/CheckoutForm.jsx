@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   TextField,
   Grid,
-  Typography,
   FormControl,
   FormLabel,
   RadioGroup,
   FormControlLabel,
   Radio,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
+import useProvinces from "../../../../hooks/useProvinces";
 
 function CheckoutForm() {
   const [formData, setFormData] = useState({
@@ -33,6 +36,50 @@ function CheckoutForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data:", formData);
+  };
+
+  const provinces = useProvinces();
+  const [pFullName, setPfullName] = useState();
+
+  const [districts, setDistricts] = useState([]);
+  useEffect(() => {
+    // Fetch dữ liệu từ file JSON
+    fetch("/utils/json/provinces.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Lọc các tỉnh và lấy district của tỉnh dựa vào pCode
+        const province = data.find((item) => item.FullName === pFullName);
+        if (province) {
+          const filteredDistricts = province.District.map((district) => ({
+            FullName: district.FullName,
+            Code: district.Code,
+          }));
+          setDistricts(filteredDistricts);
+        } else {
+          setDistricts([]);
+        }
+      })
+      .catch((error) => console.error("Error fetching the provinces:", error));
+  }, [pFullName]);
+
+  const handleProvinceChange = (event) => {
+    setFormData({
+      ...formData,
+      city: event.target.value,
+    });
+    setPfullName(event.target.value);
+  };
+
+  const handleDistrictChange = (event) => {
+    setFormData({
+      ...formData,
+      district: event.target.value,
+    });
   };
 
   return (
@@ -87,36 +134,48 @@ function CheckoutForm() {
           />
         </Grid>
         <Grid item xs={12} sm={7}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="Tỉnh / Thành"
-            fullWidth
-            variant="outlined"
-            value={formData.city}
-            onChange={handleChange}
-          />
+          <FormControl fullWidth>
+            <InputLabel id="province-select-label">Tỉnh / Thành</InputLabel>
+            <Select
+              labelId="province-select-label"
+              id="province-select"
+              value={formData.city}
+              label="Tỉnh / Thành"
+              onChange={handleProvinceChange}
+            >
+              {provinces.map((p) => (
+                <MenuItem key={p.Code} value={p.FullName}>
+                  {p.FullName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={5}>
-          <TextField
-            required
-            id="district"
-            name="district"
-            label="Quận / Huyện"
-            fullWidth
-            variant="outlined"
-            value={formData.district}
-            onChange={handleChange}
-          />
+          <FormControl fullWidth>
+            <InputLabel id="district-select-label">Quận / Huyện</InputLabel>
+            <Select
+              labelId="district-select-label"
+              id="district-select"
+              value={formData.district}
+              label="Quận / Huyện"
+              onChange={handleDistrictChange}
+            >
+              {districts.map((d) => (
+                <MenuItem key={d.Code} value={d.FullName}>
+                  {d.FullName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12}>
           <FormControl>
-            <FormLabel id="demo-radio-buttons-group-label">
+            <FormLabel id="payment-method-label">
               Phương thức thanh toán
             </FormLabel>
             <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
+              aria-labelledby="payment-method-label"
               defaultValue="COD"
               name="radio-buttons-group"
             >
