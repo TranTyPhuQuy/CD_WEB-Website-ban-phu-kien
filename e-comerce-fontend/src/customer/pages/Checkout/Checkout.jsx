@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Breadcrumbs,
@@ -14,6 +13,7 @@ import "./Checkout.css";
 import { useSelector } from "react-redux";
 import { cartSelector, cartTotalSelector } from "../Cart/Selectors";
 import { formatPrice } from "../../../utils";
+import paymentApi from "../../../api/paymentApi";
 
 Checkout.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -26,10 +26,24 @@ const useStyles = makeStyles((theme) => ({
   right: { flex: "1 1 0", padding: "12px", width: "45%" },
   breadcrumb: { marginBottom: "20px" },
 }));
+
+
 function Checkout(props) {
   const classes = useStyles();
   const cart = useSelector(cartSelector);
   const cartTotal = useSelector(cartTotalSelector);
+
+  const handleSubmitPayment = async (formData) => {
+    if (formData.paymentMethod === "VNPAY") {
+      try {
+        const res = await paymentApi.payment(cartTotal,'Thanh toan don hang');
+        console.log('url: ', res);
+        window.location.href = res.paymentUrl
+      } catch (error) {
+        console.log("Error with payment: ", error);
+      }
+    }
+  };
 
   return (
     <Box className={classes.root}>
@@ -52,7 +66,7 @@ function Checkout(props) {
             <Box>
               <Typography>Thông tin giao hàng</Typography>
               <Typography marginBottom={2}>Bạn đã có tài khoản?</Typography>
-              <CheckoutForm />
+              <CheckoutForm handleSubmitPayment={handleSubmitPayment}/>
             </Box>
           </Grid>
           <Grid item className={classes.right}>
