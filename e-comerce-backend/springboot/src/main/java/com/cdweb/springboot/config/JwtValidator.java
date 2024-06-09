@@ -29,20 +29,28 @@ public class JwtValidator extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        String jwt = request.getHeader("Authorization");
-    	System.out.println("validate");
+    	 String jwt = request.getHeader("Authorization");
+         System.out.println("validate");
 
-        if (jwt != null && jwt.startsWith("Bearer ") && jwtProvider.validateToken(jwt.substring(7))) {
-        	
-        	System.out.println("validate thanh cong");
-            String email = jwtProvider.getEmailFromToken(jwt);
-            UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(email);
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
+         if (jwt != null && jwt.startsWith("Bearer ") && jwtProvider.validateToken(jwt.substring(7))) {
+             System.out.println("validate thanh cong");
+             String email = jwtProvider.getEmailFromToken(jwt.substring(7));
 
-        filterChain.doFilter(request, response);
-    }
+             // Tải thông tin người dùng sử dụng email
+             UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(email);
+             System.out.println("userDetails: " + userDetails);
+
+             // Tạo một token xác thực sử dụng thông tin người dùng
+             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                     userDetails, null, userDetails.getAuthorities());
+
+             // Thiết lập các chi tiết bổ sung
+             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+             // Thiết lập token xác thực trong SecurityContextHolder
+             SecurityContextHolder.getContext().setAuthentication(authentication);
+         }
+
+         filterChain.doFilter(request, response);
+     }
 }
