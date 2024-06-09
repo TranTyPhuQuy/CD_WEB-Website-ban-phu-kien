@@ -293,14 +293,17 @@ textarea {
   display: inline-block;
   border-radius: 4px;
   font-weight: 500;
-  padding: 1.4em 1.7em;
   box-sizing: border-box;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   position: relative;
-  background: #338dbc;
   color: white;
+}
+
+.btn-checkout {
+  background: #338dbc;
+  padding: 1.4em 1.7em;
 }
 
 .fieldset .field .field-input-btn-wrapper .field-input-btn {

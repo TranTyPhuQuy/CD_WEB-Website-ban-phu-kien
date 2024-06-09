@@ -247,10 +247,16 @@ p {
     font-style: italic;
 }
 
+#button_blog-seeMore {
+    padding: 0!important;
+    font-size: 20px;
+}
+
 .button-seeMore {
     width: 12rem;
-    height: 65px;
+    height: 55px;
     font-size: 20px;
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
 }
+

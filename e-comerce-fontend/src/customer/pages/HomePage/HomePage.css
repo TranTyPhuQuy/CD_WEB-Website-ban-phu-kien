@@ -154,4 +154,9 @@ a {
     filter: invert(100%);
 }
 
+.div__menu {
+    background-color: #fff;
+    padding: 10px 0;
+}
+
 

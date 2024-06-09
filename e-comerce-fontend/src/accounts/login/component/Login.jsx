@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import "./login.css";
 
 import BackgroundImage from "../images/loginBgr.png";
 import Logo from "../images/logo.png";
+import BackHome from "../images/home.svg";
 
 const Login = () => {
   const [inputUsername, setInputUsername] = useState("");
@@ -34,10 +36,13 @@ const Login = () => {
       className="sign-in__wrapper"
       style={{ backgroundImage: `url(${BackgroundImage})` }}
     >
+      <a className="blk-backHome" href="/">
+        <img src={BackHome} className="icon-backHome"/>
+      </a>
       {/* Overlay */}
       <div className="sign-in__backdrop"></div>
       {/* Form */}
-      <Form className="shadow p-4 bg-white rounded" onSubmit={handleSubmit}>
+      <Form className="shadow p-4 bg-white form-login rounded" onSubmit={handleSubmit}>
         {/* Header */}
         <img
           className="img-thumbnail mx-auto d-block mb-2 img_logo-login"
@@ -59,7 +64,7 @@ const Login = () => {
           <div />
         )}
         <Form.Group className="mb-2" controlId="username">
-          <Form.Label>Tài khoản</Form.Label>
+          <Form.Label style={{ fontWeight: 500 }}>Tài khoản</Form.Label>
           <Form.Control
             type="text"
             value={inputUsername}
@@ -69,7 +74,7 @@ const Login = () => {
           />
         </Form.Group>
         <Form.Group className="mb-2" controlId="password">
-          <Form.Label>Mật Khẩu</Form.Label>
+          <Form.Label style={{ fontWeight: 500 }}>Mật khẩu</Form.Label>
           <Form.Control
             type="password"
             value={inputPassword}
@@ -81,27 +86,37 @@ const Login = () => {
         <Form.Group className="mb-2" controlId="checkbox">
           <Form.Check type="checkbox" label="Nhớ tài khoản" />
         </Form.Group>
-        {!loading ? (
-          <Button className="w-100" variant="primary" type="submit">
-            Đăng Nhập
-          </Button>
-        ) : (
-          <Button className="w-100" variant="primary" type="submit" disabled>
-            Đang Đăng Nhập...
-          </Button>
-        )}
-        <div className="d-grid justify-content-end">
-          <Button
-            className="text-muted px-0"
-            variant="link"
-            onClick={handlePassword}
-          >
-            Quên mật khẩu?
-          </Button>
+        <div id="button_login">
+          {!loading ? (
+            <Button className="w-100 btn_login-submit" variant="primary" type="submit">
+              Đăng Nhập
+            </Button>
+          ) : (
+            <Button className="w-100" variant="primary" type="submit" disabled>
+              Đang Đăng Nhập...
+            </Button>
+          )}
+        </div>
+        <div id="blk_nav">
+          <div className="nav_text">
+            <a href="/signup" className="nav_text-signup">
+              Đăng ký tài khoản!
+            </a>
+          </div>
+          <div className="d-grid justify-content-end">
+            <a
+              href="/forgot-pass"
+              className="text-muted px-0 btn_forgot-pass"
+              variant="link"
+              onClick={handlePassword}
+            >
+              Quên mật khẩu?
+            </a>
+          </div>
         </div>
       </Form>
       <div className="w-100 mb-2 position-absolute bottom-0 start-50 translate-middle-x text-white text-center">
-        Made by Fit NLU | &copy;2024
+        Copyright © 2024 ShopPhuKien by FITNLU
       </div>
     </div>
   );

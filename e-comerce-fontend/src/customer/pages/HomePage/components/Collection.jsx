@@ -199,7 +199,7 @@ function Collection({categories}) {
             </li>
           </ul>
           <div className="div__button">
-            <Button variant="outline-dark" className="button-seeMore">
+            <Button variant="outline-dark" className="button-seeMore" id="button_blog-seeMore">
               Xem thêm <i class="fa-solid fa-arrow-right"></i>
             </Button>
           </div>

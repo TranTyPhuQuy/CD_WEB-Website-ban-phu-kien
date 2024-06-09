@@ -175,7 +175,7 @@ function Checkout(props) {
                           </div>
                           <button
                             type="submit"
-                            className="field-input-btn btn btn-default btn-disabled"
+                            className="field-input-btn btn btn-checkout btn-default btn-disabled"
                           >
                             <span className="btn-content">Sử dụng</span>
                             <i className="btn-spinner icon icon-button-spinner" />
