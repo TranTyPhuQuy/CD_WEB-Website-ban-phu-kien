@@ -63,7 +63,7 @@
 }
 
 .css-ittuaa-MuiInputAdornment-root {
-    margin-right: 0;
+    margin-right: 0!important;
 }
 
 .css-1wvjvpd {
@@ -72,4 +72,9 @@
 
 .css-i4bv87-MuiSvgIcon-root {
     font-size: 2rem!important;
+}
+
+.custom-autocomplete {
+    border-color: transparent!important;
+    outline: invert;
 }

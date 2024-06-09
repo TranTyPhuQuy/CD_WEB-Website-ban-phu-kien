@@ -251,7 +251,8 @@ export default function Header() {
           >
             <MenuIcon onClick={handleCategoryMenuOpen} />
           </IconButton>
-          <Typography
+          <a href="/">
+            <Typography
               variant="h6"
               noWrap
               component="div"
@@ -260,13 +261,15 @@ export default function Header() {
               onClick={handleClickLogo}
             >
               SHOP PHU KIEN
-          </Typography>
+            </Typography>
+          </a>
         </div>
         <div className="header-search">
           <AutocompleteSearchBar
             list={list}
             onInChange={handleInputChange}
             onEnChange={handleEnterKeyword}
+            className="custom-autocomplete"
           />
         </div>
         <Box sx={{ flexGrow: 1 }} />
