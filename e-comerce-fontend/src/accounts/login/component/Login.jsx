@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import "./login.css";
 
-import BackgroundImage from "../../assets/images/background.png";
-import Logo from "../../assets/images/logo.png";
+import BackgroundImage from "../images/bgr.png";
+import Logo from "../images/logo.png";
 
 const Login = () => {
   const [inputUsername, setInputUsername] = useState("");
@@ -96,13 +96,13 @@ const Login = () => {
             variant="link"
             onClick={handlePassword}
           >
-            Forgot password?
+            Quên mật khẩu?
           </Button>
         </div>
       </Form>
       {/* Footer */}
       <div className="w-100 mb-2 position-absolute bottom-0 start-50 translate-middle-x text-white text-center">
-        Made by Hendrik C | &copy;2022
+        Made by Fit NLU | &copy;2024
       </div>
     </div>
   );
