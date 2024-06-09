@@ -59,7 +59,7 @@ const Login = () => {
           <div />
         )}
         <Form.Group className="mb-2" controlId="username">
-          <Form.Label>Username</Form.Label>
+          <Form.Label>Tài khoản</Form.Label>
           <Form.Control
             type="text"
             value={inputUsername}
@@ -83,11 +83,11 @@ const Login = () => {
         </Form.Group>
         {!loading ? (
           <Button className="w-100" variant="primary" type="submit">
-            Log In
+            Đăng Nhập
           </Button>
         ) : (
           <Button className="w-100" variant="primary" type="submit" disabled>
-            Logging In...
+            Đang Đăng Nhập...
           </Button>
         )}
         <div className="d-grid justify-content-end">

@@ -22,6 +22,7 @@ import productApi from "../../../api/productApi";
 import { useState } from "react";
 import { Avatar, Divider, ListItemIcon, Tooltip } from "@mui/material";
 import { CategoryContext } from "../../../constants/common";
+import "./styles.css";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -240,31 +241,34 @@ export default function Header() {
       style={{ backgroundColor: "#0f1230", zIndex: 1000 }}
     >
       <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon onClick={handleCategoryMenuOpen} />
-        </IconButton>
-
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          color="#FFFF00	"
-          sx={{ display: { xs: "none", sm: "block" }, cursor: "pointer" }}
-          onClick={handleClickLogo}
-        >
-          SHOP PHU KIEN
-        </Typography>
-        <AutocompleteSearchBar
-          list={list}
-          onInChange={handleInputChange}
-          onEnChange={handleEnterKeyword}
-        />
+        <div className="header-titleMenu">
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon onClick={handleCategoryMenuOpen} />
+          </IconButton>
+          <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              color="#FFFF00	"
+              sx={{ display: { xs: "none", sm: "block" }, cursor: "pointer" }}
+              onClick={handleClickLogo}
+            >
+              SHOP PHU KIEN
+          </Typography>
+        </div>
+        <div className="header-search">
+          <AutocompleteSearchBar
+            list={list}
+            onInChange={handleInputChange}
+            onEnChange={handleEnterKeyword}
+          />
+        </div>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           <IconButton

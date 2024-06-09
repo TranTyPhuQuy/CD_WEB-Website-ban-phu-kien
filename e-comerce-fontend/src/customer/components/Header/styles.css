@@ -46,3 +46,30 @@
     position: absolute;
     filter: brightness(0);
 }
+
+.header-titleMenu {
+    width: 22rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.header-search {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.css-ittuaa-MuiInputAdornment-root {
+    margin-right: 0;
+}
+
+.css-1wvjvpd {
+    margin-left: -10px!important;
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+    font-size: 2rem!important;
+}

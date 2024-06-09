@@ -36,17 +36,18 @@ function AutocompleteSearchBar({ list, onInChange, onEnChange }) {
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Tìm kiếm..."
+            placeholder="Tìm kiếm..."
             InputLabelProps={{
               style: { top: "-6px" }, 
             }}
+            style={{ fontSize: 18 }}
             InputProps={{
               ...params.InputProps, 
               style: { padding: 0 }, 
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", fontSize: 30.5, marginLeft: 5, }}
                     onClick={() => {
                       console.log("SearchIcon clicked");
                       if (input != null) {
@@ -58,7 +59,7 @@ function AutocompleteSearchBar({ list, onInChange, onEnChange }) {
               ),
             }}
             sx={{
-              width: 350,
+              width: 600,
               backgroundColor: "white",
               borderRadius: "4px",
             }}
