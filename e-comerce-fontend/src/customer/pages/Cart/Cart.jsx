@@ -14,16 +14,18 @@ import { makeStyles } from "@mui/styles";
 import CartItem from "./Components/CartItem";
 import { cartSelector, cartTotalSelector } from "./Selectors";
 import { formatPrice } from "../../../utils";
+import { useNavigate } from "react-router-dom";
 
 Cart.propTypes = {};
 
 const useStyles = makeStyles((theme) => ({
-  root: { padding: "30px 0px", backgroundColor: "#f4f4f4" },
+  root: { padding: "30px 0px", backgroundColor: "#f4f4f4", height: '500px' },
   left: { width: "65%" },
   right: { width: "33%" },
   breadcrumb: { marginBottom: "20px" },
   cartTitle: {
     position: "relative",
+    marginBottom: '20px',
     "&::after": {
       content: '""',
       position: "absolute",
@@ -36,10 +38,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 function Cart(props) {
   const classes = useStyles();
   const cart = useSelector(cartSelector);
   const cartTotal = useSelector(cartTotalSelector);
+
+  const navigate = useNavigate();
+  
+  const handleAddToCartSubmit = () => {
+    navigate('/cart/checkout');
+  }
 
   return (
     <Box className={classes.root}>
@@ -76,10 +85,10 @@ function Cart(props) {
                 >
                   GIỎ HÀNG CỦA BẠN
                 </Typography>
-                {cart.map((cartItems) => (
+                {cart.map((cartItem) => (
                   <CartItem
-                    product={cartItems.product}
-                    quan={cartItems.quantity}
+                    product={cartItem.product}
+                    quan={cartItem.quantity}
                   />
                 ))}
               </Paper>
@@ -124,7 +133,7 @@ function Cart(props) {
                 color="primary"
                 style={{ width: "100%", marginTop: "20px" }}
                 size="large"
-                // onClick={handleAddToCartSubmit}
+                onClick={handleAddToCartSubmit}
               >
                 ĐẶT HÀNG
               </Button>

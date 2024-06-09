@@ -3,10 +3,10 @@ import axios from 'axios';
 const jwt = 'eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTY2MDY1MTIsImV4cCI6MTcxNzQ1MjUxMiwiZW1haWwiOiJsb2NAZ21haWwuY29tIn0.W337FMjhkz2YcU8RC8O5ky1DF2pDNVd56JumjKqRrvFaNSZ2ff35JxlQ67v_NU3Jxax_BtEVMwyFDx3jcg3Oxg';
 const axiosClient = axios.create({
   baseURL: 'http://localhost:8080/api/',
-  headers: {
-    "Authorization": `Bearer ${jwt}`,
-    'Content-Type': 'application/json',
-  },
+  // headers: {
+  //   "Authorization": `Bearer ${jwt}`,
+  //   'Content-Type': 'application/json',
+  // },
 });
 
 axiosClient.interceptors.request.use(
