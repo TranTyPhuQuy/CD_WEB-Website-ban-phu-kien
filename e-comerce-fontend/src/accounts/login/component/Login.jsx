@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import "./login.css";
 
-import BackgroundImage from "../images/bgr.png";
+import BackgroundImage from "../images/loginBgr.png";
 import Logo from "../images/logo.png";
 
 const Login = () => {
@@ -40,11 +40,11 @@ const Login = () => {
       <Form className="shadow p-4 bg-white rounded" onSubmit={handleSubmit}>
         {/* Header */}
         <img
-          className="img-thumbnail mx-auto d-block mb-2"
+          className="img-thumbnail mx-auto d-block mb-2 img_logo-login"
           src={Logo}
           alt="logo"
         />
-        <div className="h4 mb-2 text-center">Sign In</div>
+        <div className="h4 mb-2 text-center">Đăng Nhập</div>
         {/* ALert */}
         {show ? (
           <Alert
@@ -53,7 +53,7 @@ const Login = () => {
             onClose={() => setShow(false)}
             dismissible
           >
-            Incorrect username or password.
+            Tên đăng nhập hoặc mật khẩu của bạn không chính xác.
           </Alert>
         ) : (
           <div />
@@ -63,23 +63,23 @@ const Login = () => {
           <Form.Control
             type="text"
             value={inputUsername}
-            placeholder="Username"
+            placeholder="Tài khoản"
             onChange={(e) => setInputUsername(e.target.value)}
             required
           />
         </Form.Group>
         <Form.Group className="mb-2" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Mật Khẩu</Form.Label>
           <Form.Control
             type="password"
             value={inputPassword}
-            placeholder="Password"
+            placeholder="Mật khẩu"
             onChange={(e) => setInputPassword(e.target.value)}
             required
           />
         </Form.Group>
         <Form.Group className="mb-2" controlId="checkbox">
-          <Form.Check type="checkbox" label="Remember me" />
+          <Form.Check type="checkbox" label="Nhớ tài khoản" />
         </Form.Group>
         {!loading ? (
           <Button className="w-100" variant="primary" type="submit">
@@ -100,7 +100,6 @@ const Login = () => {
           </Button>
         </div>
       </Form>
-      {/* Footer */}
       <div className="w-100 mb-2 position-absolute bottom-0 start-50 translate-middle-x text-white text-center">
         Made by Fit NLU | &copy;2024
       </div>
