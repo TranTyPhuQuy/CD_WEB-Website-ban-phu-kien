@@ -7,6 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 import CustomerRouters from './routers/CustomerRouters';
 import Checkout from './customer/pages/Checkout/Checkout';
 import PaymentResult from './customer/pages/Checkout/PaymentResult';
+import SignIn from './customer/pages/User/SignIn';
+import SignUp from './customer/pages/User/SignUp';
 
 function App() {
   return (
@@ -15,6 +17,12 @@ function App() {
         <Route path="/cart/checkout" element={<Checkout />}>
         </Route>
         <Route path="/payment-result/*" element={<PaymentResult />}>
+          {" "}
+        </Route>
+        <Route path="/sign-in" element={<SignIn />}>
+          {" "}
+        </Route>
+        <Route path="/sign-up" element={<SignUp />}>
           {" "}
         </Route>
     </Routes>

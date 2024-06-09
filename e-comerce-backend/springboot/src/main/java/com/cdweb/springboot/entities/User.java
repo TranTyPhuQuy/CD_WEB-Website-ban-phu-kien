@@ -24,12 +24,12 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String firstName;
-	private String lastName;
-	private String password;
 	private String email;
-	private String role;
+	private String userName;
+	private String password;
 	private String mobile;
+	private String fullName;
+	private String role;
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	private List<Address> address = new ArrayList<>();
@@ -50,13 +50,13 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(Long id, String firstName, String lastName, String password, String email, String role, String mobile,
+	public User(Long id, String fullName, String userName, String password, String email, String role, String mobile,
 			List<Address> address, List<PaymentInformation> paymentInformation, List<Rating> ratings,
 			List<Review> rivews, LocalDateTime createdAt) {
 		super();
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.fullName = fullName;
+		this.userName = userName;
 		this.password = password;
 		this.email = email;
 		this.role = role;
@@ -73,17 +73,17 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getFirstName() {
-		return firstName;
+	public String getFullname() {
+		return fullName;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFullname(String fullName) {
+		this.fullName = fullName;
 	}
-	public String getLastName() {
-		return lastName;
+	public String getUsername() {
+		return userName;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setUsername(String userName) {
+		this.userName = userName;
 	}
 	public String getPassword() {
 		return password;

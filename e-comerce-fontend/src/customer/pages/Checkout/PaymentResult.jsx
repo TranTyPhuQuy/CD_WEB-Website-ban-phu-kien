@@ -1,42 +1,84 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import paymentApi from '../../../api/paymentApi';
-
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import paymentApi from "../../../api/paymentApi";
+import { Box, Button, Modal, Typography } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ReportIcon from "@mui/icons-material/Report";
+// import { removeCart } from "../Cart/CartSlice";
 const PaymentResult = () => {
-    const [paymentResult, setPaymentResult] = useState(null);
-    const location = useLocation();
+  const [paymentResult, setPaymentResult] = useState(null);
+  const location = useLocation();
 
-    useEffect(() => {
-        const fetchPaymentResult = async () => {
-            const params = new URLSearchParams(location.search);
-            console.log('pram: ',params.toString());
-            const response = await paymentApi.paymentResult(params.toString());
-            console.log('response: ',response);
-            setPaymentResult(response);
-        };
+  useEffect(() => {
+    const fetchPaymentResult = async () => {
+      const params = new URLSearchParams(location.search);
+      const response = await paymentApi.paymentResult(params.toString());
+      if(response.paymentStatus === "success") {
+        // removeCart()
+      }
+      setPaymentResult(response);
+    };
 
-        fetchPaymentResult();
-    }, [location]);
+    fetchPaymentResult();
+  }, [location]);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 450,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    textAlign: "center",
+  };
+  const navigate = useNavigate();
+  const handleClickBackHome = () => {
+    navigate("/");
+}
 
-    return (
-        <div>
-            {paymentResult ? (
-                paymentResult.paymentStatus === "success" ? (
-                    <div>
-                        <h1>Payment Successful</h1>
-                        <p>Order ID: {paymentResult.orderId}</p>
-                        <p>Amount: {paymentResult.totalPrice}</p>
-                        <p>Payment Time: {paymentResult.paymentTime}</p>
-                        <p>Transaction ID: {paymentResult.transactionId}</p>
-                    </div>
-                ) : (
-                    <h1>Payment: {paymentResult.paymentStatus}</h1>
-                )
-            ) : (
-                <p>Processing payment...</p>
-            )}
-        </div>
-    );
+  return (
+    <>
+      {paymentResult ? (
+        paymentResult.paymentStatus === "success" ? (
+          <Box sx={style}>
+            <CheckCircleIcon sx={{ fontSize: "56px", color: "#22c55e" }} />
+            <h3>PAYMENT SUCCESSFUL</h3>
+            <Typography>
+              Cảm ơn bạn đã thanh toán. Đơn hàng của bạn sẽ sớm được xử lý
+            </Typography>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <p>Order ID:</p>
+              <p>1111111111</p>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <p>Amount: </p>
+              <p>1111111111111</p>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <p>Payment Time: </p>
+              <p>111111111111</p>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <p>Transaction ID: </p>
+              <p>111111111111</p>
+            </Box>
+            <Button onClick={handleClickBackHome}>Quay về trang chủ</Button>
+          </Box>
+        ) : (
+          <Box sx={style}>
+            <ReportIcon sx={{ fontSize: "56px", color: "#ef4444" }} />
+            <h3>PAYMENT FAILED</h3>
+            <Typography>Đã có lỗi trong quá trình thanh toán</Typography>
+            <Button onClick={handleClickBackHome} >Quay về trang chủ</Button>
+          </Box>
+        )
+      ) : (
+        <p>Processing payment...</p>
+      )}
+    </>
+  );
 };
 
 export default PaymentResult;

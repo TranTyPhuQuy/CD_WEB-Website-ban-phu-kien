@@ -22,6 +22,7 @@ import productApi from "../../../api/productApi";
 import { useState } from "react";
 import { Avatar, Divider, ListItemIcon, Tooltip } from "@mui/material";
 import { CategoryContext } from "../../../constants/common";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ export default function Header() {
   };
   const handleClickLogo = () => {
     navigate("/");
+  };
+  const handleClickAccount = () => {
+    navigate("/sign-in");
   };
 
   const [list, setList] = useState([]);
@@ -85,6 +89,7 @@ export default function Header() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
   const renderAccountMenu = (
     <Menu
       anchorEl={accountAnchorEl}
@@ -277,7 +282,7 @@ export default function Header() {
               <ShoppingCart />
             </Badge>
           </IconButton>
-          <Tooltip title="Account settings">
+          {/* <Tooltip title="Account settings">
             <IconButton
               onClick={handleAccountMenuOpen}
               size="small"
@@ -288,7 +293,12 @@ export default function Header() {
             >
               <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
+          <IconButton onClick={handleClickAccount}>
+            <PermIdentityIcon 
+              sx={{color:'white'}}
+            />
+          </IconButton>
         </Box>
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton
