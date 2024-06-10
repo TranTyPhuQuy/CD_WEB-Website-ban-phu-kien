@@ -1,43 +1,118 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
+import userApi from "../../../api/userApi";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const [checked, setChecked] = useState(false);
+  // const [data, setData] = useState({
+  //   fullName: "",
+  //   email: "",
+  //   password: "",
+  // });
+  const navigate = useNavigate();
+
+  const handleCheckboxChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const formData = new FormData(event.currentTarget);
+    const fullName = formData.get("fullName");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const rePassword = formData.get("rePassword");
+
+    // Kiểm tra họ và tên
+    if (!fullName) {
+      alert("Họ và tên là bắt buộc");
+      return;
+    }
+
+    // Kiểm tra email
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    if (!email || !emailRegex.test(email)) {
+      alert("Vui lòng nhập địa chỉ email hợp lệ");
+      return;
+    }
+
+    // Kiểm tra mật khẩu
+    if (!password || password.length < 8) {
+      alert("Mật khẩu phải có ít nhất 8 ký tự");
+      return;
+    }
+
+    // Kiểm tra mật khẩu nhập lại
+    if (password !== rePassword) {
+      alert("Mật khẩu không khớp");
+      return;
+    }
+
+    // Kiểm tra hộp kiểm
+    if (!checked) {
+      alert("Bạn phải đồng ý nhận cập nhật qua email.");
+      return;
+    }
+
+    const signUpData = {
+      fullName,
+      email,
+      password,
+    };
+
+    try {
+      const res = await userApi.signUp(signUpData);
+      if (res.message === "Signup Success") {
+        navigate("/sign-in");
+      } else {
+        alert("Đăng ký thất bại: " + res.message);
+      }
+    } catch (error) {
+      console.log("Lỗi đăng ký: ", error);
+      alert("Đã xảy ra lỗi trong quá trình đăng ký");
+    }
   };
 
   return (
@@ -47,38 +122,34 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            ĐĂNG KÝ TÀI KHOẢN
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="fullName"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="fullName"
+                  label="Họ và tên"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  // onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -86,9 +157,10 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Địa chỉ Email"
                   name="email"
                   autoComplete="email"
+                  // onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -96,16 +168,34 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Nhập mật khẩu"
                   type="password"
                   id="password"
+                  autoComplete="new-password"
+                  // onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="rePassword"
+                  label="Nhập lại mật khẩu"
+                  type="password"
+                  id="rePassword"
                   autoComplete="new-password"
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  control={
+                    <Checkbox
+                      value="allowExtraEmails"
+                      color="primary"
+                      onChange={handleCheckboxChange}
+                    />
+                  }
+                  label="Bằng cách nhấn vào Đăng Ký, bạn đồng ý với các điều khoản và dịch vụ của chúng tôi."
                 />
               </Grid>
             </Grid>
@@ -115,12 +205,12 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Đăng ký
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/sign-in" variant="body2">
-                  Already have an account? Sign in
+                  Bạn đã có tài khoản ? Đăng nhập
                 </Link>
               </Grid>
             </Grid>

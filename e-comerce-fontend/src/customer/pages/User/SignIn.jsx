@@ -15,6 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import userApi from "../../../api/userApi";
 function Copyright(props) {
   return (
     <Typography
@@ -38,13 +41,38 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  // const [data, setData] = useState({
+  //   fullName: "",
+  //   email: "",
+  //   password: "",
+  // });
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
     console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+      email: email,
+      password: password,
     });
+    const signInData = {
+      email,
+      password,
+    };
+
+    try {
+      const res = await userApi.signIn(signInData);
+      if (res.message === "Signin Success") {
+        navigate("/");
+      } else {
+        alert("Đăng nhập thất bại: " + res.message);
+      }
+    } catch (error) {
+      console.log("Lỗi đăng nhập: ", error);
+      alert("Đã xảy ra lỗi trong quá trình đăng nhập");
+    }
   };
 
   return (
@@ -63,7 +91,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            ĐĂNG NHẬP
           </Typography>
           <Box
             component="form"
@@ -76,7 +104,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Địa chỉ Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -86,7 +114,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Nhập mật khẩu"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -111,17 +139,17 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              ĐĂNG NHẬP
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Quên mật khẩu?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/sign-up" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Bạn chưa có tài khoản? Đăng ký"}
                 </Link>
               </Grid>
             </Grid>

@@ -29,7 +29,7 @@ import com.cdweb.springboot.service.EmailService;
 import com.cdweb.springboot.service.Impl.UserDetailsServiceImpl;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("api/auth")
 public class UserController {
 
     @Autowired
@@ -80,22 +80,23 @@ public class UserController {
         return "Password reset successful";
     }
     @PostMapping("/change-password")
-    public String confirmReset(@RequestParam String email, @RequestParam String oldPassword) {
-        User user = u;
-        user.setPassword(new BCryptPasswordEncoder().encode(newPassword));
-        userRepository.save(user);
-
-        tokenRepository.delete(passwordResetToken);
-        return "Password reset successful";
+    public Boolean changePassword(@RequestParam String email, @RequestParam String oldPassword) {
+        User user = userRepository.findByEmailAndPassword(email, oldPassword);
+        if(user!=null) {
+        	return true; 
+        }
+        
+        return false;
     }
-    @PostMapping("/signup")
+    
+    @PostMapping("/sign-up")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResponse(null, "Email is already used"));
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_ADMIN");
+        user.setRole("ROLE_USER");
         userRepository.save(user);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
@@ -105,11 +106,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, "Signup Success"));
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/sign-in")
     public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest) {
-        String email = loginRequest.getEmail();
-        String password = loginRequest.getPassword();
-
+    	String email = loginRequest.getEmail();
+    	String password = loginRequest.getPassword();
+    	
         Authentication authentication = authenticate(email, password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
