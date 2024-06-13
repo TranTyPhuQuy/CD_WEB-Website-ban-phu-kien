@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import QuantityField from "../../../components/form-controls/QuantityField/QuantityField";
+import QuantityField from "../../../Components/form-controls/QuantityField/QuantityField";
 
 AddToCartForm.propTypes = {
   onSubmit: PropTypes.func,

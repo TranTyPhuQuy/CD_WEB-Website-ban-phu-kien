@@ -289,7 +289,7 @@ textarea {
   box-shadow: none;
 }
 
-.btn {
+.field-input-btn-wrapper .btn {
   display: inline-block;
   border-radius: 4px;
   font-weight: 500;

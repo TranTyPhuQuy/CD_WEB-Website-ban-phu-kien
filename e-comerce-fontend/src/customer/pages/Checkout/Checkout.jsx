@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Box,
   Breadcrumbs,
@@ -11,7 +11,7 @@ import CheckoutForm from "./Components/CheckoutForm";
 import { makeStyles } from "@mui/styles";
 import "./Checkout.css";
 import { useSelector } from "react-redux";
-import { cartSelector, cartTotalSelector } from "../Cart/Selectors";
+import { cartSelector, cartTotalSelector } from "../../../app/Selectors";
 import { formatPrice } from "../../../utils";
 import paymentApi from "../../../api/paymentApi";
 

@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { Box, Button, Typography } from "@mui/material";
-import { BASEURLHOST, THUMBNAIL_PLACEHOLDER } from "../../../../constants";
-import QuantityBtn from "../../../components/QuantityBtn/QuantityBtn";
-import { Height } from "@mui/icons-material";
+import { THUMBNAIL_PLACEHOLDER } from "../../../../constants";
 import { formatPrice } from "../../../../utils";
-import { addToCart, setQuantity, removeFromCart } from "../CartSlice";
+import {  setQuantity, removeFromCart } from "../../../../app/CartSlice";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
 

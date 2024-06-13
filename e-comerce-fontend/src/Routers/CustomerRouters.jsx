@@ -8,6 +8,7 @@ import ProductDetail from "../customer/pages/ProductDetail/ProductDetail";
 import NotFound from "../customer/pages/NotFound/NotFound";
 import Cart from "../customer/pages/Cart/Cart";
 import ProductList1 from "../customer/pages/ProductList/ProductList1";
+import UserSettings from "../customer/pages/User/UserSettings";
 
 const CustomerRouters = () => {
   return (
@@ -27,6 +28,9 @@ const CustomerRouters = () => {
           {" "}
         </Route>
         <Route path="/cart" element={<Cart />}>
+          {" "}
+        </Route>
+        <Route path="/profile" element={<UserSettings />}>
           {" "}
         </Route>
         <Route component={NotFound} />

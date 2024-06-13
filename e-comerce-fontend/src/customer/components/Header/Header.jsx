@@ -12,17 +12,22 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Logout, PersonAdd, Settings, ShoppingCart } from "@mui/icons-material";
+import { Logout, ShoppingCart } from "@mui/icons-material";
 import { useSelector } from "react-redux";
-import { cartItemsCountSelector } from "../../pages/Cart/Selectors";
 import { useNavigate } from "react-router-dom";
 import AutocompleteSearchBar from "./component/AutocompleteSearchBar";
 import { useEffect } from "react";
 import productApi from "../../../api/productApi";
 import { useState } from "react";
-import { Avatar, Divider, ListItemIcon, Tooltip } from "@mui/material";
+import { Avatar, Divider, Link, ListItemIcon, Tooltip } from "@mui/material";
 import { CategoryContext } from "../../../constants/common";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import {
+  userInfor,
+  isAuthenticatedSelector,
+  cartItemsCountSelector,
+} from "../../../app/Selectors";
+import { useContext } from "react";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -36,7 +41,9 @@ export default function Header() {
   const handleClickAccount = () => {
     navigate("/sign-in");
   };
-
+  const handleClickProfile = () => {
+    navigate("/profile")
+  }
   const [list, setList] = useState([]);
   const [suggest, setSuggest] = useState();
 
@@ -126,34 +133,19 @@ export default function Header() {
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      <MenuItem onClick={handleCategoryMenuClose}>
-        <Avatar /> Profile
-      </MenuItem>
-      <MenuItem onClick={handleCategoryMenuClose}>
-        <Avatar /> My account
+      <MenuItem onClick={handleClickProfile}>
+        <Avatar /> Hồ sơ
       </MenuItem>
       <Divider />
       <MenuItem onClick={handleCategoryMenuClose}>
         <ListItemIcon>
-          <PersonAdd fontSize="small" />
-        </ListItemIcon>
-        Add another account
-      </MenuItem>
-      <MenuItem onClick={handleCategoryMenuClose}>
-        <ListItemIcon>
-          <Settings fontSize="small" />
-        </ListItemIcon>
-        Settings
-      </MenuItem>
-      <MenuItem onClick={handleCategoryMenuClose}>
-        <ListItemIcon>
           <Logout fontSize="small" />
         </ListItemIcon>
-        Logout
+        Đăng xuất
       </MenuItem>
     </Menu>
   );
-  const categories = React.useContext(CategoryContext);
+  const categories = useContext(CategoryContext);
 
   const renderCategoryMenu = (
     <Menu
@@ -239,6 +231,8 @@ export default function Header() {
       </MenuItem>
     </Menu>
   );
+  const user = useSelector(userInfor);
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <AppBar
       position="sticky"
@@ -271,6 +265,7 @@ export default function Header() {
           onEnChange={handleEnterKeyword}
         />
         <Box sx={{ flexGrow: 1 }} />
+
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           <IconButton
             size="large"
@@ -282,23 +277,26 @@ export default function Header() {
               <ShoppingCart />
             </Badge>
           </IconButton>
-          {/* <Tooltip title="Account settings">
-            <IconButton
-              onClick={handleAccountMenuOpen}
-              size="small"
-              sx={{ ml: 2 }}
-              aria-controls={isOpenAccount ? "account-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={isOpenAccount ? "true" : undefined}
-            >
-              <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+          {console.log('isAuthenticated',isAuthenticated)}
+          {!isAuthenticated ? (
+            <IconButton onClick={handleClickAccount}>
+              <PermIdentityIcon sx={{ color: "white" }} />
             </IconButton>
-          </Tooltip> */}
-          <IconButton onClick={handleClickAccount}>
-            <PermIdentityIcon 
-              sx={{color:'white'}}
-            />
-          </IconButton>
+          ) : (
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleAccountMenuOpen}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={isOpenAccount ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={isOpenAccount ? "true" : undefined}
+              >
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {user.userName? user.userName.charAt(0).toUpperCase(): "A"}</Avatar>
+              </IconButton>
+            </Tooltip>
+          )}
         </Box>
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton

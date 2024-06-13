@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "./ProductTabs.css";
+import Comment from './Comment'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,8 +57,7 @@ export default function ProductTabs() {
           centered
         >
           <Tab label="Mô tả" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Đánh giá" {...a11yProps(2)} />
+          <Tab label="Đánh giá" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -185,10 +185,7 @@ export default function ProductTabs() {
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Đánh giá
+        <Comment />
       </CustomTabPanel>
     </Box>
   );

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CartItem from "./Components/CartItem";
-import { cartSelector, cartTotalSelector } from "./Selectors";
+import { cartSelector, cartTotalSelector } from "../../../app/Selectors";
 import { formatPrice } from "../../../utils";
 import { useNavigate } from "react-router-dom";
 
@@ -73,7 +73,7 @@ function Cart(props) {
             }}
           >
             <img  alt="empty cart" 
-            src="https://newnet.vn/themes/newnet/assets/img/empty-cart.png" />
+            src="../../../../utils/images/emptycart.png" />
           </Box>
         ) : (
           <Grid container spacing={2}>

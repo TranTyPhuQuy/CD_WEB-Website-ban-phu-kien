@@ -2,7 +2,6 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const cartItemsSelector = (state) => state.cart.cartItems;
 
-
 // cart
 export const cartSelector = cartItemsSelector;
 
@@ -15,3 +14,7 @@ export const cartItemsCountSelector = createSelector(cartItemsSelector, (cartIte
 export const cartTotalSelector = createSelector(cartItemsSelector, (cartItems) =>
   cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0)
 );
+
+export const userInfor = (state) => state.user.userInfo;
+
+export const isAuthenticatedSelector = (state) => state.user.isAuthenticated;

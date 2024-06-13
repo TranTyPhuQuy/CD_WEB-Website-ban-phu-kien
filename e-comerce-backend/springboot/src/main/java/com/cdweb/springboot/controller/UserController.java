@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cdweb.springboot.config.JwtProvider;
 import com.cdweb.springboot.entities.PasswordResetToken;
+//import com.cdweb.springboot.entities.Token;
 import com.cdweb.springboot.entities.User;
 import com.cdweb.springboot.repository.AuthResponse;
 import com.cdweb.springboot.repository.PasswordResetTokenRepository;
+//import com.cdweb.springboot.repository.TokenRepository;
 import com.cdweb.springboot.repository.UserRepository;
 import com.cdweb.springboot.request.LoginRequest;
 import com.cdweb.springboot.service.EmailService;
@@ -42,10 +44,12 @@ public class UserController {
     private UserDetailsServiceImpl userDetailsServiceImpl;
     
     @Autowired
-    private PasswordResetTokenRepository tokenRepository;
+    private PasswordResetTokenRepository passwordResetTokenRepository;
 
     @Autowired
     private EmailService emailService;
+    
+//    private TokenRepository tokenRepository;
     
     @PostMapping("/reset-password/request")
     public String resetPassword(@RequestParam String email) {
@@ -57,7 +61,7 @@ public class UserController {
         String token = UUID.randomUUID().toString();
         
         PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
-        tokenRepository.save(passwordResetToken);
+        passwordResetTokenRepository.save(passwordResetToken);
 
         String resetUrl = "http://localhost:3000/reset-password?token=" + token;
         emailService.sendEmail(email, "Reset Password", "Click the link to reset your password: " + resetUrl);
@@ -67,7 +71,7 @@ public class UserController {
 
     @PostMapping("/reset-password/confirm")
     public String confirmReset(@RequestParam String token, @RequestParam String newPassword) {
-       PasswordResetToken passwordResetToken = tokenRepository.findByToken(token);
+       PasswordResetToken passwordResetToken = passwordResetTokenRepository.findByToken(token);
         if (passwordResetToken == null) {
             return "Invalid token";
         }
@@ -76,7 +80,7 @@ public class UserController {
         user.setPassword(new BCryptPasswordEncoder().encode(newPassword));
         userRepository.save(user);
 
-        tokenRepository.delete(passwordResetToken);
+        passwordResetTokenRepository.delete(passwordResetToken);
         return "Password reset successful";
     }
     @PostMapping("/change-password")
@@ -92,18 +96,20 @@ public class UserController {
     @PostMapping("/sign-up")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResponse(null, "Email is already used"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResponse(null,null,null,null,null,null, "Email is already used"));
         }
-
+        
+        System.out.println("user register: "+user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setUsername(user.getEmail().split("@")[0]);
         user.setRole("ROLE_USER");
         userRepository.save(user);
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String token = jwtProvider.generateToken(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, "Signup Success"));
+//        Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//        String token = jwtProvider.generateToken(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(null,null,null,null,null,null, "Signup Success"));
     }
 
     @PostMapping("/sign-in")
@@ -116,9 +122,21 @@ public class UserController {
 
         User user = userRepository.findByEmail(email);
         String token = jwtProvider.generateToken(user);
+//        saveToken(user, token);
+        
+        
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, "Signin Success"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(user.getId(), user.getEmail(), user.getUsername(), user.getFullName(), 
+        		user.getMobile(), token,"Signin Success"));
     }
+
+//	private void saveToken(User user, String token) {
+//		Token t = new Token();
+//        t.setRefreshToken(token);
+//        t.setLoggedOut(false);
+//        t.setUser(user);
+//        tokenRepository.save(t);
+//	}
 
     private Authentication authenticate(String username, String password) {
         UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);

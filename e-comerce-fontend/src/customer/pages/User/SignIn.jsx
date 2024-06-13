@@ -18,6 +18,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import userApi from "../../../api/userApi";
+import { logIn } from "../../../app/UserSlice";
+import { useDispatch } from "react-redux";
 function Copyright(props) {
   return (
     <Typography
@@ -47,6 +49,7 @@ export default function SignIn() {
   //   password: "",
   // });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -65,6 +68,18 @@ export default function SignIn() {
     try {
       const res = await userApi.signIn(signInData);
       if (res.message === "Signin Success") {
+        const userInfor = ({
+           id: res.id,
+           email: res.email,
+           userName: res.userName,
+           fullName: res.fullName,
+           mobile: res.mobile,
+           jwt: res.jwt
+        });
+        const action = logIn(userInfor);
+        // console.log('action:',action)
+        dispatch(action);
+
         navigate("/");
       } else {
         alert("Đăng nhập thất bại: " + res.message);
@@ -124,7 +139,7 @@ export default function SignIn() {
               label="Remember me"
             />
 
-            <Box sx={{textAlign:'center'}}>
+            <Box sx={{ textAlign: "center" }}>
               <IconButton>
                 <GoogleIcon />
               </IconButton>
