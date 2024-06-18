@@ -31,9 +31,9 @@ public class User {
 	private String mobile;
 	private String fullName;
 	private String role;
-
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Comment> comments;
+//
+//	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Comment> comments;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<PasswordResetToken> passwordResetTokens;
@@ -67,13 +67,13 @@ public class User {
 		this.userName = userName;
 	}
 
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+//	public List<Comment> getComments() {
+//		return comments;
+//	}
+//
+//	public void setComments(List<Comment> comments) {
+//		this.comments = comments;
+//	}
 
 	public Set<PasswordResetToken> getPasswordResetTokens() {
 		return passwordResetTokens;

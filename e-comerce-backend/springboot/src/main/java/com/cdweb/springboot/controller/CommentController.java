@@ -1,5 +1,7 @@
 package com.cdweb.springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cdweb.springboot.dto.CreateCommentDTO;
 import com.cdweb.springboot.entities.Comment;
+import com.cdweb.springboot.projection.CommentProjection;
 import com.cdweb.springboot.service.CommentService;
 
 @RestController
@@ -29,13 +32,16 @@ public class CommentController {
     public Comment getCommentById(@PathVariable Long id) {
         return commentService.getCommentById(id);
     }
-
+    @GetMapping("/product/{productId}")
+    public List<CommentProjection> getCommentByProductId(@PathVariable Long productId) {
+        return commentService.getCommentsByProductId(productId);
+    }
     @PostMapping("/{parentId}/replies")
-    public Comment replyToComment(@PathVariable Long parentId, @RequestBody CreateCommentDTO CreateCommentDTO) {
+    public String replyToComment(@PathVariable Long parentId, @RequestBody CreateCommentDTO CreateCommentDTO) {
         return commentService.replyToComment(parentId, CreateCommentDTO);
     }
     @PostMapping
-    public Comment createComment(@RequestBody CreateCommentDTO createCommentDTO) {
+    public String createComment(@RequestBody CreateCommentDTO createCommentDTO) {
         return commentService.createComment(createCommentDTO);
     }
     @DeleteMapping("/{id}")

@@ -4,7 +4,7 @@ import paymentApi from "../../../api/paymentApi";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReportIcon from "@mui/icons-material/Report";
-// import { removeCart } from "../Cart/CartSlice";
+import { removeCart } from "../../../app/CartSlice";
 const PaymentResult = () => {
   const [paymentResult, setPaymentResult] = useState(null);
   const location = useLocation();
@@ -14,7 +14,7 @@ const PaymentResult = () => {
       const params = new URLSearchParams(location.search);
       const response = await paymentApi.paymentResult(params.toString());
       if(response.paymentStatus === "success") {
-        // removeCart()
+        removeCart()
       }
       setPaymentResult(response);
     };

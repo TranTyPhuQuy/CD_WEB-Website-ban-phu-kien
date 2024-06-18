@@ -13,7 +13,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Logout, ShoppingCart } from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AutocompleteSearchBar from "./component/AutocompleteSearchBar";
 import { useEffect } from "react";
@@ -28,6 +28,7 @@ import {
   cartItemsCountSelector,
 } from "../../../app/Selectors";
 import { useContext } from "react";
+import {logOut} from "../../../app/UserSlice"
 
 export default function Header() {
   const navigate = useNavigate();
@@ -97,6 +98,10 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logOut());
+  }
   const renderAccountMenu = (
     <Menu
       anchorEl={accountAnchorEl}
@@ -137,7 +142,7 @@ export default function Header() {
         <Avatar /> Hồ sơ
       </MenuItem>
       <Divider />
-      <MenuItem onClick={handleCategoryMenuClose}>
+      <MenuItem onClick={handleLogout}>
         <ListItemIcon>
           <Logout fontSize="small" />
         </ListItemIcon>

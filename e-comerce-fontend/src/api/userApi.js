@@ -27,6 +27,31 @@ const userApi = {
       throw error; // Re-throw the error so it can be handled by the caller
     }
   },
+  async resetPassword(email) {
+    const url = `auth/reset-password/request?email=${encodeURIComponent(
+      email
+    )}`;
+    console.log("reset-password: ", email);
+    try {
+      const response = await axiosClient.post(url);
+      return response; // Assuming the response data contains the necessary information
+    } catch (error) {
+      console.error("Error during reset-password:", error);
+      throw error; // Re-throw the error so it can be handled by the caller
+    }
+  },
+
+  async resetPasswordConfirm(params) {
+    const url = "auth/reset-password/confirm";
+    console.log("reset-password: ", params);
+    try {
+      const response = await axiosClient.post(url, params);
+      return response; // Assuming the response data contains the necessary information
+    } catch (error) {
+      console.error("Error during reset-password:", error);
+      throw error; // Re-throw the error so it can be handled by the caller
+    }
+  },
   async getProucts() {
     const url = "/categories/products";
     return axiosClient.get(url);

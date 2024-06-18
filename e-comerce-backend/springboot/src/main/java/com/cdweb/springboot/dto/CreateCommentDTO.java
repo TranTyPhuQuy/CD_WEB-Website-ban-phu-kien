@@ -4,6 +4,7 @@ public class CreateCommentDTO {
     private String content;
     private Long productId;
     private Long parentCommentId;
+    private String author;
     private Long userId;
 	public String getContent() {
 		return content;
@@ -28,6 +29,12 @@ public class CreateCommentDTO {
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
     // getters and setters

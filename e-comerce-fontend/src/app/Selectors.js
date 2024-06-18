@@ -16,5 +16,6 @@ export const cartTotalSelector = createSelector(cartItemsSelector, (cartItems) =
 );
 
 export const userInfor = (state) => state.user.userInfo;
+export const userId = (state) => state.user.userInfo.id;
 
 export const isAuthenticatedSelector = (state) => state.user.isAuthenticated;

@@ -49,9 +49,6 @@ public class Product {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
-	 @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-	    private List<Comment> comments;
-	
 	private LocalDateTime createAt;
 
 	public Product() {
@@ -75,14 +72,6 @@ public class Product {
 
 	public Long getId() {
 		return id;
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
 	}
 
 	public void setId(Long id) {

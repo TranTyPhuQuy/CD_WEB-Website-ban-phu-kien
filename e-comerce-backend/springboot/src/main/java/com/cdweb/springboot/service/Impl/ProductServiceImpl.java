@@ -59,7 +59,7 @@ public class ProductServiceImpl implements ProductService{
 //		
 //		return filteredProducts;
 //	}
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public Page<Product> getListProductByCategory(String category, Integer minPrice, Integer maxPrice, String sort, Integer page, Integer limit) {
         page = page > 0 ? page - 1 : page;

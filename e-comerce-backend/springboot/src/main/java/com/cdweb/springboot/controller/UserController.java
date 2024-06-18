@@ -1,5 +1,7 @@
 package com.cdweb.springboot.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ import com.cdweb.springboot.repository.PasswordResetTokenRepository;
 //import com.cdweb.springboot.repository.TokenRepository;
 import com.cdweb.springboot.repository.UserRepository;
 import com.cdweb.springboot.request.LoginRequest;
+import com.cdweb.springboot.response.ResponseApi;
 import com.cdweb.springboot.service.EmailService;
 import com.cdweb.springboot.service.Impl.UserDetailsServiceImpl;
 
@@ -52,10 +55,10 @@ public class UserController {
 //    private TokenRepository tokenRepository;
     
     @PostMapping("/reset-password/request")
-    public String resetPassword(@RequestParam String email) {
+    public ResponseApi resetPassword(@RequestParam("email") String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
-            return "Email not found";
+            return new ResponseApi("failure", "Email not found");
         }
 
         String token = UUID.randomUUID().toString();
@@ -63,17 +66,17 @@ public class UserController {
         PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
         passwordResetTokenRepository.save(passwordResetToken);
 
-        String resetUrl = "http://localhost:3000/reset-password?token=" + token;
+        String resetUrl = "http://localhost:3000/reset-password/result?token=" + token;
         emailService.sendEmail(email, "Reset Password", "Click the link to reset your password: " + resetUrl);
 
-        return "Password reset email sent";
+        return new ResponseApi("success", "Password reset email sent");
     }
 
     @PostMapping("/reset-password/confirm")
-    public String confirmReset(@RequestParam String token, @RequestParam String newPassword) {
+    public ResponseApi confirmReset(@RequestParam String token, @RequestParam String newPassword) {
        PasswordResetToken passwordResetToken = passwordResetTokenRepository.findByToken(token);
         if (passwordResetToken == null) {
-            return "Invalid token";
+            return new ResponseApi("failure", "Invalid token");
         }
 
         User user = passwordResetToken.getUser();
@@ -81,7 +84,7 @@ public class UserController {
         userRepository.save(user);
 
         passwordResetTokenRepository.delete(passwordResetToken);
-        return "Password reset successful";
+        return new ResponseApi("success","Password reset successful");
     }
     @PostMapping("/change-password")
     public Boolean changePassword(@RequestParam String email, @RequestParam String oldPassword) {

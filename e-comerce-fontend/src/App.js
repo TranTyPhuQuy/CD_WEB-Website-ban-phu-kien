@@ -9,6 +9,8 @@ import Checkout from './customer/pages/Checkout/Checkout';
 import PaymentResult from './customer/pages/Checkout/PaymentResult';
 import SignIn from './customer/pages/User/SignIn';
 import SignUp from './customer/pages/User/SignUp';
+import ResetPassword from './customer/pages/User/ResetPassword';
+import ResetPasswordResult from './customer/pages/User/ResetPasswordResult';
 
 function App() {
   return (
@@ -23,6 +25,12 @@ function App() {
           {" "}
         </Route>
         <Route path="/sign-up" element={<SignUp />}>
+          {" "}
+        </Route>
+        <Route path="/reset-password" element={<ResetPassword />}>
+          {" "}
+        </Route>
+        <Route path="/reset-password/result/*" element={<ResetPasswordResult />}>
           {" "}
         </Route>
     </Routes>

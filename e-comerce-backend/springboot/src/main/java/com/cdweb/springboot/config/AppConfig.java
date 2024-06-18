@@ -30,7 +30,7 @@ public class AppConfig {
             .and()
             .addFilterBefore(jwtValidator, BasicAuthenticationFilter.class)
             .authorizeHttpRequests(authorize -> authorize
-//                .requestMatchers("/api/products/**").hasRole("ADMIN")
+//                .requestMatchers("/api/products/**").permitAll()
 //                .requestMatchers("/api/user/**").hasRole("USER")
                 .anyRequest().permitAll()
             )

@@ -30,7 +30,7 @@ export const CategoryProvider = (props) => {
     (async () => {
       try {
         const list = await categoryApi.getProucts();
-        console.log("cateee", list);
+        // console.log("cateee", list);
         setCategories(list);
       } catch (error) {
         console.log("Failed to fetch category list", error);

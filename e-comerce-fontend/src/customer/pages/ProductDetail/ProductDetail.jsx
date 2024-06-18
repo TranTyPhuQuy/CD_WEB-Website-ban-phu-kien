@@ -32,6 +32,7 @@ function ProductDetail() {
   const {
     params: { productId },
   } = match;
+  
   const { product, loading } = useProductDetail(productId);
   if (loading) {
     return <Box>Loading</Box>;

@@ -42,45 +42,38 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function ResetPasswordResult() {
   // const [data, setData] = useState({
   //   fullName: "",
   //   email: "",
   //   password: "",
   // });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
     const password = formData.get("password");
-    console.log({
-      email: email,
-      password: password,
-    });
+    const rePassword = formData.get("rePassword");
+    const token = '';
+    // console.log({
+    //   rePassword: rePassword,
+    //   password: password,
+    // });
     const signInData = {
-      email,
+      token,
       password,
+      rePassword,
     };
 
     try {
       const res = await userApi.signIn(signInData);
-      if (res.message === "Signin Success") {
-        const userInfor = ({
-           id: res.id,
-           email: res.email,
-           userName: res.userName,
-           fullName: res.fullName,
-           mobile: res.mobile,
-           jwt: res.jwt
-        });
-        const action = logIn(userInfor);
+      if (res.message === "success") {
+        // const action = logIn(userInfor);
         // console.log('action:',action)
-        dispatch(action);
+        // dispatch(action);
 
-        navigate("/");
+        navigate("/sign-in");
       } else {
         alert("Đăng nhập thất bại: " + res.message);
       }
@@ -106,7 +99,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            ĐĂNG NHẬP
+            NHẬP MẬT KHẨU MỚI
           </Typography>
           <Box
             component="form"
@@ -118,27 +111,23 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Địa chỉ Email"
-              name="email"
-              autoComplete="email"
+              id="password"
+              label="Nhập mật khẩu"
+              type="password"
+              name="password"
+              autoComplete="password"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Nhập mật khẩu"
+              name="rePassword"
+              label="Nhập lại mật khẩu"
               type="password"
-              id="password"
+              id="passworePasswordrd"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-
             <Box sx={{ textAlign: "center" }}>
               <IconButton>
                 <GoogleIcon />
@@ -154,20 +143,8 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              ĐĂNG NHẬP
+              XÁC NHẬN
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/forgot-password" variant="body2">
-                  Quên mật khẩu?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/sign-up" variant="body2">
-                  {"Bạn chưa có tài khoản? Đăng ký"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

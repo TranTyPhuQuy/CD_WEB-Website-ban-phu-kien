@@ -9,6 +9,7 @@ import com.cdweb.springboot.dto.CreateCommentDTO;
 import com.cdweb.springboot.entities.Comment;
 import com.cdweb.springboot.entities.Product;
 import com.cdweb.springboot.entities.User;
+import com.cdweb.springboot.projection.CommentProjection;
 import com.cdweb.springboot.repository.CommentRepository;
 import com.cdweb.springboot.repository.UserRepository;
 
@@ -23,8 +24,7 @@ public class CommentService {
     public Comment getCommentById(Long id) {
         return commentRepository.findById(id).orElse(null);
     }
-
-    public List<Comment> getCommentsByProductId(Long productId) {
+    public List<CommentProjection> getCommentsByProductId(Long productId) {
         return commentRepository.findByProductId(productId);
     }
 
@@ -32,47 +32,49 @@ public class CommentService {
         return commentRepository.findByParentCommentId(commentId);
     }
 
-    public Comment replyToComment(Long parentCommentId, CreateCommentDTO createCommentDTO) {
+    public String replyToComment(Long parentCommentId, CreateCommentDTO createCommentDTO) {
         Comment parentComment = commentRepository.findById(parentCommentId).orElseThrow(() -> new RuntimeException("Parent comment not found"));
         Comment replyComment = new Comment();
         replyComment.setContent(createCommentDTO.getContent());
+        replyComment.setAuthor(createCommentDTO.getAuthor());
         replyComment.setParentComment(parentComment);
 
-        if (createCommentDTO.getProductId() != null) {
-            Product product = new Product();
-            product.setId(createCommentDTO.getProductId());
-            replyComment.setProduct(product);
+        if (createCommentDTO.getProductId() == null || createCommentDTO.getUserId() == null) {
+            return "Failed";
         }
-
-        if (createCommentDTO.getUserId() != null) {
-            User user = userRepository.findById(createCommentDTO.getUserId()).orElse(null);
-            replyComment.setUser(user);
-        }
-
-        return commentRepository.save(replyComment);
+        Product product = new Product();
+        product.setId(createCommentDTO.getProductId());
+        replyComment.setProduct(product);
+        
+        User user = userRepository.findById(createCommentDTO.getUserId()).orElse(null);
+        replyComment.setUser(user);
+        
+        commentRepository.save(replyComment);
+        
+        return "Success";
     }
-    public Comment createComment(CreateCommentDTO createCommentDTO) {
+    public String createComment(CreateCommentDTO createCommentDTO) {
         Comment comment = new Comment();
         comment.setContent(createCommentDTO.getContent());
+        comment.setAuthor(createCommentDTO.getAuthor());
 
-        if (createCommentDTO.getProductId() != null) {
-            Product product = new Product();
-            product.setId(createCommentDTO.getProductId());
-            comment.setProduct(product);
+        if (createCommentDTO.getProductId() == null || createCommentDTO.getUserId() == null) {
+            return "Failed";
         }
+        Product product = new Product();
+        product.setId(createCommentDTO.getProductId());
+        comment.setProduct(product);
+        
+        User user = userRepository.findById(createCommentDTO.getUserId()).orElse(null);
+        comment.setUser(user);
 
         if (createCommentDTO.getParentCommentId() != null) {
             Comment parentComment = new Comment();
             parentComment.setId(createCommentDTO.getParentCommentId());
             comment.setParentComment(parentComment);
         }
-
-        if (createCommentDTO.getUserId() != null) {
-            User user = userRepository.findById(createCommentDTO.getUserId()).orElse(null);
-            comment.setUser(user);
-        }
-
-        return commentRepository.save(comment);
+        commentRepository.save(comment);
+        return "Success";
     }
 
     public void deleteComment(Long id) {

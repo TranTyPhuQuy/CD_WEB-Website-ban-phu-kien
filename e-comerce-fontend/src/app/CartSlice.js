@@ -36,21 +36,22 @@ const cartSlice = createSlice({
         state.cartItems[index].quantity = quantity;
       }
     },
-
+    removeCart(state) {
+      state.cartItems =[];
+      console.log('state.cartItems',state.cartItems);
+    },
+    
     removeFromCart(state, action) {
       const {id} = action.payload;
       state.cartItems = state.cartItems.filter((x) => x.id !== id);
       console.log('state.cartItems',state.cartItems);
     },
     
-    removeCart(state) {
-      state.cartItems =[];
-      console.log('state.cartItems',state.cartItems);
-    },
+
 
   },
 });
 
 const { actions, reducer } = cartSlice;
-export const { showMiniCart, hideMiniCart, addToCart, setQuantity, removeFromCart } = actions; // named export
+export const { showMiniCart, hideMiniCart, addToCart, setQuantity, removeFromCart,removeCart } = actions; // named export
 export default reducer; // default export
