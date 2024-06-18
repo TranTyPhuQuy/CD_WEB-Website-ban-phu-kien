@@ -15,11 +15,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import userApi from "../../../api/userApi";
 import { logIn } from "../../../app/UserSlice";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 function Copyright(props) {
   return (
     <Typography
@@ -49,37 +50,51 @@ export default function ResetPasswordResult() {
   //   password: "",
   // });
   const navigate = useNavigate();
+  const [token, setToken] = useState("");
+  const location = useLocation();
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tokenFromUrl = params.get("token");
+    if (tokenFromUrl) {
+      setToken(tokenFromUrl);
+    }
+  }, [location]);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const password = formData.get("password");
     const rePassword = formData.get("rePassword");
-    const token = '';
-    // console.log({
-    //   rePassword: rePassword,
-    //   password: password,
-    // });
-    const signInData = {
-      token,
-      password,
-      rePassword,
-    };
 
+    // console.log("formData: ", formData);
+    if (password !== rePassword) {
+      alert("Mật khẩu không khớp");
+      return;
+    }
+    const data = {
+      token: token,
+      password: password,
+      rePassword: rePassword,
+    };
     try {
-      const res = await userApi.signIn(signInData);
-      if (res.message === "success") {
+      const res = await userApi.resetPasswordConfirm(
+        token,
+        password,
+        rePassword
+      );
+      console.log(res);
+      if (res.status === "success") {
         // const action = logIn(userInfor);
         // console.log('action:',action)
         // dispatch(action);
 
         navigate("/sign-in");
       } else {
-        alert("Đăng nhập thất bại: " + res.message);
+        alert("Đổi mật khẩu thất bại: " + res.message);
       }
     } catch (error) {
-      console.log("Lỗi đăng nhập: ", error);
-      alert("Đã xảy ra lỗi trong quá trình đăng nhập");
+      console.log("Lỗi đổi mật khẩu: ", error);
+      alert("Đã xảy ra lỗi trong quá trình đổi mật khẩu");
     }
   };
 
@@ -125,18 +140,9 @@ export default function ResetPasswordResult() {
               name="rePassword"
               label="Nhập lại mật khẩu"
               type="password"
-              id="passworePasswordrd"
+              id="rePassword"
               autoComplete="current-password"
             />
-            <Box sx={{ textAlign: "center" }}>
-              <IconButton>
-                <GoogleIcon />
-              </IconButton>
-              <IconButton>
-                <FacebookIcon />
-              </IconButton>
-            </Box>
-
             <Button
               type="submit"
               fullWidth

@@ -40,18 +40,21 @@ const userApi = {
       throw error; // Re-throw the error so it can be handled by the caller
     }
   },
-
-  async resetPasswordConfirm(params) {
-    const url = "auth/reset-password/confirm";
-    console.log("reset-password: ", params);
+  async resetPasswordConfirm(token, password, rePassword) {
+    const url = `/auth/reset-password/confirm?token=${encodeURIComponent(
+      token
+    )}&password=${password}&rePassword=${rePassword}`;
+    // console.log("reset-password: ", params);
+    // params.email = encodeURIComponent(params.email);
     try {
-      const response = await axiosClient.post(url, params);
+      const response = await axiosClient.post(url);
       return response; // Assuming the response data contains the necessary information
     } catch (error) {
       console.error("Error during reset-password:", error);
       throw error; // Re-throw the error so it can be handled by the caller
     }
   },
+
   async getProucts() {
     const url = "/categories/products";
     return axiosClient.get(url);

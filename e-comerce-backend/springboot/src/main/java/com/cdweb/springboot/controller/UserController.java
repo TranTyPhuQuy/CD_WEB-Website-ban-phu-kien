@@ -73,14 +73,17 @@ public class UserController {
     }
 
     @PostMapping("/reset-password/confirm")
-    public ResponseApi confirmReset(@RequestParam String token, @RequestParam String newPassword) {
+    public ResponseApi confirmReset(@RequestParam String token, @RequestParam String password,
+    		@RequestParam String rePassword) {
+    	System.out.println("Token: "+ token);
        PasswordResetToken passwordResetToken = passwordResetTokenRepository.findByToken(token);
         if (passwordResetToken == null) {
             return new ResponseApi("failure", "Invalid token");
         }
-
+        if(!rePassword.equals(password)) return new ResponseApi("failure", "Password Incorrect");
+        
         User user = passwordResetToken.getUser();
-        user.setPassword(new BCryptPasswordEncoder().encode(newPassword));
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
         userRepository.save(user);
 
         passwordResetTokenRepository.delete(passwordResetToken);
