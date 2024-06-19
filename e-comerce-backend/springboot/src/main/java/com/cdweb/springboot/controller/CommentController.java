@@ -34,7 +34,7 @@ public class CommentController {
         return commentService.getCommentById(id);
     }
     @GetMapping("/product/{productId}")
-    public List<CommentProjection> getCommentByProductId(@PathVariable Long productId) {
+    public List<Comment> getCommentByProductId(@PathVariable Long productId) {
         return commentService.getCommentsByProductId(productId);
     }
     @PostMapping("/{parentId}/replies")

@@ -11,7 +11,7 @@ public interface CommentProjection {
     String getAuthor();
     Long getProductId();
     Long getUserId();
-    Long getParentCommentId();
+//    Long getParentCommentId();
     LocalDateTime getCreateAt();
     List<Comment> getReplies(); 
 }

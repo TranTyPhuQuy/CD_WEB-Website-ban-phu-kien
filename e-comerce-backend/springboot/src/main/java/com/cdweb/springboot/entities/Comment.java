@@ -1,5 +1,6 @@
 package com.cdweb.springboot.entities;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,11 +15,10 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Comment {
 
 	@Id
@@ -27,31 +27,31 @@ public class Comment {
 	private String content;
 	private String author;
 
-	@ManyToOne
-	@JoinColumn(name = "product_id")
-	private Product product;
+//	@ManyToOne
+//	@JoinColumn(name = "product_id")
+//	private Product product;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-
-	@JsonManagedReference
-	@ManyToOne
-	@JoinColumn(name = "parent_comment_id")
-	private Comment parentComment;
-
-	@OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Comment> replies;
-
-	private LocalDateTime createAt;
+	private Long productId;
 	
-	public LocalDateTime getCreateAt() {
-		return createAt;
-	}
+//	@ManyToOne
+//	@JoinColumn(name = "user_id")
+//	private User user;
 
-	public void setCreateAt(LocalDateTime createAt) {
-		this.createAt = createAt;
-	}
+	private Long userId;
+	
+	@JsonManagedReference
+	private Long parentCommentId;
+	
+//	@JsonManagedReference
+//	@ManyToOne
+//	@JoinColumn(name = "parent_comment_id")
+//	private Comment parentComment;
+	
+    @CreatedDate
+	private LocalDateTime createAt;
+    
+	@OneToMany(mappedBy = "parentCommentId", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Comment> replies;
 
 	public Long getId() {
 		return id;
@@ -76,15 +76,8 @@ public class Comment {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
-	public List<Comment> getReplies() {
-		return replies;
-	}
-
-	public void setReplies(List<Comment> replies) {
-		this.replies = replies;
-	}
-
+	
+//
 //	public Product getProduct() {
 //		return product;
 //	}
@@ -93,35 +86,78 @@ public class Comment {
 //		this.product = product;
 //	}
 
-	public User getUser() {
-		return user;
+	public Long getProductId() {
+		return productId;
 	}
 
-//	public Long getProductId() {
-//		return productId;
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+	
+//
+//	public User getUser() {
+//		return user;
 //	}
 //
-//	public void setProductId(Long productId) {
-//		this.productId = productId;
+//	public void setUser(User user) {
+//		this.user = user;
 //	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public Product getProduct() {
-		return product;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+//	public String getUserName() {
+//		return userName;
+//	}
+//
+//	public void setUserName(String userName) {
+//		this.userName = userName;
+//	}
+
+//	public Comment getParentComment() {
+//		return parentComment;
+//	}
+//
+//	public void setParentComment(Comment parentComment) {
+//		this.parentComment = parentComment;
+//	}
+
+	public List<Comment> getReplies() {
+		return replies;
 	}
 
-	public Comment getParentComment() {
-		return parentComment;
+	public Long getParentCommentId() {
+		return parentCommentId;
 	}
 
-	public void setParentComment(Comment parentComment) {
-		this.parentComment = parentComment;
+	public void setParentCommentId(Long parentCommentId) {
+		this.parentCommentId = parentCommentId;
 	}
+
+	public void setReplies(List<Comment> replies) {
+		this.replies = replies;
+	}
+
+//	public LocalDateTime getCreateAt() {
+//		return createAt;
+//	}
+
+
+	
+	public String getCreateAt() {
+	      LocalDateTime currentDateTime = LocalDateTime.now();
+	        Duration duration = Duration.between(createAt, currentDateTime);
+	        return duration.toDays()+" trước";
+	}
+
+	public void setCreateAt(LocalDateTime createAt) {
+		this.createAt = createAt;
+	}
+	
+	
 }
