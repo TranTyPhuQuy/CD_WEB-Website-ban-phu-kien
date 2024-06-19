@@ -1,6 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Modal,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useMatch } from "react-router-dom";
 import commentApi from "../../../../api/commentApi";
@@ -12,7 +19,18 @@ Coment.propTypes = {
   commentsData: PropTypes.array,
 };
 
-const Comment = ({ comment }) => (
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+const Comment = ({ comment, handleReplyComment }) => (
   <Paper elevation={1} style={{ padding: "16px", marginBottom: "8px" }}>
     <Typography variant="body1">
       <strong>{comment.author}</strong>
@@ -23,59 +41,62 @@ const Comment = ({ comment }) => (
     <Typography variant="body1" style={{ marginTop: "8px" }}>
       {comment.content}
     </Typography>
-    <Button style={{ marginTop: "8px" }} onClick={} >Trả lời</Button>
+    <Button
+      style={{ marginTop: "8px" }}
+      onClick={() => handleReplyComment(comment.author,comment.id)}
+    >
+      Trả lời
+    </Button>
     {comment.replies && comment.replies.length > 0 && (
       <Box marginTop={2}>
         {comment.replies.map((reply, index) => (
-          <Comment key={index} comment={reply} />
+          <Comment
+            key={index}
+            comment={reply}
+            handleReplyComment={handleReplyComment}
+          />
         ))}
       </Box>
     )}
   </Paper>
 );
-
-// const commentsData = [
-//   {
-//     author: "tái dương",
-//     date: "8 ngày trước",
-//     content: "con này dùng main gì ạ",
-//     replies: [
-//       {
-//         author: "Phan Hoàng Lân (Quản trị viên)",
-//         date: "7 ngày trước",
-//         content:
-//           "Chào anh Dương, Dạ anh quan tâm sản phẩm cụ thể nào vậy ạ. Để được hỗ trợ chi tiết về sản phẩm, anh vui lòng liên hệ tổng đài miễn phí 18006601 hoặc để lại SĐT bên em liên hệ tư vấn nhanh nhất ạ. Thân mến!",
-//       },
-//     ],
-//   },
-//   {
-//     author: "Lương Tuấn Thành",
-//     date: "9/5/2024",
-//     content:
-//       "Poco m6 pro 8-256gb nằm ở loại 3 mua được 3 tháng mình muốn lên poco m6 pro 12-512gb thì phải bù bao nhiêu bạn?",
-//     replies: [],
-//   },
-// ];
-function Coment({data}) {
+function Coment({ data }) {
   const match = useMatch("/products/:productId");
+  const [open, setOpen] = useState(false);
+  const [author, setAuthor] = useState();
+  const [question, setQuestion] = useState("");
+  const [question1, setQuestion1] = useState("");
+  const [error, setError] = useState("");
+  const [error1, setError1] = useState("");
+  const userId = useSelector(userid);
+  const [commentsData, setCommentsData] = useState(data);
+  const [parentId, setParentId] = useState();
   const {
     params: { productId },
   } = match;
-  const [question, setQuestion] = useState("");
 
-  const [error, setError] = useState("");
-
+  const handleClose = () => setOpen(false);
+  const handleReplyComment = async (author,id) => {
+    setOpen(true);
+    setAuthor(author);
+    setParentId(id);
+  };
   const handleInputChange = (event) => {
     setQuestion(event.target.value);
     if (event.target.value) {
       setError(""); // Xóa thông báo lỗi nếu người dùng nhập gì đó
     }
   };
-  console.log("data: ",data);
-  const [commentsData, setCommentsData] = useState(data);
+  const handleInputChange1 = (event) => {
+    setQuestion1(event.target.value);
+    if (event.target.value) {
+      setError1(""); // Xóa thông báo lỗi nếu người dùng nhập gì đó
+    }
+  };
+  // console.log("data: ", data);
   // setCommentsData(data);
-  console.log("commentsData: ",commentsData);
-  const userId = useSelector(userid);
+  // console.log("commentsData: ", commentsData);
+
   const handleSubmitComment = async () => {
     console.log("coment");
     if (!question.trim()) {
@@ -112,12 +133,55 @@ function Coment({data}) {
       alert("Đã xảy ra lỗi trong quá trình đăng ký");
     }
   };
+  const handleSubmitReplyComment = async () => {
+    console.log("coment");
+    if (!question1.trim()) {
+      // Kiểm tra nếu question rỗng hoặc chỉ chứa khoảng trắng
+      setError1("Câu hỏi không được để trống");
+      return;
+    }
+    if (userId == null) {
+      // Kiểm tra nếu question rỗng hoặc chỉ chứa khoảng trắng
+      setError1("Yêu cầu đăng nhập");
+      return;
+    }
+    const replyCommentData = {
+      content: question1,
+      productId: productId,
+      parentCommentId: "",
+      userId: userId,
+    };
+    console.log("parentId", parentId);
+    try {
+      const res = await commentApi.replyComment(parentId,replyCommentData);
+      if (res.status === "success") {
+        try {
+          const res = await commentApi.getComments(productId);
+          setCommentsData(res);
+          setOpen(false);
+          setQuestion1("");
+          console.log("Loi lay ds comments", res);
+        } catch (error) {
+          console.log("Loi lay ds comments", error);
+        }
+      } else {
+        alert("Comment thất bại: " + res.message);
+      }
+    } catch (error) {
+      console.log("Lỗi đăng ký: ", error);
+      alert("Đã xảy ra lỗi trong quá trình đăng ký");
+    }
+  };
   return (
     <Box padding="24px 0px">
       <Box>
         {commentsData &&
           commentsData.map((comment, index) => (
-            <Comment key={index} comment={comment} />
+            <Comment
+              key={index}
+              comment={comment}
+              handleReplyComment={handleReplyComment}
+            />
           ))}
         <Box marginTop={2}>
           <TextField
@@ -141,6 +205,37 @@ function Coment({data}) {
           </Button>
         </Box>
       </Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Box marginTop={2}>
+            <Typography>Trả lời "{author}"</Typography>
+            <TextField
+              label="Viết câu hỏi của bạn"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              value={question1}
+              onChange={handleInputChange1}
+              error={!!error1}
+              helperText={error1}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "8px" }}
+              onClick={handleSubmitReplyComment}
+            >
+              Gửi câu hỏi
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </Box>
   );
 }
