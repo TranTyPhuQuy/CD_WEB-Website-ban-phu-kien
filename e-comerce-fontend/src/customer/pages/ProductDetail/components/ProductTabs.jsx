@@ -31,6 +31,7 @@ CustomTabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
+  commentsData: PropTypes.array,
 };
 
 function a11yProps(index) {
@@ -40,7 +41,7 @@ function a11yProps(index) {
   };
 }
 
-export default function ProductTabs() {
+export default function ProductTabs({commentsData}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -185,7 +186,7 @@ export default function ProductTabs() {
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <Comment />
+        <Comment data={commentsData}/>
       </CustomTabPanel>
     </Box>
   );

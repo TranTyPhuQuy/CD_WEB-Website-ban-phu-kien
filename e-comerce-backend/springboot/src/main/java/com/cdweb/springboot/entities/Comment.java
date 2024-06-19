@@ -143,17 +143,17 @@ public class Comment {
 		this.replies = replies;
 	}
 
-//	public LocalDateTime getCreateAt() {
-//		return createAt;
-//	}
+	public LocalDateTime getCreateAt() {
+		return createAt;
+	}
 
 
 	
-	public String getCreateAt() {
-	      LocalDateTime currentDateTime = LocalDateTime.now();
-	        Duration duration = Duration.between(createAt, currentDateTime);
-	        return duration.toDays()+" trước";
-	}
+//	public String getCreateAt() {
+//	      LocalDateTime currentDateTime = LocalDateTime.now();
+//	        Duration duration = Duration.between(createAt, currentDateTime);
+//	        return duration.toDays()+" trước";
+//	}
 
 	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;

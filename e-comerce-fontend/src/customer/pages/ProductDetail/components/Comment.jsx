@@ -6,8 +6,10 @@ import { useMatch } from "react-router-dom";
 import commentApi from "../../../../api/commentApi";
 import { useSelector } from "react-redux";
 import { userid } from "../../../../app/Selectors";
+import useComments from "../../../../hooks/useComments";
 Coment.propTypes = {
   onSubmit: PropTypes.func,
+  commentsData: PropTypes.array,
 };
 
 const Comment = ({ comment }) => (
@@ -21,7 +23,7 @@ const Comment = ({ comment }) => (
     <Typography variant="body1" style={{ marginTop: "8px" }}>
       {comment.content}
     </Typography>
-    <Button style={{ marginTop: "8px" }}>Trả lời</Button>
+    <Button style={{ marginTop: "8px" }} onClick={} >Trả lời</Button>
     {comment.replies && comment.replies.length > 0 && (
       <Box marginTop={2}>
         {comment.replies.map((reply, index) => (
@@ -32,34 +34,33 @@ const Comment = ({ comment }) => (
   </Paper>
 );
 
-const commentsData = [
-  {
-    author: "tái dương",
-    date: "8 ngày trước",
-    content: "con này dùng main gì ạ",
-    replies: [
-      {
-        author: "Phan Hoàng Lân (Quản trị viên)",
-        date: "7 ngày trước",
-        content:
-          "Chào anh Dương, Dạ anh quan tâm sản phẩm cụ thể nào vậy ạ. Để được hỗ trợ chi tiết về sản phẩm, anh vui lòng liên hệ tổng đài miễn phí 18006601 hoặc để lại SĐT bên em liên hệ tư vấn nhanh nhất ạ. Thân mến!",
-      },
-    ],
-  },
-  {
-    author: "Lương Tuấn Thành",
-    date: "9/5/2024",
-    content:
-      "Poco m6 pro 8-256gb nằm ở loại 3 mua được 3 tháng mình muốn lên poco m6 pro 12-512gb thì phải bù bao nhiêu bạn?",
-    replies: [],
-  },
-];
-function Coment() {
+// const commentsData = [
+//   {
+//     author: "tái dương",
+//     date: "8 ngày trước",
+//     content: "con này dùng main gì ạ",
+//     replies: [
+//       {
+//         author: "Phan Hoàng Lân (Quản trị viên)",
+//         date: "7 ngày trước",
+//         content:
+//           "Chào anh Dương, Dạ anh quan tâm sản phẩm cụ thể nào vậy ạ. Để được hỗ trợ chi tiết về sản phẩm, anh vui lòng liên hệ tổng đài miễn phí 18006601 hoặc để lại SĐT bên em liên hệ tư vấn nhanh nhất ạ. Thân mến!",
+//       },
+//     ],
+//   },
+//   {
+//     author: "Lương Tuấn Thành",
+//     date: "9/5/2024",
+//     content:
+//       "Poco m6 pro 8-256gb nằm ở loại 3 mua được 3 tháng mình muốn lên poco m6 pro 12-512gb thì phải bù bao nhiêu bạn?",
+//     replies: [],
+//   },
+// ];
+function Coment({data}) {
   const match = useMatch("/products/:productId");
   const {
     params: { productId },
   } = match;
-
   const [question, setQuestion] = useState("");
 
   const [error, setError] = useState("");
@@ -70,6 +71,10 @@ function Coment() {
       setError(""); // Xóa thông báo lỗi nếu người dùng nhập gì đó
     }
   };
+  console.log("data: ",data);
+  const [commentsData, setCommentsData] = useState(data);
+  // setCommentsData(data);
+  console.log("commentsData: ",commentsData);
   const userId = useSelector(userid);
   const handleSubmitComment = async () => {
     console.log("coment");
@@ -92,7 +97,13 @@ function Coment() {
     try {
       const res = await commentApi.createComment(commentData);
       if (res.status === "success") {
-        alert("Comment thanh cong: " + res.message);
+        try {
+          const res = await commentApi.getComments(productId);
+          setCommentsData(res);
+          console.log("Loi lay ds comments", res);
+        } catch (error) {
+          console.log("Loi lay ds comments", error);
+        }
       } else {
         alert("Comment thất bại: " + res.message);
       }
@@ -104,9 +115,10 @@ function Coment() {
   return (
     <Box padding="24px 0px">
       <Box>
-        {commentsData.map((comment, index) => (
-          <Comment key={index} comment={comment} />
-        ))}
+        {commentsData &&
+          commentsData.map((comment, index) => (
+            <Comment key={index} comment={comment} />
+          ))}
         <Box marginTop={2}>
           <TextField
             label="Viết câu hỏi của bạn"

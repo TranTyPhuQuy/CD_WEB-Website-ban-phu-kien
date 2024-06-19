@@ -9,6 +9,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import ProductThumbnail from "./Components/ProductThumbnail";
 import useProductDetail from "../../../hooks/useProductDetail";
+import useComments from "../../../hooks/useComments";
 import { Link, useMatch } from "react-router-dom";
 import ProductInfo from "./Components/ProductInfo";
 import ProductTabs from "./Components/ProductTabs";
@@ -32,9 +33,11 @@ function ProductDetail() {
   const {
     params: { productId },
   } = match;
-  
-  const { product, loading } = useProductDetail(productId);
-  if (loading) {
+
+  const { product, loading: productLoading } = useProductDetail(productId);
+  const commentsData = useComments(productId);
+  // console.log("commentsData: ",commentsData);
+  if (productLoading) {
     return <Box>Loading</Box>;
   }
 
@@ -43,13 +46,13 @@ function ProductDetail() {
       <Container>
         <Box className={classes.breadcrumb}>
           <Breadcrumbs maxItems={3} aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href="#">
+            <Link underline="hover" color="inherit" to="/">
               Trang chủ
             </Link>
-            <Link underline="hover" color="inherit" href="#">
+            <Link underline="hover" color="inherit" to="#">
               Chi tiết sản phẩm
             </Link>
-            <Link underline="hover" color="inherit" href="#">
+            <Link underline="hover" color="inherit" to="#">
               {product.productName}
             </Link>
           </Breadcrumbs>
@@ -65,7 +68,7 @@ function ProductDetail() {
             </Grid>
           </Grid>
         </Paper>
-        <ProductTabs />
+        <ProductTabs commentsData={commentsData}/>
       </Container>
     </Box>
   );
