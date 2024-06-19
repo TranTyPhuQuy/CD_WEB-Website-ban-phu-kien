@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useMatch } from "react-router-dom";
 import commentApi from "../../../../api/commentApi";
 import { useSelector } from "react-redux";
-import { userId } from "../../../../app/Selectors";
+import { userid } from "../../../../app/Selectors";
 Coment.propTypes = {
   onSubmit: PropTypes.func,
 };
@@ -70,11 +70,17 @@ function Coment() {
       setError(""); // Xóa thông báo lỗi nếu người dùng nhập gì đó
     }
   };
-  const userId = useSelector(userId);
+  const userId = useSelector(userid);
   const handleSubmitComment = async () => {
+    console.log("coment");
     if (!question.trim()) {
       // Kiểm tra nếu question rỗng hoặc chỉ chứa khoảng trắng
       setError("Câu hỏi không được để trống");
+      return;
+    }
+    if (userId == null) {
+      // Kiểm tra nếu question rỗng hoặc chỉ chứa khoảng trắng
+      setError("Yêu cầu đăng nhập");
       return;
     }
     const commentData = {
@@ -82,12 +88,13 @@ function Coment() {
       productId: productId,
       parentCommentId: "",
       userId: userId,
-    }
+    };
     try {
       const res = await commentApi.createComment(commentData);
-      if (res.message === "Success") {
+      if (res.status === "success") {
+        alert("Comment thanh cong: " + res.message);
       } else {
-        alert("Đăng ký thất bại: " + res.message);
+        alert("Comment thất bại: " + res.message);
       }
     } catch (error) {
       console.log("Lỗi đăng ký: ", error);
@@ -116,7 +123,7 @@ function Coment() {
             variant="contained"
             color="primary"
             style={{ marginTop: "8px" }}
-            onSubmit={handleSubmitComment}
+            onClick={handleSubmitComment}
           >
             Gửi câu hỏi
           </Button>

@@ -16,7 +16,7 @@ const commentApi = {
   //     return axiosClient.get(url);
   //   },
   createComment(params) {
-    const url = "/comments";
+    const url = "comments";
     return axiosClient.post(url, params );
   },
 };

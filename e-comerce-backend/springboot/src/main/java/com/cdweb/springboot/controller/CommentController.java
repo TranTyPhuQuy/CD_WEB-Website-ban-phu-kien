@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cdweb.springboot.dto.CreateCommentDTO;
 import com.cdweb.springboot.entities.Comment;
 import com.cdweb.springboot.projection.CommentProjection;
+import com.cdweb.springboot.response.ResponseApi;
 import com.cdweb.springboot.service.CommentService;
 
 @RestController
@@ -37,11 +38,11 @@ public class CommentController {
         return commentService.getCommentsByProductId(productId);
     }
     @PostMapping("/{parentId}/replies")
-    public String replyToComment(@PathVariable Long parentId, @RequestBody CreateCommentDTO CreateCommentDTO) {
+    public ResponseApi replyToComment(@PathVariable Long parentId, @RequestBody CreateCommentDTO CreateCommentDTO) {
         return commentService.replyToComment(parentId, CreateCommentDTO);
     }
     @PostMapping
-    public String createComment(@RequestBody CreateCommentDTO createCommentDTO) {
+    public ResponseApi createComment(@RequestBody CreateCommentDTO createCommentDTO) {
         return commentService.createComment(createCommentDTO);
     }
     @DeleteMapping("/{id}")

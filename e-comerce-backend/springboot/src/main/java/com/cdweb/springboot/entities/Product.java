@@ -3,6 +3,8 @@ package com.cdweb.springboot.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -49,6 +51,7 @@ public class Product {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
+	 @CreatedDate
 	private LocalDateTime createAt;
 
 	public Product() {

@@ -12,6 +12,7 @@ import com.cdweb.springboot.entities.User;
 import com.cdweb.springboot.projection.CommentProjection;
 import com.cdweb.springboot.repository.CommentRepository;
 import com.cdweb.springboot.repository.UserRepository;
+import com.cdweb.springboot.response.ResponseApi;
 
 @Service
 public class CommentService {
@@ -32,7 +33,7 @@ public class CommentService {
         return commentRepository.findByParentCommentId(commentId);
     }
 
-    public String replyToComment(Long parentCommentId, CreateCommentDTO createCommentDTO) {
+    public ResponseApi replyToComment(Long parentCommentId, CreateCommentDTO createCommentDTO) {
         Comment parentComment = commentRepository.findById(parentCommentId).orElseThrow(() -> new RuntimeException("Parent comment not found"));
         Comment replyComment = new Comment();
         replyComment.setContent(createCommentDTO.getContent());
@@ -40,7 +41,7 @@ public class CommentService {
         replyComment.setParentComment(parentComment);
 
         if (createCommentDTO.getProductId() == null || createCommentDTO.getUserId() == null) {
-            return "Failed";
+            return new ResponseApi("failed", "Cannot comment");
         }
         Product product = new Product();
         product.setId(createCommentDTO.getProductId());
@@ -50,16 +51,16 @@ public class CommentService {
         replyComment.setUser(user);
         
         commentRepository.save(replyComment);
-        
-        return "Success";
+
+        return new ResponseApi("success", "Comment added");
     }
-    public String createComment(CreateCommentDTO createCommentDTO) {
+    public ResponseApi createComment(CreateCommentDTO createCommentDTO) {
         Comment comment = new Comment();
         comment.setContent(createCommentDTO.getContent());
         comment.setAuthor(createCommentDTO.getAuthor());
 
         if (createCommentDTO.getProductId() == null || createCommentDTO.getUserId() == null) {
-            return "Failed";
+            return new ResponseApi("failed", "Cannot comment");
         }
         Product product = new Product();
         product.setId(createCommentDTO.getProductId());
@@ -74,7 +75,7 @@ public class CommentService {
             comment.setParentComment(parentComment);
         }
         commentRepository.save(comment);
-        return "Success";
+        return new ResponseApi("success", "Comment added");
     }
 
     public void deleteComment(Long id) {
