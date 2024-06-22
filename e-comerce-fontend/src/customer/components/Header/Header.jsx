@@ -61,6 +61,7 @@ export default function Header() {
   }, [suggest]);
   const handleInputChange = (suggest) => {
     console.log("handleInputChange: ", suggest);
+    if(!suggest) return;
     setSuggest(suggest);
   };
   const handleEnterKeyword = (keyword) => {

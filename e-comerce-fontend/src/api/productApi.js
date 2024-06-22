@@ -62,6 +62,8 @@ const productApi = {
     return axiosClient.get(url);
   },
   getProductNameSuggest(suggest) {
+    suggest = suggest? suggest : "dghfjrkoshsjsk";
+    console.log('suggest: ', suggest);
     const url = `/products/suggest/${suggest}`;
     return axiosClient.get(url);
   }
