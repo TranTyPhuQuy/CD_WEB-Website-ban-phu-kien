@@ -73,7 +73,7 @@ function Cart(props) {
             }}
           >
             <img  alt="empty cart" 
-            src="../../../../utils/images/emptycart.png" />
+            src={require("../../../utils/images/emptycart.png")} />
           </Box>
         ) : (
           <Grid container spacing={2}>

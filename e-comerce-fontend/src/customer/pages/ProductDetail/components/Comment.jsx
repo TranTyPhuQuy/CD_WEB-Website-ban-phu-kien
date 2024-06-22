@@ -114,6 +114,7 @@ function Coment({ data }) {
       productId: productId,
       parentCommentId: "",
       userId: userId,
+      author: "Nguyen Van C",
     };
     try {
       const res = await commentApi.createComment(commentData);
@@ -150,6 +151,7 @@ function Coment({ data }) {
       productId: productId,
       parentCommentId: "",
       userId: userId,
+      author: "Nguyen Van A",
     };
     console.log("parentId", parentId);
     try {

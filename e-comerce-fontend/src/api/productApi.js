@@ -14,7 +14,7 @@ const productApi = {
     newParams.minPrice = params.minPrice? params.minPrice : 0;
     newParams.maxPrice = params.maxPrice? params.maxPrice : 10000000;
     newParams.sort = params.sort? params.sort.toString() : 'ASC';
-    newParams.page = params.page? params.page : 0;
+    newParams.page = params.page? params.page : 1;
     newParams.limit = 12;
 
     // delete newParams._page;
@@ -25,7 +25,7 @@ const productApi = {
       data: res.content,
       pagination: {
         count: res.totalPages,
-        page: params.pageNumber
+        page: newParams.page
       },
     };
   },
@@ -53,7 +53,7 @@ const productApi = {
       data: res.content,
       pagination: {
         count: res.totalPages,
-        page: params.pageNumber
+        page: params.page
       },
     };
   },

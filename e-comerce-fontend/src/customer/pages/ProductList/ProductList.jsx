@@ -76,9 +76,9 @@ function ProductList(props) {
         );
         setProductList(data);
         setPagination(pagination);
-        console.log(data);
+        console.log('data',data);
         console.log("=====================");
-        console.log(pagination);
+        console.log('pagination',pagination);
       } catch (error) {
         console.log("Loi product list: ", error);
       }
