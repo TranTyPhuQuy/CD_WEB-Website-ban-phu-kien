@@ -15,7 +15,11 @@ export const cartTotalSelector = createSelector(cartItemsSelector, (cartItems) =
   cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0)
 );
 
+//cart
 export const userInfor = (state) => state.user.userInfo;
 export const userid = (state) => state.user.userInfo ? state.user.userInfo.id:null;
 
 export const isAuthenticatedSelector = (state) => state.user.isAuthenticated;
+
+//favourite
+export const favouritesSelector = (state) => state.favourite.favouriteItems;

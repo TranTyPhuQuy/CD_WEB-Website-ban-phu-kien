@@ -6,7 +6,7 @@ import OrderHistory from "./Components/OrderHistory";
 import AccountProfile from "./Components/AccountProfile";
 
 function UserSettings() {
-  const [selectedMenu, setSelectedMenu] = useState("Subscription & billing");
+  const [selectedMenu, setSelectedMenu] = useState("Profile");
 
   const handleMenuClick = (menu) => {
     console.log("UserSettings ", menu);

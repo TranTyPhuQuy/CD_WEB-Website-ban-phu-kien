@@ -8,13 +8,19 @@ import { removeCart } from "../../../app/CartSlice";
 const PaymentResult = () => {
   const [paymentResult, setPaymentResult] = useState(null);
   const location = useLocation();
-
+   const [resPayment, setResPayment] = useState();
   useEffect(() => {
     const fetchPaymentResult = async () => {
       const params = new URLSearchParams(location.search);
       const response = await paymentApi.paymentResult(params.toString());
-      if(response.paymentStatus === "success") {
-        removeCart()
+      if (response.paymentStatus === "success") {
+        setResPayment({
+          orderId: response.orderId ,
+          amount:response.totalPrice,
+          paymentTime:response.paymentTime,
+          transactionId:response.transactionId,
+        })
+        removeCart();
       }
       setPaymentResult(response);
     };
@@ -36,7 +42,7 @@ const PaymentResult = () => {
   const navigate = useNavigate();
   const handleClickBackHome = () => {
     navigate("/");
-}
+  };
 
   return (
     <>
@@ -50,19 +56,19 @@ const PaymentResult = () => {
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <p>Order ID:</p>
-              <p>1111111111</p>
+              <p>{resPayment.orderId}</p>
             </Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <p>Amount: </p>
-              <p>1111111111111</p>
+              <p>{resPayment.amount}</p>
             </Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <p>Payment Time: </p>
-              <p>111111111111</p>
+              <p>{resPayment.transactionId}</p>
             </Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <p>Transaction ID: </p>
-              <p>111111111111</p>
+              <p>{resPayment.paymentTime}</p>
             </Box>
             <Button onClick={handleClickBackHome}>Quay về trang chủ</Button>
           </Box>
@@ -71,7 +77,7 @@ const PaymentResult = () => {
             <ReportIcon sx={{ fontSize: "56px", color: "#ef4444" }} />
             <h3>PAYMENT FAILED</h3>
             <Typography>Đã có lỗi trong quá trình thanh toán</Typography>
-            <Button onClick={handleClickBackHome} >Quay về trang chủ</Button>
+            <Button onClick={handleClickBackHome}>Quay về trang chủ</Button>
           </Box>
         )
       ) : (
