@@ -13,37 +13,40 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "password_reset_tokens")
 public class PasswordResetToken {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String token;
+	@Column(unique = true, nullable = false)
+	private String token;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(nullable = false, name = "user_id")
+	private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
-    private User user;
-    
-    private Date expiryDate;
-	 @CreatedDate
+	private Date expiryDate;
+	@CreatedDate
 	private LocalDateTime createAt;
-    public PasswordResetToken() {}
 
-    public PasswordResetToken(String token, User user) {
-        this.token = token;
-        this.user = user;
-        this.expiryDate = calculateExpiryDate(24 * 60); // 24 hours
-    }
+	public PasswordResetToken() {
+	}
 
-    private Date calculateExpiryDate(int expiryTimeInMinutes) {
-        Date now = new Date();
-        return new Date(now.getTime() + expiryTimeInMinutes * 60 * 1000);
-    }
+	public PasswordResetToken(String token, User user) {
+		this.token = token;
+		this.user = user;
+		this.expiryDate = calculateExpiryDate(24 * 60); // 24 hours
+	}
+
+	private Date calculateExpiryDate(int expiryTimeInMinutes) {
+		Date now = new Date();
+		return new Date(now.getTime() + expiryTimeInMinutes * 60 * 1000);
+	}
 
 	public LocalDateTime getCreateAt() {
 		return createAt;
@@ -85,7 +88,6 @@ public class PasswordResetToken {
 		this.expiryDate = expiryDate;
 	}
 
-    // Getters and setters
-    
-    
+	// Getters and setters
+
 }

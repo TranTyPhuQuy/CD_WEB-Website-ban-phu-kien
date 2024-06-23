@@ -5,22 +5,30 @@ import { Box, Button, Modal, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReportIcon from "@mui/icons-material/Report";
 import { removeCart } from "../../../app/CartSlice";
+import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
+// import { cartSelector, userInfor } from "../../../app/Selectors";
 const PaymentResult = () => {
   const [paymentResult, setPaymentResult] = useState(null);
   const location = useLocation();
-   const [resPayment, setResPayment] = useState();
+  const [resPayment, setResPayment] = useState();
+  const dispatch = useDispatch();
+  // const cart = useSelector(cartSelector);
+  // const user = useSelector(userInfor);
+
   useEffect(() => {
     const fetchPaymentResult = async () => {
       const params = new URLSearchParams(location.search);
       const response = await paymentApi.paymentResult(params.toString());
       if (response.paymentStatus === "success") {
         setResPayment({
-          orderId: response.orderId ,
-          amount:response.totalPrice,
-          paymentTime:response.paymentTime,
-          transactionId:response.transactionId,
-        })
-        removeCart();
+          orderId: response.orderId,
+          amount: response.totalPrice,
+          paymentTime: response.paymentTime,
+          transactionId: response.transactionId,
+        });
+        const action =  removeCart();
+        dispatch(action);
       }
       setPaymentResult(response);
     };
@@ -54,10 +62,6 @@ const PaymentResult = () => {
             <Typography>
               Cảm ơn bạn đã thanh toán. Đơn hàng của bạn sẽ sớm được xử lý
             </Typography>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <p>Order ID:</p>
-              <p>{resPayment.orderId}</p>
-            </Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <p>Amount: </p>
               <p>{resPayment.amount}</p>

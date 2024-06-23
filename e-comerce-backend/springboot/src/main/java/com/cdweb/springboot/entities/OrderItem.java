@@ -1,35 +1,43 @@
 package com.cdweb.springboot.entities;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.criteria.Order;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "order_items")
 public class OrderItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+    @JsonIgnore
+	private Order order;
 
-    @Column(nullable = false)
-    private String productName;
-
-    @Column(nullable = false)
-    private int quantity;
-
-    @Column(nullable = false)
-    private double price;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
+	private int quantity;
 
 	public Long getId() {
 		return id;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public void setId(Long id) {
@@ -44,14 +52,6 @@ public class OrderItem {
 		this.order = order;
 	}
 
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
 	public int getQuantity() {
 		return quantity;
 	}
@@ -59,15 +59,4 @@ public class OrderItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-    // Getters and setters
-    
 }

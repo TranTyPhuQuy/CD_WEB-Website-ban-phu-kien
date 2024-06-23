@@ -108,7 +108,7 @@ public class UserController {
         
         System.out.println("user register: "+user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setUsername(user.getEmail().split("@")[0]);
+        user.setUserName(user.getEmail().split("@")[0]);
         user.setRole("ROLE_USER");
         userRepository.save(user);
 
@@ -133,7 +133,7 @@ public class UserController {
         
         
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(user.getId(), user.getEmail(), user.getUsername(), user.getFullName(), 
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(user.getId(), user.getEmail(), user.getUserName(), user.getFullName(), 
         		user.getMobile(), token,"Signin Success"));
     }
 

@@ -20,16 +20,16 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@NotNull
 	@Size(max = 50)
 	private String name;
-	
+
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "parent_category_id")
 	private Category pareCategory;
-	
+
 	private int level;
 
 	public Category() {
@@ -75,6 +75,5 @@ public class Category {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	
-	
+
 }

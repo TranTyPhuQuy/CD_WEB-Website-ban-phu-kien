@@ -11,7 +11,11 @@ import CheckoutForm from "./Components/CheckoutForm";
 import { makeStyles } from "@mui/styles";
 import "./Checkout.css";
 import { useSelector } from "react-redux";
-import { cartSelector, cartTotalSelector } from "../../../app/Selectors";
+import {
+  cartSelector,
+  cartTotalSelector,
+  userInfor,
+} from "../../../app/Selectors";
 import { formatPrice } from "../../../utils";
 import paymentApi from "../../../api/paymentApi";
 
@@ -27,24 +31,38 @@ const useStyles = makeStyles((theme) => ({
   breadcrumb: { marginBottom: "20px" },
 }));
 
-
 function Checkout(props) {
   const classes = useStyles();
   const cart = useSelector(cartSelector);
-  const cartTotal = useSelector(cartTotalSelector);
+  const orderTotal = useSelector(cartTotalSelector);
 
   const handleSubmitPayment = async (formData) => {
     if (formData.paymentMethod === "VNPAY") {
       try {
-        const res = await paymentApi.payment(cartTotal,'Thanh toan don hang');
-        console.log('url: ', res);
-        window.location.href = res.paymentUrl
+        // Create a string of order items in the format [productId,quantity] separated by semicolons
+        const orderItems = cart
+          .map((product) => `${product.id},${product.quantity}`)
+          .join(";");
+
+        // Create orderInfo string
+        const orderInfo = `${formData.userId};${formData.customerName};
+        ${formData.customerEmail};
+        ${formData.customerMobile};${formData.address},
+         ${formData.city}, ${formData.district}`;
+
+        // Combine orderInfo and orderItems properly
+        const combinedOrderInfo = `${orderInfo} orderItems:${orderItems}`;
+        const res = await paymentApi.payment(
+          orderTotal,
+          combinedOrderInfo
+        );
+        console.log("url: ", res);
+        window.location.href = res.paymentUrl;
       } catch (error) {
         console.log("Error with payment: ", error);
       }
     }
   };
-
   return (
     <Box className={classes.root}>
       <Container>
@@ -58,7 +76,7 @@ function Checkout(props) {
                     Trang chủ
                   </Link>
                   <Link underline="hover" color="inherit" href="#">
-                    Chi tiết sản phẩm
+                    Checkout
                   </Link>
                 </Breadcrumbs>
               </Box>
@@ -66,7 +84,7 @@ function Checkout(props) {
             <Box>
               <Typography>Thông tin giao hàng</Typography>
               <Typography marginBottom={2}>Bạn đã có tài khoản?</Typography>
-              <CheckoutForm handleSubmitPayment={handleSubmitPayment}/>
+              <CheckoutForm handleSubmitPayment={handleSubmitPayment} />
             </Box>
           </Grid>
           <Grid item className={classes.right}>
@@ -127,11 +145,13 @@ function Checkout(props) {
                             </span>
                           </td>
                           <td className="product-quantity visually-hidden">
-                          {cartItem.quantity}
+                            {cartItem.quantity}
                           </td>
                           <td className="product-price">
                             <span className="order-summary-emphasis">
-                            {formatPrice(cartItem.quantity*cartItem.product.price)}
+                              {formatPrice(
+                                cartItem.quantity * cartItem.product.price
+                              )}
                             </span>
                           </td>
                         </tr>
@@ -239,7 +259,7 @@ function Checkout(props) {
                             className="order-summary-emphasis"
                             data-checkout-subtotal-price-target={121800000}
                           >
-                            {formatPrice(cartTotal)}
+                            {formatPrice(orderTotal)}
                           </span>
                         </td>
                       </tr>
@@ -267,7 +287,7 @@ function Checkout(props) {
                             className="payment-due-price"
                             data-checkout-payment-due-target={121800000}
                           >
-                          {formatPrice(cartTotal)}
+                            {formatPrice(orderTotal)}
                           </span>
                           <span
                             className="checkout_version"

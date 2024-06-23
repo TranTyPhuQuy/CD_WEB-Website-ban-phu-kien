@@ -1,33 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 const favouriteSlice = createSlice({
-  name: 'favourite',
+  name: "favourite",
   initialState: {
     favouriteItems: [],
   },
   reducers: {
-    addToFavourite(state, action) {
-      const productId = action.payload;
-      const index = state.cartItems.findIndex((x) => x === productId);
+    setFavourite(state, action) {
+      // newItem = { product }
+      const newItem = action.payload;
+      const index = state.favouriteItems.findIndex((x) => x.id === newItem.id);
 
       if (index >= 0) {
-        return;
+        state.favouriteItems = state.favouriteItems.filter((x) => x.id !== newItem.id);
       } else {
-        state.favouriteItems.push(productId);
+        state.favouriteItems.push(newItem);
       }
     },
     removeFavourite(state) {
-      state.cartItems =[];
-      console.log('state.favouriteItems',state.favouriteItems);
-    },
-    
-    removeFromFavourite(state, action) {
-      const {productId} = action.payload;
-      state.favouriteItems = state.favouriteItems.filter((x) => x !== productId);
-      console.log('state.favouriteItems',state.favouriteItems);
+      state.favouriteItems = [];
+      console.log("state.favouriteItems", state.favouriteItems);
     },
   },
 });
 
 const { actions, reducer } = favouriteSlice;
-export const { addToFavourite, removeFavourite,removeFromFavourite } = actions; // named export
+export const { setFavourite, removeFavourite } = actions; // named export
 export default reducer; // default export

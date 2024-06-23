@@ -14,22 +14,27 @@ import {
 } from "@mui/material";
 import useProvinces from "../../../../hooks/useProvinces";
 import PropTypes from "prop-types";
+import { userInfor } from "../../../../app/Selectors";
+import { useSelector } from "react-redux";
 
 CheckoutForm.propTypes = {
   filters: PropTypes.object.isRequired,
   onChange: PropTypes.func,
 };
+
 function CheckoutForm({ handleSubmitPayment }) {
+  const user = useSelector(userInfor);
   const [formData, setFormData] = useState({
-    fullName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+    userId: user.id,
+    customerName: user.fullName,
+    customerEmail: user.email,
+    customerMobile: "",
     address: "",
-    city: "",
-    district: "",
+    city: "Thành phố Hà Nội",
+    district: "Quận Ba Đình",
     paymentMethod: "COD",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -39,11 +44,40 @@ function CheckoutForm({ handleSubmitPayment }) {
   };
 
   const provinces = useProvinces();
-  const [pFullName, setPfullName] = useState();
+  const [districts, setDistricts] = useState([
+    { FullName: "Quận Ba Đình", Code: "001" },
+    { FullName: "Quận Hoàn Kiếm", Code: "002" },
+    { FullName: "Quận Tây Hồ", Code: "003" },
+    { FullName: "Quận Long Biên", Code: "004" },
+    { FullName: "Quận Cầu Giấy", Code: "005" },
+    { FullName: "Quận Đống Đa", Code: "006" },
+    { FullName: "Quận Hai Bà Trưng", Code: "007" },
+    { FullName: "Quận Hoàng Mai", Code: "008" },
+    { FullName: "Quận Thanh Xuân", Code: "009" },
+    { FullName: "Huyện Sóc Sơn", Code: "016" },
+    { FullName: "Huyện Đông Anh", Code: "017" },
+    { FullName: "Huyện Gia Lâm", Code: "018" },
+    { FullName: "Quận Nam Từ Liêm", Code: "019" },
+    { FullName: "Huyện Thanh Trì", Code: "020" },
+    { FullName: "Quận Bắc Từ Liêm", Code: "021" },
+    { FullName: "Huyện Mê Linh", Code: "250" },
+    { FullName: "Quận Hà Đông", Code: "268" },
+    { FullName: "Thị xã Sơn Tây", Code: "269" },
+    { FullName: "Huyện Ba Vì", Code: "271" },
+    { FullName: "Huyện Phúc Thọ", Code: "272" },
+    { FullName: "Huyện Đan Phượng", Code: "273" },
+    { FullName: "Huyện Hoài Đức", Code: "274" },
+    { FullName: "Huyện Quốc Oai", Code: "275" },
+    { FullName: "Huyện Thạch Thất", Code: "276" },
+    { FullName: "Huyện Chương Mỹ", Code: "277" },
+    { FullName: "Huyện Thanh Oai", Code: "278" },
+    { FullName: "Huyện Thường Tín", Code: "279" },
+    { FullName: "Huyện Phú Xuyên", Code: "280" },
+    { FullName: "Huyện Ứng Hòa", Code: "281" },
+    { FullName: "Huyện Mỹ Đức", Code: "282" },
+  ]);
 
-  const [districts, setDistricts] = useState([]);
-  useEffect(() => {
-    // Fetch dữ liệu từ file JSON
+  const fetchDistricts = (provinceName) => {
     fetch("/utils/json/provinces.json")
       .then((response) => {
         if (!response.ok) {
@@ -52,27 +86,43 @@ function CheckoutForm({ handleSubmitPayment }) {
         return response.json();
       })
       .then((data) => {
-        // Lọc các tỉnh và lấy district của tỉnh dựa vào pCode
-        const province = data.find((item) => item.FullName === pFullName);
+        const province = data.find((item) => item.FullName === provinceName);
         if (province) {
           const filteredDistricts = province.District.map((district) => ({
             FullName: district.FullName,
             Code: district.Code,
           }));
           setDistricts(filteredDistricts);
+          // Cập nhật district mặc định
+          if (filteredDistricts.length > 0) {
+            setFormData((prevData) => ({
+              ...prevData,
+              district: filteredDistricts[0].FullName,
+            }));
+          }
         } else {
           setDistricts([]);
+          setFormData((prevData) => ({
+            ...prevData,
+            district: "",
+          }));
         }
       })
       .catch((error) => console.error("Error fetching the provinces:", error));
-  }, [pFullName]);
+  };
+
+  useEffect(() => {
+    fetchDistricts(formData.city);
+  }, [formData.city]);
 
   const handleProvinceChange = (event) => {
+    const newCity = event.target.value;
     setFormData({
       ...formData,
-      city: event.target.value,
+      city: newCity,
+      district: "", // Reset district khi tỉnh thành thay đổi
     });
-    setPfullName(event.target.value);
+    fetchDistricts(newCity);
   };
 
   const handleDistrictChange = (event) => {
@@ -81,10 +131,39 @@ function CheckoutForm({ handleSubmitPayment }) {
       district: event.target.value,
     });
   };
+
+  const handleMobileChange = (event) => {
+    setFormData({
+      ...formData,
+      customerMobile: event.target.value,
+    });
+  };
+
+  const handleAddressChange = (event) => {
+    setFormData({
+      ...formData,
+      address: event.target.value,
+    });
+  };
+
   const handleChangePaymentMethod = (e) => {
     setFormData({
       ...formData,
       paymentMethod: e.target.value,
+    });
+  };
+
+  const handleFullNameChange = (e) => {
+    setFormData({
+      ...formData,
+      customerName: e.target.value,
+    });
+  };
+
+  const handleEmailChange = (e) => {
+    setFormData({
+      ...formData,
+      customerEmail: e.target.value,
     });
   };
 
@@ -95,6 +174,7 @@ function CheckoutForm({ handleSubmitPayment }) {
     }
     console.log("Form Data:", formData);
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <Grid container spacing={3}>
@@ -106,8 +186,8 @@ function CheckoutForm({ handleSubmitPayment }) {
             label="Họ Và Tên"
             fullWidth
             variant="outlined"
-            value={formData.fullName}
-            onChange={handleChange}
+            value={formData.customerName}
+            onChange={handleFullNameChange}
           />
         </Grid>
         <Grid item xs={12} sm={8}>
@@ -118,8 +198,8 @@ function CheckoutForm({ handleSubmitPayment }) {
             label="Email"
             fullWidth
             variant="outlined"
-            value={formData.email}
-            onChange={handleChange}
+            value={formData.customerEmail}
+            onChange={handleEmailChange}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
@@ -130,8 +210,8 @@ function CheckoutForm({ handleSubmitPayment }) {
             label="Số điện thoại"
             fullWidth
             variant="outlined"
-            value={formData.phone}
-            onChange={handleChange}
+            value={formData.customerMobile}
+            onChange={handleMobileChange}
           />
         </Grid>
         <Grid item xs={12}>
@@ -143,7 +223,7 @@ function CheckoutForm({ handleSubmitPayment }) {
             fullWidth
             variant="outlined"
             value={formData.address}
-            onChange={handleChange}
+            onChange={handleAddressChange}
           />
         </Grid>
         <Grid item xs={12} sm={7}>
@@ -212,7 +292,6 @@ function CheckoutForm({ handleSubmitPayment }) {
             fullWidth
             variant="contained"
             color="primary"
-            on
           >
             Hoàn tất đơn hàng
           </Button>

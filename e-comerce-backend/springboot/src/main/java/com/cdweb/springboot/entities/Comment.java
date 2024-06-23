@@ -1,6 +1,5 @@
 package com.cdweb.springboot.entities;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,13 +15,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "comments")
 public class Comment {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String content;
 	private String author;
@@ -32,24 +33,24 @@ public class Comment {
 //	private Product product;
 
 	private Long productId;
-	
+
 //	@ManyToOne
 //	@JoinColumn(name = "user_id")
 //	private User user;
 
 	private Long userId;
-	
+
 	@JsonManagedReference
 	private Long parentCommentId;
-	
+
 //	@JsonManagedReference
 //	@ManyToOne
 //	@JoinColumn(name = "parent_comment_id")
 //	private Comment parentComment;
-	
-    @CreatedDate
+
+	@CreatedDate
 	private LocalDateTime createAt;
-    
+
 	@OneToMany(mappedBy = "parentCommentId", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> replies;
 
@@ -76,7 +77,7 @@ public class Comment {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
+
 //
 //	public Product getProduct() {
 //		return product;
@@ -93,7 +94,7 @@ public class Comment {
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
-	
+
 //
 //	public User getUser() {
 //		return user;
@@ -147,8 +148,6 @@ public class Comment {
 		return createAt;
 	}
 
-
-	
 //	public String getCreateAt() {
 //	      LocalDateTime currentDateTime = LocalDateTime.now();
 //	        Duration duration = Duration.between(createAt, currentDateTime);
@@ -158,6 +157,5 @@ public class Comment {
 	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
-	
-	
+
 }
