@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 #header {
     width: 100%;
     height: auto;
@@ -5,6 +7,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#header_blk {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+}
+
+#header1, #header2, #header3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#header1 {
+    width: 35%;
+    justify-content: start;
+}
+
+#header2 {
+    width: 100%;
+    justify-content: center;
+}
+
+#header3 {
+    width: 25%;
+    justify-content: end;
 }
 
 .header__content {
@@ -45,4 +77,28 @@
 .search__image {
     position: absolute;
     filter: brightness(0);
+}
+
+#header_home {
+    margin-left: 4.8rem;
+    /* margin-right: 4%; */
+}
+
+.header_home-text {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 24px;
+    background: linear-gradient(180deg, #ff3300, #fff200);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+    width: 2em!important;
+    height: 1.5em!important;
+}
+
+.css-7e0s21-MuiPaper-root-MuiAppBar-root {
+    padding: 1.5px!important;
 }

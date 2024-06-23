@@ -15,31 +15,34 @@ export default function HomePage() {
   const categories = useContext(CategoryContext);
 
   return (
+    
+
+
     <Box
       sx={{
         bgcolor: "#f4f4f4",
       }}
     >
+      <div className="div__menu">
+        <div className="menu-list-items">
+          <ul className="list-items">
+            {categories &&
+              categories.map((c) => (
+                <li className="items">
+                  <a
+                    className="block-pages"
+                    href={`/categories/${c.categoryName}`}
+                  >
+                    {c.categoryName}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </div>
+      </div>
       <Container>
         <div className="div__chat">
           <img src={ChatIcon} className="chat-icon" alt="chat" />
-        </div>
-        <div className="div__menu">
-          <div className="menu-list-items">
-            <ul className="list-items">
-              {categories &&
-                categories.map((c) => (
-                  <li className="items">
-                    <a
-                      className="block-pages"
-                      href={`/categories/${c.categoryName}`}
-                    >
-                      {c.categoryName}
-                    </a>
-                  </li>
-                ))}
-            </ul>
-          </div>
         </div>
         <div className="contents">
           <div className="carouselMain">

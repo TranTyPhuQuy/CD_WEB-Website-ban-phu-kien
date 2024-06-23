@@ -18,6 +18,7 @@ import {
 } from "../../../app/Selectors";
 import { formatPrice } from "../../../utils";
 import paymentApi from "../../../api/paymentApi";
+import HeaderAcc from "../User/Components/HeaderAcc";
 
 Checkout.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +66,7 @@ function Checkout(props) {
   };
   return (
     <Box className={classes.root}>
+      <HeaderAcc/>
       <Container>
         <Grid container>
           <Grid item className={classes.left}>
@@ -72,7 +74,7 @@ function Checkout(props) {
               <Typography>SHOP PHU KIEN</Typography>
               <Box className={classes.breadcrumb}>
                 <Breadcrumbs maxItems={3} aria-label="breadcrumb">
-                  <Link underline="hover" color="inherit" href="#">
+                  <Link underline="hover" color="inherit" href="/">
                     Trang chủ
                   </Link>
                   <Link underline="hover" color="inherit" href="#">

@@ -2,6 +2,7 @@ import { Box, TextField, Autocomplete, InputAdornment } from "@mui/material";
 import PropTypes from "prop-types";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
+import "./searchInput.css";
 
 AutocompleteSearchBar.propTypes = {
   list: PropTypes.array.isRequired,
@@ -36,7 +37,8 @@ function AutocompleteSearchBar({ list, onInChange, onEnChange }) {
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Tìm kiếm..."
+            // label="Tìm kiếm..."
+            placeholder="Tìm kiếm"
             InputLabelProps={{
               style: { top: "-6px" }, 
             }}

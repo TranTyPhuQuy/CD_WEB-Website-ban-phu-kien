@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState, useRef } from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom"; // Import Link từ react-router-dom
 import "./Collection.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IMGBANNERS, BLOGCONTENTS } from "../../../../constants/index.js";
 import ProductCard from "../../../components/ProductCard/ProductCard.jsx";
 
 function Collection({categories}) {
+  // State để lưu trữ các danh mục sản phẩm
   const [cate1, setCate1] = useState([]);
   const [cate2, setCate2] = useState([]);
   const [cate3, setCate3] = useState([]);
   const [cate4, setCate4] = useState([]);
 
+  // Effect để cập nhật state khi props categories thay đổi
   useEffect(() => {
     if (categories) {
       setCate1(categories[0]);
@@ -20,9 +24,19 @@ function Collection({categories}) {
     }
   }, [categories]);
 
+  // Refs để tham chiếu đến từng phần tử danh mục trên trang
+  const cate1Ref = useRef(null);
+  const cate2Ref = useRef(null);
+  const cate3Ref = useRef(null);
+  const cate4Ref = useRef(null);
+ 
+  const scrollToCategory = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <>
-      <div className="div__title">
+    <div>
+      <div className="div__title" ref={cate1Ref}>
         <h2 className="title-accessory">{cate1 && cate1.categoryName}</h2>
       </div>
       <div className="div__lists">
@@ -32,12 +46,12 @@ function Collection({categories}) {
               <ProductCard product={product} />
             ))}
           </div>
-          <Button variant="outline-dark" className="button__seeMore">
+          <Link variant="outline-dark" className="button__seeMore" to={`/categories/${cate1 && cate1.categoryName}`}>
             Xem thêm sản phẩm <b className="bold-text">{cate1 && cate1.categoryName}</b>
-          </Button>
+          </Link>
         </div>
       </div>
-      <div className="div__title">
+      <div className="div__title" ref={cate2Ref}>
         <h2 className="title-accessory">{cate2 && cate2.categoryName}</h2>
       </div>
       <div className="div__lists">
@@ -47,9 +61,9 @@ function Collection({categories}) {
               <ProductCard product={product} />
             ))}
           </div>
-          <Button variant="outline-dark" className="button__seeMore">
+          <Link variant="outline-dark" className="button__seeMore" to={`/categories/${cate2 && cate2.categoryName}`}>
             Xem thêm sản phẩm <b className="bold-text">{cate2 && cate2.categoryName}</b>
-          </Button>
+          </Link>
         </div>
       </div>
       <div className="div__banners">
@@ -57,7 +71,7 @@ function Collection({categories}) {
           <img src={IMGBANNERS.imgID1} className="img-banners" alt="banners" />
         </div>
       </div>
-      <div className="div__title">
+      <div className="div__title" ref={cate3Ref}>
         <h2 className="title-accessory">{cate3 && cate3.categoryName}</h2>
       </div>
       <div className="div__lists">
@@ -67,9 +81,9 @@ function Collection({categories}) {
               <ProductCard product={product} />
             ))}
           </div>
-          <Button variant="outline-dark" className="button__seeMore">
+          <Link variant="outline-dark" className="button__seeMore" to={`/categories/${cate3 && cate3.categoryName}`}>
             Xem thêm sản phẩm <b className="bold-text">{cate3 && cate3.categoryName}</b>
-          </Button>
+          </Link>
         </div>
       </div>
       <div className="div__banners">
@@ -77,7 +91,7 @@ function Collection({categories}) {
           <img src={IMGBANNERS.imgID1} className="img-banners" alt="banners" />
         </div>
       </div>
-      <div className="div__title">
+      <div className="div__title" ref={cate4Ref}>
         <h2 className="title-accessory">{cate4 && cate4.categoryName}</h2>
       </div>
       <div className="div__lists">
@@ -87,9 +101,9 @@ function Collection({categories}) {
               <ProductCard product={product} />
             ))}
           </div>
-          <Button variant="outline-dark" className="button__seeMore">
+          <Link variant="outline-dark" className="button__seeMore" to={`/categories/${cate4 && cate4.categoryName}`}>
             Xem thêm sản phẩm <b className="bold-text">{cate4 && cate4.categoryName}</b>
-          </Button>
+          </Link>
         </div>
       </div>
       <div className="blogs">
@@ -205,7 +219,7 @@ function Collection({categories}) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

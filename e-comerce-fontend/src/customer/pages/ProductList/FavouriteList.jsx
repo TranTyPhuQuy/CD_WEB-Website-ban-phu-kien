@@ -14,6 +14,7 @@ import List from "./components/List";
 import Sort from "./components/Sort";
 import Filters from "./components/Filters";
 import { Link, useMatch } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { favouritesSelector } from "../../../app/Selectors";
 // import { useNavigate, useLocation } from "react-router-dom";
 // import queryString from "query-string";

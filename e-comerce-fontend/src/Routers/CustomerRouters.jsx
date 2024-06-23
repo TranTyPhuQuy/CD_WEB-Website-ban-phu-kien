@@ -34,6 +34,7 @@ const CustomerRouters = () => {
           {" "}
         </Route>
         <Route component={NotFound} />
+        {/* <Route path="/not-found" element={<NotFound />}/> */}
       </Routes>
       <div>
         <Footer />

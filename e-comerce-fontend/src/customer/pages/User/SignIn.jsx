@@ -13,13 +13,19 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
-import FacebookIcon from "@mui/icons-material/Facebook";
+// import GoogleIcon from "@mui/icons-material/Google";
+// import FacebookIcon from "@mui/icons-material/Facebook";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import userApi from "../../../api/userApi";
 import { logIn } from "../../../app/UserSlice";
 import { useDispatch } from "react-redux";
+import HeaderAcc from "./Components/HeaderAcc";
+import GoogleColorIcon from "../../../utils/images/google.png";
+import FbColorIcon from "../../../utils/images/facebook.png";
+import "./signin.css";
+
+
 function Copyright(props) {
   return (
     <Typography
@@ -91,87 +97,102 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            ĐĂNG NHẬP
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Địa chỉ Email"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Nhập mật khẩu"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-
-            <Box sx={{ textAlign: "center" }}>
-              <IconButton>
-                <GoogleIcon />
-              </IconButton>
-              <IconButton>
-                <FacebookIcon />
-              </IconButton>
-            </Box>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+    <div id="block-signin">
+      <div id="header-signin">
+        <HeaderAcc/>
+      </div>
+      <div id="container-signin">
+        <ThemeProvider theme={defaultTheme}>
+          <Container component="main" maxWidth="xs" className="form_blk-signin">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 4,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
-              ĐĂNG NHẬP
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/reset-password" variant="body2">
-                  Quên mật khẩu?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/sign-up" variant="body2">
-                  {"Bạn chưa có tài khoản? Đăng ký"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                ĐĂNG NHẬP
+              </Typography>
+              <Box
+                component="form"
+                onSubmit={handleSubmit}
+                noValidate
+                sx={{ mt: 1 }}
+              >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Địa chỉ Email"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Nhập mật khẩu"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Nhớ tài khoản"
+                />
+
+                <Box sx={{ textAlign: "center" }}>
+                  <IconButton>
+                    <img src={GoogleColorIcon} alt="google icon" className="google-icon"/>
+                    {/* <GoogleIcon/> */}
+                  </IconButton>
+                  <IconButton>
+                    <img src={FbColorIcon} alt="google icon" className="fb-icon"/>
+                    {/* <FacebookIcon /> */}
+                  </IconButton>
+                </Box>
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  ĐĂNG NHẬP
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="/reset-password" variant="body2">
+                      Quên mật khẩu?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <p className="text-question">
+                      Chưa có tài khoản? 
+                      <span>
+                        <Link href="/sign-up" variant="body2">
+                          {" Đăng ký ngay!"}
+                        </Link>
+                      </span>
+                    </p>
+
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+            <Copyright sx={{ mt: 8, mb: 4 }} />
+          </Container>
+        </ThemeProvider>
+      </div>
+    </div>
   );
 }

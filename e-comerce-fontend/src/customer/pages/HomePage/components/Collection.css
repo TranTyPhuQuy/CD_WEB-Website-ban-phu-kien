@@ -78,10 +78,18 @@ p {
 
 .button__seeMore {
     margin-top: 2%;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 500;
     font-family: "Quicksand", sans-serif;
-    padding: 10px 30px;
+    padding: 15px 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1.3px solid #0f1230;
+}
+
+.button__seeMore:hover {
+    background-color: #0f1230;
+    color: #fff;
 }
 
 .card-image {

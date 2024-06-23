@@ -4,7 +4,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Route, Routes } from 'react-router-dom';
-import CustomerRouters from './routers/CustomerRouters';
+import CustomerRouters from './Routers/CustomerRouters';
 import Checkout from './customer/pages/Checkout/Checkout';
 import PaymentResult from './customer/pages/Checkout/PaymentResult';
 import SignIn from './customer/pages/User/SignIn';

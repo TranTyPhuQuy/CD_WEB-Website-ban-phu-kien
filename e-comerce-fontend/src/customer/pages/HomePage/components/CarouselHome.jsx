@@ -10,7 +10,7 @@ function CarouselHome() {
             <Carousel.Item interval={6000}>
                 <img
                     className="d-block w-100"
-                    src={require("../../../../utils/images/bgr1.png")}
+                    src={require("../../../../utils/images/slide1.jpg")}
                     alt="First slide"
                 /> 
                 {/* <Carousel.Caption>
@@ -21,7 +21,7 @@ function CarouselHome() {
             <Carousel.Item interval={6000}>
                 <img
                     className="d-block w-100"
-                    src={require("../../../../utils/images/bgr2.jpeg")}
+                    src={require("../../../../utils/images/slide2.jpg")}
                     alt="Second slide"
                 />
                 {/* <Carousel.Caption>
@@ -32,7 +32,7 @@ function CarouselHome() {
             <Carousel.Item interval={6000}>
                 <img
                     className="d-block w-100"
-                    src={require("../../../../utils/images/bgr3.png")}
+                    src={require("../../../../utils/images/slide3.jpg")}
                     alt="Third slide"
                 />
                 {/* <Carousel.Caption>
@@ -45,8 +45,7 @@ function CarouselHome() {
             <Carousel.Item interval={6000}>
                 <img
                     className="d-block w-100"
-                    // src={require("../../../../utils/images/bgr1.png")}
-                    src="https://images.alphacoders.com/133/thumb-1920-1338574.jpeg"
+                    src={require("../../../../utils/images/slide4.jpg")}
                     alt="Third slide"
                 />
                 {/* <Carousel.Caption>
@@ -56,6 +55,20 @@ function CarouselHome() {
                     </p>
                 </Carousel.Caption> */}
             </Carousel.Item>
+            {/* <Carousel.Item interval={6000}>
+                <img
+                    className="d-block w-100"
+                    // src={require("../../../../utils/images/bgr1.png")}
+                    src="https://images.alphacoders.com/133/thumb-1920-1338574.jpeg"
+                    alt="Third slide"
+                />
+                <Carousel.Caption>
+                    <h5>Third slide label</h5>
+                    <p>
+                      Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                    </p>
+                </Carousel.Caption>
+            </Carousel.Item> */}
         </Carousel>
     </div>
   );

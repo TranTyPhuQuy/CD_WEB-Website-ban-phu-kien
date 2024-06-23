@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -28,7 +29,8 @@ import {
   cartItemsCountSelector,
 } from "../../../app/Selectors";
 import { useContext } from "react";
-import {logOut} from "../../../app/UserSlice"
+import {logOut} from "../../../app/UserSlice";
+import "./styles.css";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -244,78 +246,84 @@ export default function Header() {
       position="sticky"
       style={{ backgroundColor: "#0f1230", zIndex: 1000 }}
     >
-      <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon onClick={handleCategoryMenuOpen} />
-        </IconButton>
+      <Toolbar id="header_blk">
+        <div id="header1">
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon onClick={handleCategoryMenuOpen} />
+          </IconButton>
 
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          color="#FFFF00	"
-          sx={{ display: { xs: "none", sm: "block" }, cursor: "pointer" }}
-          onClick={handleClickLogo}
-        >
-          SHOP PHU KIEN
-        </Typography>
-        <AutocompleteSearchBar
+          <div id="header_home">
+            <a href="/">
+              <p className="header_home-text">Shop Phụ Kiện</p>
+            </a>
+          </div>
+        </div>
+        <div id="header2">
+          <AutocompleteSearchBar
+            list={list}
+            onInChange={handleInputChange}
+            onEnChange={handleEnterKeyword}
+          />
+        </div>
+        {/* <AutocompleteSearchBar
           list={list}
           onInChange={handleInputChange}
           onEnChange={handleEnterKeyword}
-        />
-        <Box sx={{ flexGrow: 1 }} />
-
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-            onClick={handleClickIconShoppingCart}
-          >
-            <Badge badgeContent={cartItem} color="error">
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
-          {console.log('isAuthenticated',isAuthenticated)}
-          {!isAuthenticated ? (
-            <IconButton onClick={handleClickAccount}>
-              <PermIdentityIcon sx={{ color: "white" }} />
+        /> */}
+        {/* <Box sx={{ flexGrow: 1 }} /> */}
+        <div id="header3">
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+              onClick={handleClickIconShoppingCart}
+            >
+              <Badge badgeContent={cartItem} color="error">
+                <ShoppingCart />
+              </Badge>
             </IconButton>
-          ) : (
-            <Tooltip title="Account settings">
-              <IconButton
-                onClick={handleAccountMenuOpen}
-                size="small"
-                sx={{ ml: 2 }}
-                aria-controls={isOpenAccount ? "account-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={isOpenAccount ? "true" : undefined}
-              >
-                <Avatar sx={{ width: 32, height: 32 }}>
-                  {user.userName? user.userName.charAt(0).toUpperCase(): "A"}</Avatar>
+            {console.log('isAuthenticated',isAuthenticated)}
+            {!isAuthenticated ? (
+              <IconButton onClick={handleClickAccount}>
+                <PermIdentityIcon sx={{ color: "white" }} />
               </IconButton>
-            </Tooltip>
-          )}
-        </Box>
-        <Box sx={{ display: { xs: "flex", md: "none" } }}>
-          <IconButton
-            size="large"
-            aria-label="show more"
-            aria-controls={mobileMenuId}
-            aria-haspopup="true"
-            onClick={handleMobileMenuOpen}
-            color="inherit"
-          >
-            <MoreIcon />
-          </IconButton>
-        </Box>
+            ) : (
+              <Tooltip title="Account settings">
+                <IconButton
+                  onClick={handleAccountMenuOpen}
+                  size="small"
+                  sx={{ ml: 2 }}
+                  aria-controls={isOpenAccount ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={isOpenAccount ? "true" : undefined}
+                >
+                  <Avatar sx={{ width: 32, height: 32 }}>
+                    {user.userName? user.userName.charAt(0).toUpperCase(): "A"}</Avatar>
+                </IconButton>
+              </Tooltip>
+            )}
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
+        </div>
+        
       </Toolbar>
       {renderMobileMenu}
       {renderAccountMenu}

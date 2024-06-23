@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import "./notFound.css";
+import NotFoundImage from "../../../utils/images/nF.png";
 
-NotFound.propTypes = {
+// import PropTypes from 'prop-types';
+
+// NotFound.propTypes = {
     
-};
+// };
 
 function NotFound(props) {
     return (
-        <div>
-            
+        <div id="page_notfound">
+            <img src={NotFoundImage} alt="Not Found"/>
         </div>
     );
 }

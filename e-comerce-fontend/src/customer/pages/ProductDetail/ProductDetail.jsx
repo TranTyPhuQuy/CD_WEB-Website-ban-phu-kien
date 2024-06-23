@@ -7,12 +7,12 @@ import {
   Paper,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import ProductThumbnail from "./Components/ProductThumbnail";
+import ProductThumbnail from "./components/ProductThumbnail";
 import useProductDetail from "../../../hooks/useProductDetail";
 import useComments from "../../../hooks/useComments";
 import { Link, useMatch } from "react-router-dom";
-import ProductInfo from "./Components/ProductInfo";
-import ProductTabs from "./Components/ProductTabs";
+import ProductInfo from "./components/ProductInfo";
+import ProductTabs from "./components/ProductTabs";
 import "./ProductDetail.css";
 import AddToCartBtn from "../../components/AddToCartBtn/AddToCartBtn";
 
