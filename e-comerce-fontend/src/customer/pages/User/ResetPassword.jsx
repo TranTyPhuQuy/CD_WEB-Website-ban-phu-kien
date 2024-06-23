@@ -102,7 +102,10 @@ export default function ResetPassword() {
           </Avatar>
           {success ? (
             <Typography component="h3" variant="h5">
-              Vui lòng kiểm tra email của bạn
+              Vui lòng kiểm tra email của bạn{" "}
+              <a href={"/"}>
+                Quay về trang chủ
+              </a>
             </Typography>
           ) : (
             <Box
