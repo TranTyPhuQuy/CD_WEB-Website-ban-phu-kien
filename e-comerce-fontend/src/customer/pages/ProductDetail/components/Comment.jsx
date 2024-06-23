@@ -24,7 +24,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 600,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -121,7 +121,7 @@ function Coment({ data }) {
       if (res.status === "success") {
         try {
           const res = await commentApi.getComments(productId);
-          setCommentsData(res);
+          setCommentsData(res);setQuestion("");
           console.log("Loi lay ds comments", res);
         } catch (error) {
           console.log("Loi lay ds comments", error);
@@ -151,7 +151,7 @@ function Coment({ data }) {
       productId: productId,
       parentCommentId: "",
       userId: userId,
-      author: "Nguyen Van A",
+      author: "Nguyen Van C",
     };
     console.log("parentId", parentId);
     try {
@@ -159,7 +159,7 @@ function Coment({ data }) {
       if (res.status === "success") {
         try {
           const res = await commentApi.getComments(productId);
-          setCommentsData(res);
+          setCommentsData(res);setQuestion1("");
           setOpen(false);
           setQuestion1("");
           console.log("Loi lay ds comments", res);
@@ -226,6 +226,7 @@ function Coment({ data }) {
               onChange={handleInputChange1}
               error={!!error1}
               helperText={error1}
+              sx={{marginTop:'5px'}}
             />
             <Button
               variant="contained"

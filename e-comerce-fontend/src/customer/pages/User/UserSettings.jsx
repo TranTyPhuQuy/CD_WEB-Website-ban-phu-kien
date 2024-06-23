@@ -29,7 +29,7 @@ function UserSettings() {
   return (
     <>
       <CssBaseline />
-      <Box sx={{ backgroundColor: "#f4f4f4", p: "30px 0px", height: "520px" }}>
+      <Box sx={{ backgroundColor: "#f4f4f4", p: "30px 0px", }}>
         <Container maxWidth="lg">
           <Grid container spacing={2}>
             <Grid item xs={4} sm={3}>
