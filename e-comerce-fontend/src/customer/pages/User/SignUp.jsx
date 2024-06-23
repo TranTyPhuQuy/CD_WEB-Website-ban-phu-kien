@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import userApi from "../../../api/userApi";
 import { useNavigate } from "react-router-dom";
+import "./signup.css";
+import HeaderAcc from "./Components/HeaderAcc";
 
 function Copyright(props) {
   return (
@@ -62,6 +64,7 @@ export default function SignUp() {
     const formData = new FormData(event.currentTarget);
     const fullName = formData.get("fullName");
     const email = formData.get("email");
+    const mobile = formData.get("mobile");
     const password = formData.get("password");
     const rePassword = formData.get("rePassword");
 
@@ -99,6 +102,7 @@ export default function SignUp() {
     const signUpData = {
       fullName,
       email,
+      mobile,
       password,
     };
 
@@ -116,108 +120,131 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            ĐĂNG KÝ TÀI KHOẢN
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="fullName"
-                  required
-                  fullWidth
-                  id="fullName"
-                  label="Họ và tên"
-                  autoFocus
-                  // onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Địa chỉ Email"
-                  name="email"
-                  autoComplete="email"
-                  // onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Nhập mật khẩu"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  // onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="rePassword"
-                  label="Nhập lại mật khẩu"
-                  type="password"
-                  id="rePassword"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="allowExtraEmails"
-                      color="primary"
-                      onChange={handleCheckboxChange}
-                    />
-                  }
-                  label="Bằng cách nhấn vào Đăng Ký, bạn đồng ý với các điều khoản và dịch vụ của chúng tôi."
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+    <div id="block-signup">
+      <div id="header-signup">
+        <HeaderAcc/>
+      </div>
+      <div id="container-signup">
+        <ThemeProvider theme={defaultTheme}>
+          <Container component="main" maxWidth="xs" className="form_blk-signup">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
-              Đăng ký
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/sign-in" variant="body2">
-                  Bạn đã có tài khoản ? Đăng nhập
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
-    </ThemeProvider>
+              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                ĐĂNG KÝ TÀI KHOẢN
+              </Typography>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 3 }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      autoComplete="given-name"
+                      name="fullName"
+                      required
+                      fullWidth
+                      id="fullName"
+                      label="Họ và tên"
+                      autoFocus
+                      // onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="email"
+                      label="Địa chỉ Email"
+                      name="email"
+                      autoComplete="email"
+                      // onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="mobile"
+                      label="Số điện thoại"
+                      name="mobile"
+                      autoComplete="mobile"
+                      // onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="password"
+                      label="Nhập mật khẩu"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                      // onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="rePassword"
+                      label="Nhập lại mật khẩu"
+                      type="password"
+                      id="rePassword"
+                      autoComplete="new-password"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value="allowExtraEmails"
+                          color="primary"
+                          onChange={handleCheckboxChange}
+                        />
+                      }
+                      label="Bằng cách nhấn vào Đăng Ký, bạn đồng ý với các điều khoản và dịch vụ của chúng tôi."
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Đăng ký
+                </Button>
+                <Grid container justifyContent="flex-end">
+                  <Grid item>
+                    <p className="text-questions">
+                      Đã có tài khoản? 
+                      <span>
+                        <Link href="/sign-in" variant="body2">
+                          {" Đăng nhập!"}
+                        </Link>
+                      </span>
+                    </p>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+            <Copyright sx={{ mt: 5 }} />
+          </Container>
+        </ThemeProvider>
+      </div>
+    </div>
   );
 }
