@@ -100,12 +100,10 @@ function Coment({ data }) {
   const handleSubmitComment = async () => {
     console.log("coment");
     if (!question.trim()) {
-      // Kiểm tra nếu question rỗng hoặc chỉ chứa khoảng trắng
       setError("Câu hỏi không được để trống");
       return;
     }
     if (userId == null) {
-      // Kiểm tra nếu question rỗng hoặc chỉ chứa khoảng trắng
       setError("Yêu cầu đăng nhập");
       return;
     }
@@ -137,12 +135,10 @@ function Coment({ data }) {
   const handleSubmitReplyComment = async () => {
     console.log("coment");
     if (!question1.trim()) {
-      // Kiểm tra nếu question rỗng hoặc chỉ chứa khoảng trắng
       setError1("Câu hỏi không được để trống");
       return;
     }
     if (userId == null) {
-      // Kiểm tra nếu question rỗng hoặc chỉ chứa khoảng trắng
       setError1("Yêu cầu đăng nhập");
       return;
     }

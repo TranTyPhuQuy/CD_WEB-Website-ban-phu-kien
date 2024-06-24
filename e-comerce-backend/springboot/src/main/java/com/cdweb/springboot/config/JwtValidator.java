@@ -36,18 +36,14 @@ public class JwtValidator extends OncePerRequestFilter {
              System.out.println("validate thanh cong");
              String email = jwtProvider.getEmailFromToken(jwt.substring(7));
 
-             // Tải thông tin người dùng sử dụng email
              UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(email);
              System.out.println("userDetails: " + userDetails);
 
-             // Tạo một token xác thực sử dụng thông tin người dùng
              UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                      userDetails, null, userDetails.getAuthorities());
 
-             // Thiết lập các chi tiết bổ sung
              authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-             // Thiết lập token xác thực trong SecurityContextHolder
              SecurityContextHolder.getContext().setAuthentication(authentication);
          }
 

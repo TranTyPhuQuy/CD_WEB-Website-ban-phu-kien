@@ -13,4 +13,5 @@ public interface ProductService {
 	public Page<Product> getListProductByCategory(String category,Integer minPrice, Integer maxPrice, String sort, Integer page, Integer limit);
 	public List<String> getProductNameSuggest(String suggest);
 	public Page<Product> getListProductByProductName(String productName,Integer minPrice, Integer maxPrice,String sort, Integer page, Integer limit);
+	public Page<Product> getListProductAdminByCategory(String category,Integer minPrice, Integer maxPrice,String sort, Integer page, Integer limit);
 }

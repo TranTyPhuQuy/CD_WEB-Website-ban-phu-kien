@@ -54,6 +54,7 @@ public class Order {
 	private int orderStatus;
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<OrderItem> orderItems;
 
 	@ManyToOne

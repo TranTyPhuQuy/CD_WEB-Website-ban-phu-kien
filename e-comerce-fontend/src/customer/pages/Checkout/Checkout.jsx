@@ -46,10 +46,7 @@ function Checkout(props) {
           .join(";");
 
         // Create orderInfo string
-        const orderInfo = `${formData.userId};${formData.customerName};
-        ${formData.customerEmail};
-        ${formData.customerMobile};${formData.address},
-         ${formData.city}, ${formData.district}`;
+        const orderInfo = `${formData.userId};${formData.customerName};${formData.customerEmail};${formData.customerMobile};${formData.address},${formData.city}, ${formData.district}`;
 
         // Combine orderInfo and orderItems properly
         const combinedOrderInfo = `${orderInfo} orderItems:${orderItems}`;

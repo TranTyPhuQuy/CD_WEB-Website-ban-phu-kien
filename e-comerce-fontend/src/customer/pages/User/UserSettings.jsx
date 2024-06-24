@@ -14,12 +14,12 @@ function UserSettings() {
   };
   const renderContent = () => {
     switch (selectedMenu) {
-      case "Subscription & billing":
+      case "Đơn đặt hàng và hóa đơn":
         return <SubscriptionBilling />;
       // Add more cases for different menu items
-      case "Oder":
+      case "Lịch sử đặt hàng":
         return <OrderHistory />;
-      case "Profile":
+      case "Hồ sơ":
         return <AccountProfile />;
       default:
         return <SubscriptionBilling />;
@@ -27,7 +27,7 @@ function UserSettings() {
   };
 
   return (
-    <>
+    <div>
       <CssBaseline />
       <Box sx={{ backgroundColor: "#f4f4f4", p: "30px 0px", }}>
         <Container maxWidth="lg">
@@ -41,7 +41,7 @@ function UserSettings() {
           </Grid>
         </Container>
       </Box>
-    </>
+    </div>
   );
 }
 

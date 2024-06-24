@@ -13,9 +13,9 @@ Sidebar.propTypes = {
 
 function Sidebar({filters,  onMenuClick }) {
   const menuItems = [
-    { text: "Profile", icon: <AccountCircleIcon /> },
-    { text: "Oder", icon: <TocIcon /> },
-    { text: "Subscription & billing", icon: <CreditCardIcon /> },
+    { text: "Hồ sơ", icon: <AccountCircleIcon /> },
+    { text: "Lịch sử đặt hàng", icon: <TocIcon /> },
+    { text: "Đơn đặt hàng và hóa đơn", icon: <CreditCardIcon /> },
   ];
   const handleClickMenu = (menu) => {
     // console.log('Sidebar',menu);

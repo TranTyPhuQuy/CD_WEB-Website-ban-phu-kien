@@ -88,15 +88,21 @@
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     background: linear-gradient(180deg, #ff3300, #fff200);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .css-i4bv87-MuiSvgIcon-root {
-    width: 2em!important;
+    width: 1.3em!important;
+    height: 1.3em!important;
+}
+
+.css-1d159sf-MuiSvgIcon-root {
+    width: 1.5em!important;
     height: 1.5em!important;
+    margin-left: 25px!important;
 }
 
 .css-7e0s21-MuiPaper-root-MuiAppBar-root {

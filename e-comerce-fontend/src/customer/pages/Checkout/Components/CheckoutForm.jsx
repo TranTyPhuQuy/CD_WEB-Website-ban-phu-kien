@@ -11,6 +11,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  FormHelperText,
 } from "@mui/material";
 import useProvinces from "../../../../hooks/useProvinces";
 import PropTypes from "prop-types";
@@ -28,11 +29,16 @@ function CheckoutForm({ handleSubmitPayment }) {
     userId: user.id,
     customerName: user.fullName,
     customerEmail: user.email,
-    customerMobile: "",
+    customerMobile: user.mobile,
     address: "",
     city: "Thành phố Hà Nội",
     district: "Quận Ba Đình",
     paymentMethod: "COD",
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    phone: "",
   });
 
   const handleChange = (e) => {
@@ -93,7 +99,7 @@ function CheckoutForm({ handleSubmitPayment }) {
             Code: district.Code,
           }));
           setDistricts(filteredDistricts);
-          // Cập nhật district mặc định
+
           if (filteredDistricts.length > 0) {
             setFormData((prevData) => ({
               ...prevData,
@@ -120,7 +126,7 @@ function CheckoutForm({ handleSubmitPayment }) {
     setFormData({
       ...formData,
       city: newCity,
-      district: "", // Reset district khi tỉnh thành thay đổi
+      district: "", 
     });
     fetchDistricts(newCity);
   };
@@ -133,10 +139,22 @@ function CheckoutForm({ handleSubmitPayment }) {
   };
 
   const handleMobileChange = (event) => {
+    const { value } = event.target;
     setFormData({
       ...formData,
-      customerMobile: event.target.value,
+      customerMobile: value,
     });
+    if (!/^\d{10}$/.test(value)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        phone: "Số điện thoại phải có đúng 10 chữ số.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        phone: "",
+      }));
+    }
   };
 
   const handleAddressChange = (event) => {
@@ -161,15 +179,27 @@ function CheckoutForm({ handleSubmitPayment }) {
   };
 
   const handleEmailChange = (e) => {
+    const { value } = e.target;
     setFormData({
       ...formData,
-      customerEmail: e.target.value,
+      customerEmail: value,
     });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Email không hợp lệ.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "",
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (handleSubmitPayment) {
+    if (!errors.email && !errors.phone && handleSubmitPayment) {
       handleSubmitPayment(formData);
     }
     console.log("Form Data:", formData);
@@ -196,10 +226,13 @@ function CheckoutForm({ handleSubmitPayment }) {
             id="email"
             name="email"
             label="Email"
+            type='email'
             fullWidth
             variant="outlined"
             value={formData.customerEmail}
             onChange={handleEmailChange}
+            // error={!!errors.email}
+            // helperText={errors.email}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
@@ -212,6 +245,8 @@ function CheckoutForm({ handleSubmitPayment }) {
             variant="outlined"
             value={formData.customerMobile}
             onChange={handleMobileChange}
+            error={!!errors.phone}
+            helperText={errors.phone}
           />
         </Grid>
         <Grid item xs={12}>
@@ -292,6 +327,7 @@ function CheckoutForm({ handleSubmitPayment }) {
             fullWidth
             variant="contained"
             color="primary"
+            disabled={!!errors.email || !!errors.phone} // disable the button if there are errors
           >
             Hoàn tất đơn hàng
           </Button>

@@ -6,13 +6,13 @@ const cartSlice = createSlice({
     cartItems: [],
   },
   reducers: {
-    showMiniCart(state) {
-      state.showMiniCart = true;
-    },
+    // showMiniCart(state) {
+    //   state.showMiniCart = true;
+    // },
 
-    hideMiniCart(state) {
-      state.showMiniCart = false;
-    },
+    // hideMiniCart(state) {
+    //   state.showMiniCart = false;
+    // },
 
     addToCart(state, action) {
       // newItem = { product, quantity }

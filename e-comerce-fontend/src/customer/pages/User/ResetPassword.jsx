@@ -31,50 +31,30 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function ResetPassword() {
-  // const [data, setData] = useState({
-  //   fullName: "",
-  //   email: "",
-  //   password: "",
-  // });
-  // const navigate = useNavigate();
-  //   const dispatch = useDispatch();
   const [success, setSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
-    // const password = formData.get("password");
-    console.log({
-      email: email,
-      //   password: password,
-    });
+
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     if (!email || !emailRegex.test(email)) {
-      alert("Vui lòng nhập địa chỉ email hợp lệ");
+      setErrors({ email: "Vui lòng nhập địa chỉ email hợp lệ" });
       return;
+    } else {
+      setErrors({});
     }
+
     try {
       const res = await userApi.resetPassword(email);
       console.log(res);
       if (res.status === "success") {
-        // const userInfor = {
-        //   id: res.id,
-        //   email: res.email,
-        //   userName: res.userName,
-        //   fullName: res.fullName,
-        //   mobile: res.mobile,
-        //   jwt: res.jwt,
-        // };
-        // const action = logIn(userInfor);
-        // // console.log('action:',action)
-        // // dispatch(action);
         setSuccess(true);
-        // navigate("/");
       } else {
         alert("resetPassword thất bại: " + res.message);
       }
@@ -103,9 +83,9 @@ export default function ResetPassword() {
           {success ? (
             <Typography component="h3" variant="h5">
               Vui lòng kiểm tra email của bạn{" "}
-              <a href={"/"}>
+              <Link href={"/"}>
                 Quay về trang chủ
-              </a>
+              </Link>
             </Typography>
           ) : (
             <Box
@@ -123,6 +103,8 @@ export default function ResetPassword() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                error={!!errors.email}
+                helperText={errors.email}
               />
               <Button
                 type="submit"

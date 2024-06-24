@@ -38,27 +38,27 @@ public class ProductServiceImpl implements ProductService{
 //		System.out.print("Product not found with id: "+id);
 	}
 	
-//	@PostAuthorize("hasRole('SCOPE_ADMIN')")
-//	@Override
-//	public Page<Product> getListProductByCategory(String category,Integer minPrice, Integer maxPrice,String sort, Integer page, Integer limit){
-//		// TODO Auto-generated method stub
-//		System.out.println("pagenumber truoc: ROLE_ADMIN");
-//		page = page>0 ? page-1:page;
-////		System.out.println("pagenumber sau:"+pageNumber);
-//		
-//		Pageable pageable = PageRequest.of(page, limit);
-//		
-//		List<Product> products = productRepository.filterProductsByCategory(category, minPrice, maxPrice, sort);
-//		
-//		int startIndex = (int)pageable.getOffset();
-//		int endIndex = Math.min(startIndex+ pageable.getPageSize(), products.size());
-//		
-//		List<Product> pageContent = products.subList(startIndex, endIndex);
-//		
-//		Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable,products.size());
-//		
-//		return filteredProducts;
-//	}
+	@PostAuthorize("hasRole('SCOPE_ADMIN')")
+	@Override
+	public Page<Product> getListProductAdminByCategory(String category,Integer minPrice, Integer maxPrice,String sort, Integer page, Integer limit){
+		// TODO Auto-generated method stub
+		System.out.println("pagenumber truoc: ROLE_ADMIN");
+		page = page>0 ? page-1:page;
+//		System.out.println("pagenumber sau:"+pageNumber);
+		
+		Pageable pageable = PageRequest.of(page, limit);
+		
+		List<Product> products = productRepository.filterProductsByCategory(category, minPrice, maxPrice, sort);
+		
+		int startIndex = (int)pageable.getOffset();
+		int endIndex = Math.min(startIndex+ pageable.getPageSize(), products.size());
+		
+		List<Product> pageContent = products.subList(startIndex, endIndex);
+		
+		Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable,products.size());
+		
+		return filteredProducts;
+	}
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public Page<Product> getListProductByCategory(String category, Integer minPrice, Integer maxPrice, String sort, Integer page, Integer limit) {

@@ -107,6 +107,7 @@ export default function Header() {
   }
   const renderAccountMenu = (
     <Menu
+      
       anchorEl={accountAnchorEl}
       // id="account-menu"
       open={isOpenAccount}
@@ -141,7 +142,7 @@ export default function Header() {
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      <MenuItem onClick={handleClickProfile}>
+      <MenuItem onClick={handleClickProfile} >
         <Avatar /> Hồ sơ
       </MenuItem>
       <Divider />
@@ -233,9 +234,9 @@ export default function Header() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <AccountCircle/>
         </IconButton>
-        <p>Profile</p>
+        {/* <p>Profile</p> */}
       </MenuItem>
     </Menu>
   );

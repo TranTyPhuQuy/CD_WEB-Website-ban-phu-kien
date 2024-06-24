@@ -31,8 +31,10 @@ public class AppConfig {
             .addFilterBefore(jwtValidator, BasicAuthenticationFilter.class)
             .authorizeHttpRequests(authorize -> authorize
 //                .requestMatchers("/api/products/**").permitAll()
-//                .requestMatchers("/api/user/**").hasRole("USER")
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
+                
+                
             )
             .csrf().disable()
             .cors().configurationSource(request -> {
@@ -46,9 +48,9 @@ public class AppConfig {
                 return corsConfiguration;
             })
             .and()
-            .httpBasic()
-            .and()
-            .formLogin();
+            .httpBasic();
+//            .and()
+//            .formLogin();
         return httpSecurity.build();
     }
 

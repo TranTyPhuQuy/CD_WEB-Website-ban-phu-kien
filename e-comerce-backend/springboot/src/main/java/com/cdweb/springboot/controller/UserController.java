@@ -83,7 +83,7 @@ public class UserController {
         if(!rePassword.equals(password)) return new ResponseApi("failure", "Password Incorrect");
         
         User user = passwordResetToken.getUser();
-        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
 
         passwordResetTokenRepository.delete(passwordResetToken);
@@ -131,8 +131,6 @@ public class UserController {
         String token = jwtProvider.generateToken(user);
 //        saveToken(user, token);
         
-        
-
         return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(user.getId(), user.getEmail(), user.getUserName(), user.getFullName(), 
         		user.getMobile(), token,"Signin Success"));
     }
@@ -145,8 +143,8 @@ public class UserController {
 //        tokenRepository.save(t);
 //	}
 
-    private Authentication authenticate(String username, String password) {
-        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
+    private Authentication authenticate(String email, String password) {
+        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(email);
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Invalid password");
         }

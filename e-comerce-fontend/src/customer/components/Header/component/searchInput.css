@@ -14,7 +14,8 @@
 }
 
 .css-ittuaa-MuiInputAdornment-root {
-    margin-right: 0!important;
+    margin-right: 5px!important;
+    margin-left: 5px!important;
 }
 
 #combo-box-demo {
